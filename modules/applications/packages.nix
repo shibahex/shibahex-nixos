@@ -2,7 +2,7 @@
   programs.steam.enable = true;
   environment.systemPackages = with pkgs; [
     #Browser
-    librewolf
+    # librewolf-bin
     ungoogled-chromium
 
     # Password Manager
