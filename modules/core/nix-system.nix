@@ -13,7 +13,7 @@ in
   };
   time.timeZone = timeZone;
   i18n.defaultLocale = "en_US.UTF-8";
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.11";
   nixpkgs.config.allowUnfree = true;
 
 }
