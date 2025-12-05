@@ -40,6 +40,11 @@
           profile = "amd";
           username = "user";
         };
+        nixos-thinkpad = mkHost {
+          hostname = "nixos-thinkpad";
+          profile = "intel";
+          username = "gecko";
+        };
 
         nixos-desktop = mkHost {
           hostname = "nixos-desktop";
