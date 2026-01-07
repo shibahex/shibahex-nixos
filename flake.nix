@@ -1,17 +1,16 @@
 {
   description = "ShibaHex Nix (File format based on Don OS)";
-
   inputs = {
+    wazuh-nix.url = "github:V3ntus/wazuh.nix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { nixpkgs, flake-utils, ... }@inputs:
+  outputs = { nixpkgs, flake-utils, wazuh-nix, ... }@inputs:
     let
       system = "x86_64-linux";
-
       # Helper function to create a host configuration
       mkHost = { hostname, profile, username, }:
         nixpkgs.lib.nixosSystem {
@@ -23,6 +22,7 @@
             inherit username;
           };
           modules = [
+            wazuh-nix.wazuh-agent
             ./hosts/${hostname}
             ./profiles/${profile}
             ./modules/applications
@@ -40,7 +40,6 @@
           profile = "amd";
           username = "user";
         };
-
         nixos-desktop = mkHost {
           hostname = "nixos-desktop";
           profile = "nvidia";
