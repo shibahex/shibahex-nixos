@@ -1,14 +1,13 @@
 {
   description = "ShibaHex Nix (File format based on Don OS)";
   inputs = {
-    wazuh-nix.url = "github:V3ntus/wazuh.nix";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { nixpkgs, flake-utils, wazuh-nix, ... }@inputs:
+  outputs = { nixpkgs, flake-utils, ... }@inputs:
     let
       system = "x86_64-linux";
       # Helper function to create a host configuration
@@ -22,7 +21,6 @@
             inherit username;
           };
           modules = [
-            wazuh-nix.wazuh-agent
             ./hosts/${hostname}
             ./profiles/${profile}
             ./modules/applications
