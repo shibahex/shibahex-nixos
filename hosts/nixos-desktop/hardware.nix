@@ -8,6 +8,8 @@ let
 in
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  boot.kernelParams =
+    [ "intel_iommu=on" "iommu=pt" "vfio-pci.ids=${variables.vfioIds}" ];
 
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];

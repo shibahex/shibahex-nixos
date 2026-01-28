@@ -4,6 +4,7 @@
     (anki.withAddons [ ankiAddons.review-heatmap ])
     # For timing tasks and productivity
     timer
+    btop
   ];
 
   virtualisation.docker.enable = true;
