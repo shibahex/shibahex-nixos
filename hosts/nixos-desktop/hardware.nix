@@ -5,8 +5,7 @@
 let
   variables = import ./variables.nix { pkgs = pkgs; };
   # inherit (variables) gitUsername;
-in
-{
+in {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot.kernelParams =
     [ "intel_iommu=on" "iommu=pt" "vfio-pci.ids=${variables.vfioIds}" ];
@@ -51,31 +50,34 @@ in
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   #Merge SSD storage into home directory
-  systemd.services.bind-ssd-folders = {
-    description = "Bind mount all directories from /mnt/SSD into /home/shiba";
-
-    # Ensure the SSD and normal file systems are up
-    after = [ "local-fs.target" ];
-    wants = [ "local-fs.target" ];
-    wantedBy = [ "multi-user.target" ];
-
-    serviceConfig.Type = "oneshot";
-
-    path = [
-      pkgs.util-linux # mount, umount, basename, etc.
-      pkgs.coreutils # mkdir, test, etc.
-    ];
-
-    script = ''
-      for d in /mnt/SSD/*; do
-        if [ -d "$d" ]; then
-          name="$(basename "$d")"
-          target="/home/${variables.hostName}/$name"
-
-          mkdir -p "$target"
-          mount --bind "$d" "$target"
-        fi
-      done
-    '';
+  fileSystems."/home/${variables.hostName}/Documents" = {
+    device = "/mnt/SSD/Documents";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
   };
+
+  fileSystems."/home/${variables.hostName}/Ebooks" = {
+    device = "/mnt/SSD/Ebooks";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/home/${variables.hostName}/Pictures" = {
+    device = "/mnt/SSD/Pictures";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/home/${variables.hostName}/Projects" = {
+    device = "/mnt/SSD/Projects";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/home/${variables.hostName}/SteamLibrary" = {
+    device = "/mnt/SSD/SteamLibrary";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/home/${variables.hostName}/Videos" = {
+    device = "/mnt/SSD/Videos";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
+  };
+
 }
