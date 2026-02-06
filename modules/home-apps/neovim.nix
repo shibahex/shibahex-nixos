@@ -3,12 +3,11 @@
 let
   neovimConfig = pkgs.fetchFromGitHub {
     owner = "shibahex";
-    repo = "kickstart.nvim";
-    sha256 = "1sbbdxrnsc67zqw6qkm2mahvlp6hvbld4rxbm2zqixf2diccb638";
-    rev = "e3263d9cecaf27e7da88107ae23d58149827e9de";
+    repo = "LazyVim-starter";
+    sha256 = "sha256-flvrTwDjVTQyyqBvyq3f/DTjatjHCxdplVa5DFBc4Ts=";
+    rev = "cefae95b3c9f04ecfe7d8738e9c32392e921ce0c";
   };
-in
-{
+in {
 
   home.packages = [
     pkgs.neovim
@@ -30,5 +29,13 @@ in
     recursive = true;
   };
 
+  home.file.".config/nushell/nix-prompt.nu".text = ''
+    if ($env.IN_NIX_SHELL? != null) {
+        $env.PROMPT_INDICATOR = $"\(❄️($env.IN_NIX_SHELL)\) > "
+    }
+  '';
+  home.file.".config/nushell/env.nu".text = ''
+    source ~/.config/nushell/nix-prompt.nu
+  '';
   home.sessionVariables = { EDITOR = "nvim"; };
 }
