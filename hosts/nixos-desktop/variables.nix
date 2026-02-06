@@ -18,13 +18,13 @@
   defaultShell = "nushell";
   monitorRules = [{
     name = "Gaming monitors";
-    outputs_connected = [ "HDMI-0" "DP-2" ];
-    configure_single = "HDMI-0";
-    primary = true;
+    outputs_connected = [ "DP-2" "DP-4" ];
+    configure_row = [ "DP-4" "DP-2" ];
+    primary = "DP-4";
     atomic = true;
     execute_after = [
-      "${pkgs.xorg.xrandr}/bin/xrandr --output DP-4 --mode 3840x2160 --rate 144 --primary --dpi 192"
-      "${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --mode 2560x1440 --rate 100 --right-of DP-4 --rotate right"
+      "${pkgs.xorg.xrandr}/bin/xrandr --output DP-4 --mode 3840x2160 --rate 144 --dpi 192"
+      "${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --mode 2560x1440 --rate 100 --rotate normal" # --rotate right"
     ];
   }];
 
