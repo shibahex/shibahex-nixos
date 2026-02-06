@@ -34,6 +34,7 @@ in
       "docker"
       "libvirtd" # For VirtManager
       "networkmanager"
+      "kvm" # for gpu passthrough
       "wheel" # sudo access
     ];
     # Use configured shell based on defaultShell variable

@@ -5,7 +5,13 @@
     # For timing tasks and productivity
     timer
     btop
+
+    looking-glass-client
+    freerdp
   ];
+
+  # for looking glass
+  systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 $USER kvm -" ];
 
   virtualisation.docker.enable = true;
 
