@@ -4,9 +4,11 @@ let
   neovimConfig = pkgs.fetchFromGitHub {
     owner = "shibahex";
     repo = "LazyVim-starter";
-    sha256 = "sha256-flvrTwDjVTQyyqBvyq3f/DTjatjHCxdplVa5DFBc4Ts=";
-    rev = "cefae95b3c9f04ecfe7d8738e9c32392e921ce0c";
+    sha256 = "sha256-PJ7iB9yggq7ktwXA9GAVeq8ZXSFtJcj+e1+9uQ46ESo=";
+    rev = "bfbafe900eb5d80d949c9c202e624e19c994341a";
   };
+
+  #neovimConfig = "/home/shiba/Documents/LazyVim-starter";
 in {
 
   home.packages = [
@@ -31,7 +33,7 @@ in {
 
   home.file.".config/nushell/nix-prompt.nu".text = ''
     if ($env.IN_NIX_SHELL? != null) {
-        $env.PROMPT_INDICATOR = $"\(❄️($env.IN_NIX_SHELL)\) > "
+        $env.PROMPT_INDICATOR = $" \(($env.IN_NIX_SHELL)\)> "
     }
   '';
   home.file.".config/nushell/env.nu".text = ''
