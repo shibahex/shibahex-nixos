@@ -9,6 +9,8 @@ in {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   boot.kernelParams =
     [ "intel_iommu=on" "iommu=pt" "vfio-pci.ids=${variables.vfioIds}" ];
+  # Let nvidia take over
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   boot.initrd.availableKernelModules =
     [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
@@ -28,6 +30,16 @@ in {
   };
   boot.initrd.luks.devices."luks-49b6cc8e-a559-4748-b78a-dad3b31f2325".device =
     "/dev/disk/by-uuid/49b6cc8e-a559-4748-b78a-dad3b31f2325";
+
+  # Hardrive
+  boot.initrd.luks.devices."hdd".device =
+    "/dev/disk/by-uuid/746c375d-6a9e-46c8-909c-115ee042763e";
+
+  fileSystems."/mnt/HDD" = {
+    device = "/dev/mapper/hdd";
+    fsType = "btrfs";
+    options = [ "compress=zstd" "noatime" ];
+  };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/8C78-571B";
@@ -50,21 +62,6 @@ in {
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   #Merge SSD storage into home directory
-  fileSystems."/home/${variables.hostName}/Documents" = {
-    device = "/mnt/SSD/Documents";
-    options = [ "bind" "nofail" "x-systemd.automount" ];
-  };
-
-  fileSystems."/home/${variables.hostName}/Ebooks" = {
-    device = "/mnt/SSD/Ebooks";
-    options = [ "bind" "nofail" "x-systemd.automount" ];
-  };
-
-  fileSystems."/home/${variables.hostName}/Pictures" = {
-    device = "/mnt/SSD/Pictures";
-    options = [ "bind" "nofail" "x-systemd.automount" ];
-  };
-
   fileSystems."/home/${variables.hostName}/Projects" = {
     device = "/mnt/SSD/Projects";
     options = [ "bind" "nofail" "x-systemd.automount" ];
@@ -75,8 +72,29 @@ in {
     options = [ "bind" "nofail" "x-systemd.automount" ];
   };
 
+  # Hardrive 
+  fileSystems."/home/${variables.hostName}/Documents" = {
+    device = "/mnt/HDD/Documents";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/home/${variables.hostName}/Downloads" = {
+    device = "/mnt/HDD/Downloads";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/home/${variables.hostName}/Ebooks" = {
+    device = "/mnt/HDD/Ebooks";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
+  };
+
+  fileSystems."/home/${variables.hostName}/Pictures" = {
+    device = "/mnt/HDD/Pictures";
+    options = [ "bind" "nofail" "x-systemd.automount" ];
+  };
+
   fileSystems."/home/${variables.hostName}/Videos" = {
-    device = "/mnt/SSD/Videos";
+    device = "/mnt/HDD/Videos";
     options = [ "bind" "nofail" "x-systemd.automount" ];
   };
 
