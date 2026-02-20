@@ -1,4 +1,8 @@
-{ pkgs }: {
+{ pkgs }:
+let
+  mainMonitor = "DP-0";
+  sideMonitorRight = "DP-2";
+in {
   #Mainly used for hardware.nix or etc, inital setup in flake.nix has your hostname
   hostName = "shiba";
 
@@ -16,15 +20,16 @@
   startupApps = [ ];
 
   defaultShell = "nushell";
+
   monitorRules = [{
     name = "Gaming monitors";
-    outputs_connected = [ "DP-2" "DP-4" ];
-    configure_row = [ "DP-4" "DP-2" ];
-    primary = "DP-4";
+    outputs_connected = [ mainMonitor sideMonitorRight ];
+    configure_row = [ mainMonitor sideMonitorRight ];
+    primary = mainMonitor;
     atomic = true;
     execute_after = [
-      "${pkgs.xorg.xrandr}/bin/xrandr --output DP-4 --mode 3840x2160 --rate 144 --dpi 192"
-      "${pkgs.xorg.xrandr}/bin/xrandr --output DP-2 --mode 2560x1440 --rate 100 --rotate normal" # --rotate right"
+      "${pkgs.xorg.xrandr}/bin/xrandr --output ${mainMonitor} --mode 3840x2160 --rate 144 --dpi 192 --primary"
+      "${pkgs.xorg.xrandr}/bin/xrandr --output ${sideMonitorRight} --mode 2560x1440 --rate 100 --rotate normal" # --rotate right"
     ];
   }];
 
