@@ -7,11 +7,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { nixpkgs, flake-utils, ... }@inputs:
+  outputs =
+    { nixpkgs, flake-utils, ... }@inputs:
     let
       system = "x86_64-linux";
       # Helper function to create a host configuration
-      mkHost = { hostname, profile, username, }:
+      mkHost =
+        {
+          hostname,
+          profile,
+          username,
+        }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
