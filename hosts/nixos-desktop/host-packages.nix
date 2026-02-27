@@ -14,6 +14,14 @@
     mpv
     tmux
     openvpn
+
+    # Recording App
+    obs-studio
+
+    # Discord
+    vesktop
+    librewolf-bin
+
   ];
 
   # for looking glass

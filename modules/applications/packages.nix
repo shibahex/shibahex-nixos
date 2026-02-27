@@ -1,5 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.steam.enable = true;
+
   environment.systemPackages = with pkgs; [
     #Browser
     librewolf-bin
@@ -10,12 +12,6 @@
 
     # Terminal Command to see file structures
     tree
-
-    # Recording App
-    obs-studio
-
-    # Discord
-    vesktop
 
     # Screenshots
     flameshot
