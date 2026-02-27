@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # libvirtd = { enable = true; };
   environment.systemPackages = with pkgs; [
     virt-manager
@@ -14,6 +15,13 @@
     };
   };
 
+  users.users."qemu-libvirtd" = {
+    extraGroups = [
+      "render"
+      "video"
+      "kvm"
+    ];
+  };
   # Looking glass
   systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 $USER kvm -" ];
 
