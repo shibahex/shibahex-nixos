@@ -1,5 +1,5 @@
 # ❄️ My Personal NixOS Setup
-## This is my personal NixOS setup for programming and GPU passthrough for cybersecurity, virtualization, and compilation for windows
+## This is my personal NixOS setup for programming using GPU passthrough for cybersecurity, virtualization, and compilation for windows
 <img width="3839" height="2159" alt="github" src="https://github.com/user-attachments/assets/14b5d552-8b1a-406a-aaa2-b4a3df89f9ec" />
 (Left is Windows VM with a 1080ti; Right is Main PC with 3080)
 
