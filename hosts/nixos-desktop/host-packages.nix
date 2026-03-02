@@ -22,7 +22,7 @@
     vesktop
 
     # Extra browser
-    librewolf-bin
+    librewolf
 
     #Yubikey
     yubikey-manager

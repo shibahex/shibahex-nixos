@@ -4,7 +4,6 @@
 
   environment.systemPackages = with pkgs; [
     #Browser
-    librewolf-bin
     ungoogled-chromium
 
     # Password Manager
