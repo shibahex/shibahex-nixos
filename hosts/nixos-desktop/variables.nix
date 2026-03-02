@@ -34,8 +34,8 @@ in
       primary = mainMonitor;
       atomic = true;
       execute_after = [
-        "${pkgs.xorg.xrandr}/bin/xrandr --output ${mainMonitor} --mode 3840x2160 --rate 144 --dpi 192 --primary"
-        "${pkgs.xorg.xrandr}/bin/xrandr --output ${sideMonitorRight} --mode 2560x1440 --rate 100 --rotate normal" # --rotate right"
+        "${pkgs.xrandr}/bin/xrandr --output ${mainMonitor} --mode 3840x2160 --rate 144 --dpi 192 --primary"
+        "${pkgs.xrandr}/bin/xrandr --output ${sideMonitorRight} --mode 2560x1440 --rate 100 --rotate normal" # --rotate right"
       ];
     }
   ];
