@@ -15,7 +15,7 @@ in
   # Run 'lspci | grep VGA' to find your actual GPU IDs
   nvidiaID = "PCI:1:0:0";
 
-  # GPU passthrough
+  # GPU passthrough for hardware.nix
   vfioIds = "10de:1b06,10de:10ef";
 
   defaultShell = "nushell";
