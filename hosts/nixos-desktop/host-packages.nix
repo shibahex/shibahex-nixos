@@ -20,8 +20,14 @@
 
     # Discord
     vesktop
+
+    # Extra browser
     librewolf-bin
 
+    #Yubikey
+    yubikey-manager
+
+    linuxPackages.usbip
   ];
 
   # for looking glass
@@ -31,6 +37,28 @@
   virtualisation.docker.enable = true;
 
   powerManagement.cpuFreqGovernor = "performance";
+
+  # USB Yubikey to VM. (Can be insecure if public)
+  systemd.services.usbipd = {
+    enable = true;
+    description = "USB/IP Daemon";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.linuxPackages.usbip}/bin/usbipd";
+      Restart = "on-failure";
+    };
+  };
+
+  networking.firewall.extraCommands = ''
+    iptables -A INPUT -p tcp --dport 3240 -s 192.168.122.69 -j ACCEPT
+    iptables -A INPUT -p tcp --dport 3240 -j DROP
+  '';
+
+  boot.kernelModules = [
+    "usbip-core"
+    "usbip-host"
+  ];
+
   # services.wazuh-agent = {
   #   enable = true;
   #   # Add your Wazuh manager address

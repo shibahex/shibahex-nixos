@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # For easyeffects, cant add plugins without it.
   programs.dconf.enable = true;
 
@@ -8,5 +9,3 @@
     spotify # music player
   ];
 }
-
-

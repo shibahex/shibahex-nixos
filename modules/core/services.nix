@@ -1,4 +1,5 @@
-{ profile, ... }: {
+{ profile, ... }:
+{
   # Services to start
   services = {
     fstrim.enable = true; # SSD Optimizer

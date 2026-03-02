@@ -1,1 +1,4 @@
-{ ... }: { imports = [ ./dwm-setup.nix ]; }
+{ ... }:
+{
+  imports = [ ./dwm-setup.nix ];
+}

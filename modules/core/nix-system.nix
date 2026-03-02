@@ -8,7 +8,10 @@ in
     settings = {
       download-buffer-size = 250000000;
       auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
   };
   time.timeZone = timeZone;

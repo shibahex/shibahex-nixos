@@ -1,1 +1,8 @@
-{ ... }: { imports = [ ./easyeffects.nix ./monitors.nix ./neovim.nix ]; }
+{ ... }:
+{
+  imports = [
+    ./easyeffects.nix
+    ./monitors.nix
+    ./neovim.nix
+  ];
+}

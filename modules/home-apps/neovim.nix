@@ -9,7 +9,8 @@ let
   };
 
   #neovimConfig = "/home/shiba/Documents/LazyVim-starter";
-in {
+in
+{
 
   home.packages = [
     pkgs.neovim
@@ -39,5 +40,7 @@ in {
   home.file.".config/nushell/env.nu".text = ''
     source ~/.config/nushell/nix-prompt.nu
   '';
-  home.sessionVariables = { EDITOR = "nvim"; };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 }

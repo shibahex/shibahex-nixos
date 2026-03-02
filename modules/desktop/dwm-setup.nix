@@ -1,4 +1,10 @@
-{ pkgs, lib, host, ... }: {
+{
+  pkgs,
+  lib,
+  host,
+  ...
+}:
+{
   services.xserver = {
     enable = true;
     windowManager.dwm.enable = true;
@@ -7,17 +13,17 @@
   services.displayManager.ly.enable = true;
 
   nixpkgs.overlays = [
-    (final: prev:
+    (
+      final: prev:
       let
         # helper to import config files safely
-        safeImport = path:
+        safeImport =
+          path:
           if builtins.pathExists path then
-            let val = import path;
+            let
+              val = import path;
             in
-            if builtins.isFunction val then
-              val { inherit pkgs lib; }
-            else
-              val
+            if builtins.isFunction val then val { inherit pkgs lib; } else val
           else
             { };
 
@@ -25,8 +31,7 @@
         dwmCfg = safeImport ../../hosts/${host}/dwm-config/dwm/config.nix;
         dmenuCfg = safeImport ../../hosts/${host}/dwm-config/dmenu/config.nix;
         stCfg = safeImport ../../hosts/${host}/dwm-config/st/config.nix;
-        slstatusCfg =
-          safeImport ../../hosts/${host}/dwm-config/slstatus/config.nix;
+        slstatusCfg = safeImport ../../hosts/${host}/dwm-config/slstatus/config.nix;
 
         writeConfig = text: pkgs.writeText "config.h" text;
       in
@@ -58,10 +63,16 @@
             cp ${writeConfig slstatusCfg.slstatusConfig} config.h
           '';
         });
-      })
+      }
+    )
   ];
 
-  environment.systemPackages = with pkgs; [ dwm dmenu st slstatus ];
+  environment.systemPackages = with pkgs; [
+    dwm
+    dmenu
+    st
+    slstatus
+  ];
 
   systemd.user.services.slstatus = {
     description = "slstatus - suckless status monitor";
@@ -76,4 +87,3 @@
     };
   };
 }
-

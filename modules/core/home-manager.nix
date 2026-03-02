@@ -1,7 +1,13 @@
-{ pkgs, inputs, username, host, profile, ... }:
+{
+  pkgs,
+  inputs,
+  username,
+  host,
+  profile,
+  ...
+}:
 let
   variables = import ../../hosts/${host}/variables.nix { pkgs = pkgs; };
-  inherit (variables) gitUsername;
   defaultShell = variables.defaultShell or "zsh";
   shellPackage = if defaultShell == "nushell" then pkgs.nushell else pkgs.zsh;
 in
@@ -16,7 +22,14 @@ in
     useUserPackages = true;
     useGlobalPkgs = false;
     backupFileExtension = "backup";
-    extraSpecialArgs = { inherit inputs username host profile; };
+    extraSpecialArgs = {
+      inherit
+        inputs
+        username
+        host
+        profile
+        ;
+    };
     users.${username} = {
       imports = [ ../home-apps ];
       home = {
@@ -29,7 +42,7 @@ in
   users.mutableUsers = true;
   users.users.${username} = {
     isNormalUser = true;
-    description = "${gitUsername}";
+    description = "${username}";
     extraGroups = [
       "docker"
       "libvirtd" # For VirtManager
