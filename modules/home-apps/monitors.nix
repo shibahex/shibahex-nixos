@@ -5,7 +5,7 @@ let
 in
 {
   services.grobi = {
-    enable = true;
+    enable = monitorRules != [ ];
     rules = monitorRules;
   };
 }

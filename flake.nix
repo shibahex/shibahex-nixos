@@ -44,6 +44,11 @@
           profile = "amd";
           username = "user";
         };
+        cyber-vm = mkHost {
+          hostname = "cyber-vm";
+          profile = "nvidia";
+          username = "sheeb";
+        };
         nixos-desktop = mkHost {
           hostname = "nixos-desktop";
           profile = "nvidia";
