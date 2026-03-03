@@ -18,6 +18,10 @@ in
   # GPU passthrough for hardware.nix
   vfioIds = "10de:1b06,10de:10ef";
 
+  desktops = [
+    "dwm"
+    "niri"
+  ];
   defaultShell = "nushell";
 
   monitorRules = [
