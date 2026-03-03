@@ -7,6 +7,7 @@
     btop
 
     mpv
+    alacritty
     tmux
     openvpn
 
