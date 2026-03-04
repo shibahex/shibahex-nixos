@@ -11,5 +11,6 @@ in
 {
   imports =
     (lib.optional (builtins.elem "dwm" desktops) ./dwm-setup.nix)
-    ++ (lib.optional (builtins.elem "niri" desktops) ./niri-setup.nix);
+    ++ (lib.optional (builtins.elem "niri" desktops) ./niri-setup.nix)
+    ++ (lib.optional (builtins.elem "mangowc" desktops) ./mangowc-setup.nix);
 }
