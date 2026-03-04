@@ -31,8 +31,13 @@
 
     fastfetch
 
-    nemo
+    thunar
+    ffmpegthumbnailer
+
   ];
+
+  # ffmpegthumbnailer and tumbler for mp4 thumbnails
+  services.tumbler.enable = true;
 
   # for looking glass
   systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 $USER kvm -" ];
@@ -63,9 +68,4 @@
     "usbip-host"
   ];
 
-  # services.wazuh-agent = {
-  #   enable = true;
-  #   # Add your Wazuh manager address
-  #   managerAddress = "your-wazuh-manager.example.com";
-  # };
 }
