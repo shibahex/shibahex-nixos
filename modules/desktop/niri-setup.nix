@@ -25,15 +25,13 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    waybar
-    walker
-    mako
+    noctalia-shell
     fuzzel
     swaylock
-    waypaper
-    swaybg
     wl-clipboard
     satty
+
+    # Per Monitor Workspaces
     xwayland-satellite
     alacritty
     niri-scratchpad
