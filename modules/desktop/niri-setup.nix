@@ -10,16 +10,14 @@
     mako
     fuzzel
     swaylock
+    swaybg
     wl-clipboard
     xwayland-satellite
     alacritty
   ];
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-    config.common.default = [ "gnome" ];
-  };
+  # xdg.portal is already configured in modules/applications/flatpak.nix
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
 
   services.displayManager.ly.enable = lib.mkDefault true;
 }
