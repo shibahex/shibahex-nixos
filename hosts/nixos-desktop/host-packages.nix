@@ -30,6 +30,8 @@
     linuxPackages.usbip
 
     fastfetch
+
+    nemo
   ];
 
   # for looking glass

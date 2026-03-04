@@ -10,7 +10,7 @@
     windowManager.dwm.enable = true;
   };
 
- services.displayManager.defaultSession = "none+dwm";
+  services.displayManager.defaultSession = "none+dwm";
   services.displayManager.ly.enable = true;
 
   nixpkgs.overlays = [
