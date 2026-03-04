@@ -10,10 +10,16 @@
       url = "github:gvolpe/niri-scratchpad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
       nixpkgs,
+      stylix,
+
       ...
     }@inputs:
     let
@@ -39,6 +45,7 @@
             ./modules/applications
             ./modules/core
             ./modules/desktop
+            stylix.nixosModules.stylix
           ];
         };
     in
