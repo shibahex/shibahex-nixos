@@ -10,15 +10,15 @@ workspace "web"
 workspace "scratch"
 
 binds {
-    Mod+1 { focus-workspace "web"; }
-    Mod+2 { focus-workspace "dev"; }
-    Mod+3 { focus-workspace "term"; }
-    Mod+4 { focus-workspace "files"; }
-    Mod+5 { focus-workspace "chat"; }
-    Mod+6 { focus-workspace "media"; }
-    Mod+7 { focus-workspace "mail"; }
-    Mod+8 { focus-workspace "docs"; }
     Mod+9 { focus-workspace "misc"; }
+    Mod+8 { focus-workspace "docs"; }
+    Mod+7 { focus-workspace "mail"; }
+    Mod+6 { focus-workspace "media"; }
+    Mod+5 { focus-workspace "chat"; }
+    Mod+4 { focus-workspace "files"; }
+    Mod+3 { focus-workspace "term"; }
+    Mod+2 { focus-workspace "dev"; }
+    Mod+1 { focus-workspace "web"; }
 
     Mod+Shift+1 { move-column-to-workspace "web"; }
     Mod+Shift+2 { move-column-to-workspace "dev"; }
