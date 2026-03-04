@@ -1,0 +1,20 @@
+prefer-no-csd
+
+
+// For nscratch
+include "configs/workspaces.kdl"
+include "configs/window-rules.kdl"
+
+// etc
+include "configs/input.kdl"
+include "configs/monitors.kdl"
+include "configs/layout.kdl"
+include "configs/animation.kdl"
+include "configs/keymaps.kdl"
+include "configs/layer-rules.kdl"
+include "configs/misc.kdl"
+
+spawn-at-startup "spotify"
+spawn-at-startup "vesktop"
+spawn-at-startup "pavucontrol"
+spawn-at-startup "easyeffects"
