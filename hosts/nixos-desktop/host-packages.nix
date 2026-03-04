@@ -28,6 +28,8 @@
     yubikey-manager
 
     linuxPackages.usbip
+
+    fastfetch
   ];
 
   # for looking glass
@@ -50,7 +52,7 @@
   };
 
   networking.firewall.extraCommands = ''
-    iptables -A INPUT -p tcp --dport 3240 -s 192.168.122.69 -j ACCEPT
+    iptables -A INPUT -p tcp --dport 3240 -s 192.168.122.62 -j ACCEPT
     iptables -A INPUT -p tcp --dport 3240 -j DROP
   '';
 

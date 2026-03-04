@@ -20,7 +20,8 @@ in
 
   desktops = [
     "dwm"
-    "niri"
+    #"niri"
+    "mangowc"
   ];
   defaultShell = "nushell";
 

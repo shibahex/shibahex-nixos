@@ -18,6 +18,7 @@ in
     "iommu=pt"
     "vfio-pci.ids=${variables.vfioIds}"
   ];
+
   # Let nvidia take over
   boot.blacklistedKernelModules = [ "nouveau" ];
 
