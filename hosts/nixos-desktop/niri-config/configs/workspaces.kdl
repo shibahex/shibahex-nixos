@@ -20,24 +20,36 @@ workspace "media2" { open-on-output "DP-5"; }
 workspace "mail2"  { open-on-output "DP-5"; }
 workspace "docs2"  { open-on-output "DP-5"; }
 workspace "misc2"  { open-on-output "DP-5"; }
-binds {
-    Mod+9 { spawn "bash" "./workspace-per-monitor.sh" "9" "focus"; }
-    Mod+8 { spawn "bash" "./workspace-per-monitor.sh" "8" "focus"; }
-    Mod+7 { spawn "bash" "./workspace-per-monitor.sh" "7" "focus"; }
-    Mod+6 { spawn "bash" "./workspace-per-monitor.sh" "6" "focus"; }
-    Mod+5 { spawn "bash" "./workspace-per-monitor.sh" "5" "focus"; }
-    Mod+4 { spawn "bash" "./workspace-per-monitor.sh" "4" "focus"; }
-    Mod+3 { spawn "bash" "./workspace-per-monitor.sh" "3" "focus"; }
-    Mod+2 { spawn "bash" "./workspace-per-monitor.sh" "2" "focus"; }
-    Mod+1 { spawn "bash" "./workspace-per-monitor.sh" "1" "focus"; }
 
-    Mod+Shift+9 { spawn "bash" "./workspace-per-monitor.sh" "9" "move"; }
-    Mod+Shift+8 { spawn "bash" "./workspace-per-monitor.sh" "8" "move"; }
-    Mod+Shift+7 { spawn "bash" "./workspace-per-monitor.sh" "7" "move"; }
-    Mod+Shift+6 { spawn "bash" "./workspace-per-monitor.sh" "6" "move"; }
-    Mod+Shift+5 { spawn "bash" "./workspace-per-monitor.sh" "5" "move"; }
-    Mod+Shift+4 { spawn "bash" "./workspace-per-monitor.sh" "4" "move"; }
-    Mod+Shift+3 { spawn "bash" "./workspace-per-monitor.sh" "3" "move"; }
-    Mod+Shift+2 { spawn "bash" "./workspace-per-monitor.sh" "2" "move"; }
-    Mod+Shift+1 { spawn "bash" "./workspace-per-monitor.sh" "1" "move"; }
+// Side left monitor (unused if no left monitor)
+//workspace "web3"   { open-on-output ""; }
+// workspace "dev3"   { open-on-output ""; }
+// workspace "term3"  { open-on-output ""; }
+// workspace "files3" { open-on-output ""; }
+// workspace "chat3"  { open-on-output ""; }
+// workspace "media3" { open-on-output ""; }
+// workspace "mail3"  { open-on-output ""; }
+// workspace "docs3"  { open-on-output ""; }
+// workspace "misc3"  { open-on-output ""; }
+
+binds {
+    Mod+9 { spawn "workspace-per-monitor" "9" "focus"; }
+    Mod+8 { spawn "workspace-per-monitor" "8" "focus"; }
+    Mod+7 { spawn "workspace-per-monitor" "7" "focus"; }
+    Mod+6 { spawn "workspace-per-monitor" "6" "focus"; }
+    Mod+5 { spawn "workspace-per-monitor" "5" "focus"; }
+    Mod+4 { spawn "workspace-per-monitor" "4" "focus"; }
+    Mod+3 { spawn "workspace-per-monitor" "3" "focus"; }
+    Mod+2 { spawn "workspace-per-monitor" "2" "focus"; }
+    Mod+1 { spawn "workspace-per-monitor" "1" "focus"; }
+
+    Mod+Shift+9 { spawn "workspace-per-monitor" "9" "move"; }
+    Mod+Shift+8 { spawn "workspace-per-monitor" "8" "move"; }
+    Mod+Shift+7 { spawn "workspace-per-monitor" "7" "move"; }
+    Mod+Shift+6 { spawn "workspace-per-monitor" "6" "move"; }
+    Mod+Shift+5 { spawn "workspace-per-monitor" "5" "move"; }
+    Mod+Shift+4 { spawn "workspace-per-monitor" "4" "move"; }
+    Mod+Shift+3 { spawn "workspace-per-monitor" "3" "move"; }
+    Mod+Shift+2 { spawn "workspace-per-monitor" "2" "move"; }
+    Mod+Shift+1 { spawn "workspace-per-monitor" "1" "move"; }
 }

@@ -1,8 +1,8 @@
 { pkgs }:
 let
-  mainMonitor = "DP-0";
-  sideMonitorRight = "DP-2";
-
+  mainMonitor = "DP-4";
+  sideMonitorRight = "DP-5";
+  sideMonitorLeft = null;
 in
 {
   #Mainly used for hardware.nix or etc, inital setup in flake.nix has your hostname
@@ -17,6 +17,9 @@ in
 
   # GPU passthrough for hardware.nix
   vfioIds = "10de:1b06,10de:10ef";
+  mainMonitor = mainMonitor;
+  sideMonitorRight = sideMonitorRight;
+  sideMonitorLeft = sideMonitorLeft;
 
   desktops = [
     "dwm"
