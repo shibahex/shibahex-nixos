@@ -1,39 +1,64 @@
-# ❄️ My Personal NixOS Setup
-## This is my personal NixOS setup for programming using GPU passthrough for cybersecurity, virtualization, and compilation for windows
-<img width="3839" height="2159" alt="github" src="https://github.com/user-attachments/assets/14b5d552-8b1a-406a-aaa2-b4a3df89f9ec" />
-(Left is Windows VM with a 1080ti; Right is Main PC with 3080)
+# ❄️ NixOS Setup
+
+My personal NixOS configuration for development, cybersecurity research, and cross-platform compilation, built around GPU passthrough and a fully reproducible system.
+
+> **Left:** Windows VM (GTX 1080 Ti) · **Right:** Main Desktop (RTX 3080)
+
+![Desktop Screenshot](https://github.com/user-attachments/assets/14b5d552-8b1a-406a-aaa2-b4a3df89f9ec)
 
 ---
 
-## ❄️ NixOS Features
+## Hosts
 
-- Entire system is a config file in Git, fully reproducible across any machine.
-- Rollback any update with nix commands.
-- Packages and dependencies are pinned, nothing breaks unexpectedly.
-- Modular config share common settings across machines, and have custom configs per host.
-
-Easily clone my main setup into a VM in minutes, with all my tools and settings.
+| Host | Role |
+|------|------|
+| `nixos-desktop` | Main workstation. Runs libvirt/QEMU with VFIO passthrough, Looking Glass for low-latency VM display, software TPM, and USB/IP YubiKey forwarding. |
+| `cyber-vm` | NixOS VM on the passed-through 1080 Ti. Full cyber tooling, accessible via XRDP or Looking Glass, with YubiKey support via USB/IP. |
 
 ---
 
-## 🖥️ GPU Passthrough
-Instead of slow emulated graphics, GPU passthrough lets a VM own a physical GPU outright. `cyber-vm` gets a dedicated GTX 1080 Ti passed through via VFIO/IOMMU using real hardware.
+## Why NixOS
 
-**What this enables:**
+- **Reproducible**: the entire system is a config file in Git, deployable on any machine
+- **Atomic rollbacks**: revert any update with a single `nixos-rebuild` switch
+- **Pinned dependencies**: packages never break unexpectedly
+- **Modular**: shared settings across hosts with per-host overrides
+- **Fast VM cloning**: spin up a full copy of my setup in minutes
+
+---
+
+## GPU Passthrough
+
+Instead of slow emulated graphics, `cyber-vm` gets a dedicated GTX 1080 Ti passed through via VFIO/IOMMU — owning the hardware outright.
+
+This enables:
 - Windows VMs with real GPU acceleration for cross-compilation and testing
-- CTF challenges and security research on a separate OS from your daily driver
-- Running real workloads in the VM
-- Tools in the VM can fully use GPU acceleration (hashcat)
+- CTF challenges and security research outside from the daily driver
+- Full GPU acceleration for tools like `hashcat` inside the VM
 
 ---
 
-## 🖥️ Hosts
+## Desktop Environments
 
-| Host | Description |
-|------|-------------|
-| `nixos-desktop` | Main workstation for development, gaming, and the VFIO passthrough host. Runs libvirt/QEMU with software TPM, Looking Glass for low-latency VM display, and USB/IP to forward a YubiKey into the VM |
-| `cyber-vm` | NixOS VM on the passed-through 1080 Ti. With all the cyber tooling, Accessible via XRDP or looking-glass, and has YubiKey support via USB/IP |
+### Niri · Wayland
+
+Niri is a scrollable-tiling Wayland compositor.
+
+https://github.com/user-attachments/assets/fedafeb5-5513-4f91-8f56-312bd69c9777
+- **Scratchpads**: Spotify, Discord, EasyEffects, and Pavucontrol toggle as floating overlays via [niri-scratchpad](https://github.com/gvolpe/niri-scratchpad)
+- **Per-monitor workspaces**: each monitor gets 9 independent named workspaces, switched with `Mod+1–9` relative to the focused monitor
+- **Dynamic generation**: workspaces are defined once in `variables.nix` and auto-generated per monitor, with suffixes for secondary displays
+- **Multi-monitor aware**: supports main, side-right, and side-left layouts
+
+### DWM · X11
+
+DWM is a minimal suckless window manager, used on `cyber-vm` and for X11 sessions.
+
+- **Per-host `config.h`**: DWM, dmenu, st, and slstatus are compiled with host-specific configs from `hosts/<host>/dwm-config/`
+- **Tokyo Night theme**: colors baked in at compile time across all suckless tools
+- **slstatus**: lightweight bar showing CPU, RAM, uptime, and time; runs as a systemd user service
+- **st terminal**: compiled with JetBrainsMono Nerd Font
 
 ---
 
-Built on top of [shibahex/nixos-template](https://github.com/shibahex/nixos-template) :)
+Built on [shibahex/nixos-template](https://github.com/shibahex/nixos-template)
