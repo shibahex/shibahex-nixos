@@ -68,6 +68,12 @@
           profile = "nvidia";
           username = "shiba";
         };
+        thinkpad-nix = mkHost {
+          hostname = "thinkpad-nix";
+          profile = "intel";
+          username = "shiba";
+        };
+	
       };
     };
 }
