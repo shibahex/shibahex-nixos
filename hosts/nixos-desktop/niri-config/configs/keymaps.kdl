@@ -9,6 +9,10 @@ binds {
     Mod+Shift+S { spawn-sh "nscratch -id Spotify -m"; }
     Mod+Shift+A { spawn-sh "nscratch -id com.github.wwmm.easyeffects -m && nscratch -id org.pulseaudio.pavucontrol -m"; }
     Mod+Shift+D { spawn-sh "nscratch -id vesktop -m"; }
+    Mod+Shift+O { spawn-sh "nscratch -id com.obsproject.Studio -m"; }
+    Mod+Shift+P { spawn-sh "nscratch -id 1password -m"; }
+
+
     Mod+C repeat=false { close-window; }
     Mod+Ctrl+X hotkey-overlay-title="Kill unresponsive window" {
       spawn-sh "kill -9 $(niri msg -j windows | jq '.[] | select(.is_focused == true)' | jq .pid)";
@@ -233,6 +237,6 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+P { power-off-monitors; }
+    Mod+Shift+Q { power-off-monitors; }
 }
 
