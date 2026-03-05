@@ -32,9 +32,10 @@ in
           source = dynamic-workspace.workspacesKdl;
         };
       };
+
+  programs.niri.enable = true;
   environment.systemPackages =
     (with pkgs; [
-      niri
       noctalia-shell
       fuzzel
       swaylock
@@ -47,5 +48,4 @@ in
     ++ lib.optional (dynamic-workspace ? script) dynamic-workspace.script;
 
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
-  services.displayManager.ly.enable = lib.mkDefault true;
 }
