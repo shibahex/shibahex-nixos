@@ -5,28 +5,22 @@ let
   sideMonitorLeft = null;
 in
 {
-  #Mainly used for hardware.nix or etc, inital setup in flake.nix has your hostname
+  # Host
   hostName = "shiba";
-
-  # Git Configuration
   timeZone = "America/New_York";
+  hostId = "5ab03f50";
+  defaultShell = "nushell";
 
-  # For Nvidia Prime support
-  # Run 'lspci | grep VGA' to find your actual GPU IDs
+  # GPU
   nvidiaID = "PCI:1:0:0";
-
-  # GPU passthrough for hardware.nix
   vfioIds = "10de:1b06,10de:10ef";
+
+  # Monitors
   mainMonitor = mainMonitor;
   sideMonitorRight = sideMonitorRight;
   sideMonitorLeft = sideMonitorLeft;
 
-  desktops = [
-    "dwm"
-    "niri"
-  ];
-  defaultShell = "nushell";
-
+  # DWM monitor rules (for grobi)
   monitorRules = [
     {
       name = "Gaming monitors";
@@ -42,12 +36,8 @@ in
       atomic = true;
       execute_after = [
         "${pkgs.xrandr}/bin/xrandr --output ${mainMonitor} --mode 3840x2160 --rate 144 --dpi 192 --primary"
-        "${pkgs.xrandr}/bin/xrandr --output ${sideMonitorRight} --mode 2560x1440 --rate 100 --rotate normal" # --rotate right"
+        "${pkgs.xrandr}/bin/xrandr --output ${sideMonitorRight} --mode 2560x1440 --rate 100 --rotate normal"
       ];
     }
   ];
-
-  # Set network hostId if required (needed for zfs)
-  hostId = "5ab03f50";
-
 }
