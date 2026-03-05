@@ -4,6 +4,7 @@
   variables,
   host,
 }:
+assert variables.mainMonitor != null -> builtins.isString variables.mainMonitor;
 let
   workspace-file =
     if builtins.pathExists ../../hosts/${host}/niri-config/workspaces.nix then
@@ -22,8 +23,9 @@ let
           "background"
         ];
       };
+
   ws = workspace-file.workspaces;
-  mainMon = variables.mainMonitor;
+  mainMon = if variables.mainMonitor != null then variables.mainMonitor else "unknown";
   sideRight = variables.sideMonitorRight;
   sideLeft = variables.sideMonitorLeft;
 

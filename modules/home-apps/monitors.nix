@@ -1,7 +1,8 @@
 { host, pkgs, ... }:
 let
   variables = import ../../hosts/${host}/variables.nix { pkgs = pkgs; };
-  inherit (variables) monitorRules;
+  monitorRules = variables.monitorRules or [ ];
+
 in
 {
   services.grobi = {
