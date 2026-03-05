@@ -32,10 +32,9 @@ in
           source = dynamic-workspace.workspacesKdl;
         };
       };
-
   environment.systemPackages =
-    with pkgs;
-    [
+    (with pkgs; [
+      niri
       noctalia-shell
       fuzzel
       swaylock
@@ -43,10 +42,8 @@ in
       satty
       xwayland-satellite
       alacritty
-
-      ## Scripts to make niri scratchpad work with dynamic-workspace
       niri-scratchpad
-    ]
+    ])
     ++ lib.optional (dynamic-workspace ? script) dynamic-workspace.script;
 
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];

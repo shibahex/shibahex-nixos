@@ -10,7 +10,10 @@ in
   timeZone = "America/New_York";
   hostId = "5ab03f50";
   defaultShell = "nushell";
-
+  desktops = [
+    "dwm"
+    "niri"
+  ];
   # GPU
   nvidiaID = "PCI:1:0:0";
   vfioIds = "10de:1b06,10de:10ef";

@@ -73,16 +73,14 @@ let
   script = pkgs.writeShellScriptBin "workspace-per-monitor" ''
     SLOT=$1
     ACTION=''${2:-focus}
-    CURRENT=$(niri msg -j focused-output | grep -oP '"name":"\K[^"]*')
-
+    NIRI="${pkgs.niri}/bin/niri"
+    CURRENT=$($NIRI msg -j focused-output | grep -oP '"name":"\K[^"]*')
     MAIN_MON="${mainMon}"
     SIDE_RIGHT="${if sideRight != null then sideRight else ""}"
     SIDE_LEFT="${if sideLeft != null then sideLeft else ""}"
-
     if [ -z "$CURRENT" ]; then
       CURRENT="$MAIN_MON"
     fi
-
     if [ "$CURRENT" = "$MAIN_MON" ]; then
       case "$SLOT" in
         ${mkBashCase ws ""}
@@ -100,10 +98,8 @@ let
         ${mkBashCase ws ""}
       esac
     fi
-
-
-    if [ "$ACTION" = "move" ]; then niri msg action move-column-to-workspace "$WS"
-    else niri msg action focus-workspace "$WS"; fi
+    if [ "$ACTION" = "move" ]; then $NIRI msg action move-column-to-workspace "$WS"
+    else $NIRI msg action focus-workspace "$WS"; fi
   '';
 in
 {

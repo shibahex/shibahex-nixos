@@ -10,4 +10,7 @@
   sideMonitorRight = null;
   sideMonitorLeft = null;
   monitorRules = [ ];
+  desktops = [
+    "dwm"
+  ];
 }
