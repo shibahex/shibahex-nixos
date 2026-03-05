@@ -44,7 +44,8 @@ This enables:
 
 Niri is a scrollable-tiling Wayland compositor.
 
-https://github.com/user-attachments/assets/fedafeb5-5513-4f91-8f56-312bd69c9777
+https://github.com/user-attachments/assets/bbd9e773-7289-4449-8959-a0a6b27caf2f
+
 - **Scratchpads**: Spotify, Discord, EasyEffects, and Pavucontrol toggle as floating overlays via [niri-scratchpad](https://github.com/gvolpe/niri-scratchpad)
 - **Per-monitor workspaces**: each monitor gets 9 independent named workspaces, switched with `Mod+1–9` relative to the focused monitor
 - **Dynamic generation**: workspaces are defined once in `variables.nix` and auto-generated per monitor, with suffixes for secondary displays
