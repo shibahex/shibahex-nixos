@@ -5,8 +5,9 @@ layout {
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
+        proportion 0.33333
         proportion 0.5
-        proportion 0.25
+        proportion 0.66667
     }
 
     // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
