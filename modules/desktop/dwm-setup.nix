@@ -11,7 +11,6 @@
   };
 
   services.displayManager.defaultSession = "none+dwm";
-  services.displayManager.ly.enable = true;
 
   nixpkgs.overlays = [
     (
@@ -73,6 +72,7 @@
     dmenu
     st
     slstatus
+    xinit
   ];
 
   systemd.user.services.slstatus = {
