@@ -1,0 +1,42 @@
+// -------- window rules ---------~
+
+window-rule {
+    match app-id=r#"^(Spotify|org\.pulseaudio\.pavucontrol|com\.github\.wwmm\.easyeffects)|1password|com.obsproject.Studio$"#
+    open-on-workspace "scratch"
+    opacity 0.95
+    open-floating true
+    default-column-width { fixed 1596; }
+    default-window-height { fixed 1240; }
+}
+
+window-rule {
+    match app-id=r#"vesktop"#
+    open-on-workspace "scratch"
+    open-floating true
+    default-column-width { proportion 0.95; }
+    default-window-height { proportion 0.95; }
+    opacity 0.95
+
+}
+
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    match app-id=r#"^1password$"#
+
+    block-out-from "screen-capture"
+}
+
+// Example: enable rounded corners for all windows.
+// (This example rule is commented out with a "/-" in front.)
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
