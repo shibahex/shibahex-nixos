@@ -2,9 +2,26 @@
   pkgs,
   lib,
   variables,
-  workspace-file,
+  host,
 }:
 let
+  workspace-file =
+    if builtins.pathExists ../../hosts/${host}/niri-config/workspaces.nix then
+      import ../../hosts/${host}/niri-config/workspaces.nix { pkgs = pkgs; }
+    else
+      {
+        workspaces = [
+          "dev"
+          "learn"
+          "docs"
+          "media"
+          "play"
+          "files"
+          "vm"
+          "docker"
+          "background"
+        ];
+      };
   ws = workspace-file.workspaces;
   mainMon = variables.mainMonitor;
   sideRight = variables.sideMonitorRight;
@@ -17,10 +34,10 @@ let
   sideRightWs = if sideRight != null then map (n: n + "2") ws else [ ];
   sideLeftWs = if sideLeft != null then map (n: n + "3") ws else [ ];
 
-  mkBashArray = names: "(" + lib.concatImapStrings (i: n: "[${toString i}]=${n} ") names + ")";
+  mkBashCase =
+    names: prefix: lib.concatImapStrings (i: n: "      ${toString i}) WS=\"${n}${prefix}\";;\n") names;
 
   workspacesKdl = pkgs.writeText "workspaces.kdl" ''
-    workspace "scratch"
 
     // Main monitor
     ${mkWorkspaces ws mainMon}
@@ -49,29 +66,39 @@ let
         Mod+Shift+2 { spawn "workspace-per-monitor" "2" "move"; }
         Mod+Shift+1 { spawn "workspace-per-monitor" "1" "move"; }
     }
+    workspace "scratch"
   '';
-
   script = pkgs.writeShellScriptBin "workspace-per-monitor" ''
     SLOT=$1
     ACTION=''${2:-focus}
     CURRENT=$(niri msg -j focused-output | grep -oP '"name":"\K[^"]*')
-    declare -A MAIN=${mkBashArray ws}
-    declare -A SIDE=${mkBashArray sideRightWs}
-    declare -A SIDELEFT=${mkBashArray sideLeftWs}
 
     MAIN_MON="${mainMon}"
     SIDE_RIGHT="${if sideRight != null then sideRight else ""}"
     SIDE_LEFT="${if sideLeft != null then sideLeft else ""}"
 
-    if [ "$CURRENT" = "$MAIN_MON" ]; then
-      WS="''${MAIN[$SLOT]}"
-    elif [ -n "$SIDE_RIGHT" ] && [ "$CURRENT" = "$SIDE_RIGHT" ]; then
-      WS="''${SIDE[$SLOT]}"
-    elif [ -n "$SIDE_LEFT" ] && [ "$CURRENT" = "$SIDE_LEFT" ]; then
-      WS="''${SIDELEFT[$SLOT]}"
-    else
-      WS="''${MAIN[$SLOT]}"
+    if [ -z "$CURRENT" ]; then
+      CURRENT="$MAIN_MON"
     fi
+
+    if [ "$CURRENT" = "$MAIN_MON" ]; then
+      case "$SLOT" in
+        ${mkBashCase ws ""}
+      esac
+    elif [ -n "$SIDE_RIGHT" ] && [ "$CURRENT" = "$SIDE_RIGHT" ]; then
+      case "$SLOT" in
+        ${mkBashCase ws "2"}
+      esac
+    elif [ -n "$SIDE_LEFT" ] && [ "$CURRENT" = "$SIDE_LEFT" ]; then
+      case "$SLOT" in
+        ${mkBashCase ws "3"}
+      esac
+    else
+      case "$SLOT" in
+        ${mkBashCase ws ""}
+      esac
+    fi
+
 
     if [ "$ACTION" = "move" ]; then niri msg action move-column-to-workspace "$WS"
     else niri msg action focus-workspace "$WS"; fi
