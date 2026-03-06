@@ -14,6 +14,10 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lyricsmpris-rust = {
+      url = "github:BEST8OY/LyricsMPRIS-Rust";
+      flake = false;
+    };
   };
   outputs =
     {

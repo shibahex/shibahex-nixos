@@ -1,4 +1,14 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
+let   
+  lyricsmpris = pkgs.rustPlatform.buildRustPackage {
+  pname = "lyricsmpris";
+  version = "unstable";
+  src = inputs.lyricsmpris-rust;
+  cargoLock.lockFile = "${inputs.lyricsmpris-rust}/Cargo.lock";
+  buildInputs = [ pkgs.dbus pkgs.openssl ];
+  nativeBuildInputs = [ pkgs.pkg-config ];
+};
+in
 {
   environment.systemPackages = with pkgs; [
     # Add host-specific packages here
@@ -28,7 +38,15 @@
       export LD_LIBRARY_PATH=${config.boot.kernelPackages.nvidiaPackages.stable}/lib:$LD_LIBRARY_PATH
       exec ${pkgs.obs-studio}/bin/obs "$@"
     '')
+    # Playerctl for MPRIS (lyrics)
+    playerctl
+
+    #noctalia shell plugin for lyrics
+    lyricsmpris
   ];
+  services.playerctld.enable = true;
+
+
   # ffmpegthumbnailer and tumbler for mp4 thumbnails
   services.tumbler.enable = true;
   # for looking glass
