@@ -33,7 +33,6 @@ in
         };
       };
 
-  programs.niri.enable = true;
   environment.systemPackages =
     (with pkgs; [
       noctalia-shell
@@ -48,4 +47,5 @@ in
     ++ lib.optional (dynamic-workspace ? script) dynamic-workspace.script;
 
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+  programs.niri.enable = true;
 }
