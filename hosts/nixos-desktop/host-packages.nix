@@ -1,13 +1,13 @@
 { config, pkgs, inputs, ... }:
-let   
+let
   lyricsmpris = pkgs.rustPlatform.buildRustPackage {
-  pname = "lyricsmpris";
-  version = "unstable";
-  src = inputs.lyricsmpris-rust;
-  cargoLock.lockFile = "${inputs.lyricsmpris-rust}/Cargo.lock";
-  buildInputs = [ pkgs.dbus pkgs.openssl ];
-  nativeBuildInputs = [ pkgs.pkg-config ];
-};
+    pname = "lyricsmpris";
+    version = "unstable";
+    src = inputs.lyricsmpris-rust;
+    cargoLock.lockFile = "${inputs.lyricsmpris-rust}/Cargo.lock";
+    buildInputs = [ pkgs.dbus pkgs.openssl ];
+    nativeBuildInputs = [ pkgs.pkg-config ];
+  };
 in
 {
   environment.systemPackages = with pkgs; [
@@ -32,7 +32,7 @@ in
     fastfetch
     thunar
     ffmpegthumbnailer
-    
+
     # Recording (make OBS see nvidiaPackages)
     (pkgs.writeShellScriptBin "obs" ''
       export LD_LIBRARY_PATH=${config.boot.kernelPackages.nvidiaPackages.stable}/lib:$LD_LIBRARY_PATH
@@ -43,6 +43,9 @@ in
 
     #noctalia shell plugin for lyrics
     lyricsmpris
+
+    # Way to find PIDs and see what taking RAM
+    pstree
   ];
   services.playerctld.enable = true;
 
@@ -71,5 +74,10 @@ in
   boot.kernelModules = [
     "usbip-core"
     "usbip-host"
+  ];
+
+  # Ram Categories
+  imports = [
+    ./ram-management.nix
   ];
 }
