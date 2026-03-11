@@ -1,7 +1,7 @@
 { pkgs }:
 let
-  mainMonitor = "DP-4";
-  sideMonitorRight = "DP-5";
+  mainMonitor = "DP-2";
+  sideMonitorRight = "DP-0";
   sideMonitorLeft = null;
 in
 {
