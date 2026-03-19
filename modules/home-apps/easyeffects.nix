@@ -4,13 +4,14 @@ let
   easyEffectsProfiles = pkgs.fetchFromGitHub {
     "owner" = "shibahex";
     "repo" = "easyeffects-presets";
-    "rev" = "45d9a8cebcbe090c9ddba6a4f15d3f17ed22109e";
-    "hash" = "sha256-MNy7P+VIey4dRg05MJnR5MZhTB5AkL3kPHHdJnSsBRw=";
+    "rev" = "2c9ef3703fa14805e58cf9ecf75bbdba66154cba";
+    "hash" = "sha256-GJBLcIlzOz10Zn1qW/slALGLBaMTOkdKixWzf8PUVQA=";
   };
 in
 {
-  home.file.".config/easyeffects" = {
+  home.file.".local/share/easyeffects" = {
     source = easyEffectsProfiles;
     recursive = true;
   };
 }
+
