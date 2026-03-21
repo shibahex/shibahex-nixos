@@ -46,6 +46,8 @@ in
 
     # Way to find PIDs and see what taking RAM
     pstree
+
+    obsidian
   ];
   services.playerctld.enable = true;
 
