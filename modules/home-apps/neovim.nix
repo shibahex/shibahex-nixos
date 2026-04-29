@@ -4,8 +4,8 @@ let
   neovimConfig = pkgs.fetchFromGitHub {
     owner = "shibahex";
     repo = "LazyVim-starter";
-    sha256 = "sha256-PJ7iB9yggq7ktwXA9GAVeq8ZXSFtJcj+e1+9uQ46ESo=";
-    rev = "bfbafe900eb5d80d949c9c202e624e19c994341a";
+    sha256 = "sha256-AW2lFbGewmne45sgM6xJ25UDRRkQIQcTPP/Y9UhcZNA=";
+    rev = "7a4d880605356abfba486c996a70ad951746e53f";
   };
 
   #neovimConfig = "/home/shiba/Documents/LazyVim-starter";
@@ -32,15 +32,4 @@ in
     recursive = true;
   };
 
-  home.file.".config/nushell/nix-prompt.nu".text = ''
-    if ($env.IN_NIX_SHELL? != null) {
-        $env.PROMPT_INDICATOR = $" \(($env.IN_NIX_SHELL)\)> "
-    }
-  '';
-  home.file.".config/nushell/env.nu".text = ''
-    source ~/.config/nushell/nix-prompt.nu
-  '';
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
 }
