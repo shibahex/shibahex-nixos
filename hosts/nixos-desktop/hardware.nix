@@ -1,9 +1,8 @@
-{
-  config,
-  lib,
-  modulesPath,
-  pkgs,
-  ...
+{ config
+, lib
+, modulesPath
+, pkgs
+, ...
 }:
 let
   variables = import ./variables.nix { pkgs = pkgs; };
@@ -51,24 +50,42 @@ in
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/226c330a-fb06-480a-8292-33e74dc053a8";
     fsType = "btrfs";
-    options = [ "subvol=@" "compress=zstd" "noatime" "ssd" ];
+    options = [
+      "subvol=@"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+    ];
   };
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/226c330a-fb06-480a-8292-33e74dc053a8";
     fsType = "btrfs";
-    options = [ "subvol=@home" "compress=zstd" "noatime" "ssd" ];
+    options = [
+      "subvol=@home"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+    ];
   };
   fileSystems."/var/log" = {
     device = "/dev/disk/by-uuid/226c330a-fb06-480a-8292-33e74dc053a8";
     fsType = "btrfs";
-    options = [ "subvol=@var-log" "compress=zstd" "noatime" "ssd" ];
+    options = [
+      "subvol=@var-log"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+    ];
   };
 
   # Boot
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/8C78-571B";
     fsType = "vfat";
-    options = [ "fmask=0077" "dmask=0077" ];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
 
   # ============================================================
@@ -77,7 +94,12 @@ in
   fileSystems."/mnt/HDD" = {
     device = "/dev/mapper/hdd";
     fsType = "btrfs";
-    options = [ "compress=zstd" "noatime" "nossd" "nofail" ];
+    options = [
+      "compress=zstd"
+      "noatime"
+      "nossd"
+      "nofail"
+    ];
   };
 
   # ============================================================
@@ -86,46 +108,103 @@ in
   fileSystems."/home/shiba/SteamLibrary" = {
     device = "/dev/mapper/SSD_2";
     fsType = "btrfs";
-    options = [ "subvol=@steam" "compress=zstd:1" "noatime" "nofail" "ssd" ];
+    options = [
+      "subvol=@steam"
+      "compress=zstd:1"
+      "noatime"
+      "nofail"
+      "ssd"
+    ];
   };
   fileSystems."/home/shiba/Projects" = {
     device = "/dev/mapper/SSD_2";
     fsType = "btrfs";
-    options = [ "subvol=@projects" "compress=zstd" "noatime" "nofail" "ssd" ];
+    options = [
+      "subvol=@projects"
+      "compress=zstd"
+      "noatime"
+      "nofail"
+      "ssd"
+    ];
   };
   fileSystems."/home/shiba/vmImages" = {
     device = "/dev/mapper/SSD_2";
     fsType = "btrfs";
-    options = [ "subvol=@vmimages" "noatime" "nofail" "ssd" ];
+    options = [
+      "subvol=@vmimages"
+      "noatime"
+      "nofail"
+      "ssd"
+    ];
   };
 
+  # Have libvirt talk to vmimages
+  fileSystems."/var/lib/libvirt" = {
+    device = "/home/shiba/vmImages";
+    fsType = "none";
+    options = [
+      "bind"
+      "nofail"
+    ];
+    depends = [ "/home/shiba/vmImages" ];
+  };
   # ============================================================
   # HDD (sda) — 1.8T subvolumes
   # ============================================================
   fileSystems."/home/shiba/Documents" = {
     device = "/dev/mapper/hdd";
     fsType = "btrfs";
-    options = [ "subvol=@documents" "compress=zstd" "noatime" "nofail" "nossd" ];
+    options = [
+      "subvol=@documents"
+      "compress=zstd"
+      "noatime"
+      "nofail"
+      "nossd"
+    ];
   };
   fileSystems."/home/shiba/Downloads" = {
     device = "/dev/mapper/hdd";
     fsType = "btrfs";
-    options = [ "subvol=@downloads" "compress=zstd" "noatime" "nofail" "nossd" ];
+    options = [
+      "subvol=@downloads"
+      "compress=zstd"
+      "noatime"
+      "nofail"
+      "nossd"
+    ];
   };
   fileSystems."/home/shiba/Ebooks" = {
     device = "/dev/mapper/hdd";
     fsType = "btrfs";
-    options = [ "subvol=@ebooks" "compress=zstd" "noatime" "nofail" "nossd" ];
+    options = [
+      "subvol=@ebooks"
+      "compress=zstd"
+      "noatime"
+      "nofail"
+      "nossd"
+    ];
   };
   fileSystems."/home/shiba/Pictures" = {
     device = "/dev/mapper/hdd";
     fsType = "btrfs";
-    options = [ "subvol=@pictures" "compress=zstd" "noatime" "nofail" "nossd" ];
+    options = [
+      "subvol=@pictures"
+      "compress=zstd"
+      "noatime"
+      "nofail"
+      "nossd"
+    ];
   };
   fileSystems."/home/shiba/Videos" = {
     device = "/dev/mapper/hdd";
     fsType = "btrfs";
-    options = [ "subvol=@videos" "compress=zstd" "noatime" "nofail" "nossd" ];
+    options = [
+      "subvol=@videos"
+      "compress=zstd"
+      "noatime"
+      "nofail"
+      "nossd"
+    ];
   };
 
   # ============================================================
