@@ -20,20 +20,18 @@
     };
   };
   outputs =
-    {
-      nixpkgs,
-      stylix,
-
-      ...
+    { nixpkgs
+    , stylix
+    , ...
     }@inputs:
     let
       system = "x86_64-linux";
       # Helper function to create a host configuration
       mkHost =
-        {
-          hostname,
-          profile,
-          username,
+        { hostname
+        , profile
+        , username
+        ,
         }:
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -77,7 +75,7 @@
           profile = "intel";
           username = "shiba";
         };
-	
+
       };
     };
 }
