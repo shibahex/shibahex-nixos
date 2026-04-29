@@ -5,5 +5,6 @@
     ./monitors.nix
     ./neovim.nix
     ./nixpkgsconf.nix
+    ./nushell.nix
   ];
 }
