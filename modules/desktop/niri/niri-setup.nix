@@ -40,7 +40,7 @@ in
       wl-clipboard
       satty
       xwayland-satellite
-      alacritty
+      ghostty
       niri-scratchpad
     ])
     ++ lib.optional (dynamic-workspace ? script) dynamic-workspace.script;

@@ -1,12 +1,11 @@
-{
-  pkgs,
-  host,
-  lib,
-  config,
-  ...
+{ pkgs
+, host
+, lib
+, self
+, ...
 }:
 let
-  variables = import ../../hosts/${host}/variables.nix { pkgs = pkgs; };
+  variables = import "${self}/hosts/${host}/variables.nix" { inherit pkgs; };
   desktops = variables.desktops or [ "dwm" ];
 in
 {
@@ -15,9 +14,9 @@ in
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
 
   imports =
-    (lib.optional (builtins.elem "dwm" desktops) ./dwm-setup.nix)
-    ++ (lib.optional (builtins.elem "niri" desktops) ./niri-setup.nix);
+    (lib.optional (builtins.elem "dwm" desktops) ./dwm/dwm-setup.nix)
+    ++ (lib.optional (builtins.elem "niri" desktops) ./niri/niri-setup.nix);
 
-   services.displayManager.ly.enable = true;
- 
+  services.displayManager.ly.enable = true;
+
 }
