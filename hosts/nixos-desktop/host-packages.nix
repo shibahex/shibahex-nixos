@@ -1,11 +1,18 @@
-{ config, pkgs, inputs, ... }:
+{ config
+, pkgs
+, inputs
+, ...
+}:
 let
   lyricsmpris = pkgs.rustPlatform.buildRustPackage {
     pname = "lyricsmpris";
     version = "unstable";
     src = inputs.lyricsmpris-rust;
     cargoLock.lockFile = "${inputs.lyricsmpris-rust}/Cargo.lock";
-    buildInputs = [ pkgs.dbus pkgs.openssl ];
+    buildInputs = [
+      pkgs.dbus
+      pkgs.openssl
+    ];
     nativeBuildInputs = [ pkgs.pkg-config ];
   };
 in
@@ -41,16 +48,33 @@ in
     # Playerctl for MPRIS (lyrics)
     playerctl
 
-    #noctalia shell plugin for lyrics
-    lyricsmpris
-
     # Way to find PIDs and see what taking RAM
     pstree
 
     obsidian
-  ];
-  services.playerctld.enable = true;
+    taskwarrior3
+    taskwarrior-tui
+    #keyboard
+    via
 
+    #noctalia shell plugin for lyrics
+    lyricsmpris
+
+    # VPN
+    wireguard-tools
+  ];
+  # rd2
+  hardware.opengl.driSupport32Bit = true;
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    glibc_multi
+  ];
+  # Try to fix wireless keyboard disconnecting on sleep
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0c45", ATTR{idProduct}=="fefe", TEST=="power/control", ATTR{power/control}="on"
+  '';
+  #TODO: make below into more nix files
+  services.playerctld.enable = true;
 
   # ffmpegthumbnailer and tumbler for mp4 thumbnails
   services.tumbler.enable = true;
@@ -77,6 +101,10 @@ in
     "usbip-core"
     "usbip-host"
   ];
+
+  # For keyboard
+  hardware.keyboard.qmk.enable = true;
+  services.udev.packages = [ pkgs.via ];
 
   # Ram Categories
   imports = [
