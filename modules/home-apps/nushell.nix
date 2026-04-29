@@ -1,32 +1,36 @@
 { pkgs, ... }:
 {
   home.file.".config/nushell/nix-prompt.nu".text = ''
-    if ($env.IN_NIX_SHELL? != null) {
+    if ("IN_NIX_SHELL" in $env) {
         $env.PROMPT_INDICATOR = $" \(($env.IN_NIX_SHELL)\)> "
     }
   '';
-  home.file.".config/nushell/env.nu".text = ''
-    source ~/.config/nushell/nix-prompt.nu
-  '';
-  home.sessionVariables = {
-    EDITOR = "neovim";
-  };
-
   programs.nushell = {
     enable = true;
+    environmentVariables = {
+      EDITOR = "nvim";
+    };
+    extraEnv = ''
+      source ~/.config/nushell/nix-prompt.nu
+    '';
     extraConfig = ''
-      $env.config.keybindings ++= [{
-          name: ctrl_s_move_word_right
-          modifier: control
-          keycode: char_s
-          mode: [emacs, vi_insert]
-          event: {
+      $env.config = {
+        show_banner: false
+        keybindings: [
+          {
+            name: ctrl_s_hint_word_complete
+            modifier: control
+            keycode: char_s
+            mode: [emacs vi_insert vi_normal]
+            event: {
               until: [
-                  { send: historyhintwordcomplete }
-                  { edit: movewordright }
+                { send: historyhintwordcomplete }
+                { edit: movewordright }
               ]
+            }
           }
-      }]
+        ]
+      }
     '';
   };
 }
