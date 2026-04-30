@@ -3,6 +3,7 @@
 , inputs
 , host
 , self
+, username
 , stateVersion
 , ...
 }:
@@ -22,7 +23,7 @@ let
   );
 in
 {
-  home-manager.users.${variables.hostName} =
+  home-manager.users.${username} =
     lib.mkIf (builtins.pathExists "${self}/hosts/${host}/niri-config")
       {
         home.stateVersion = "${stateVersion}";
