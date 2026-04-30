@@ -7,12 +7,12 @@
     timer
     btop
 
-    mpv
+    # dont want to manually compile deno
+    (pkgs.mpv.override {
+      youtubeSupport = false;
+    })
     tmux
     openvpn
-
-    # Recording App
-    obs-studio
 
     # Discord
     vesktop
@@ -32,6 +32,11 @@
 
   ];
 
+  #recording
+  programs.obs-studio = {
+    enable = true;
+  };
+
   # ffmpegthumbnailer and tumbler for mp4 thumbnails
   services.tumbler.enable = true;
 
@@ -42,5 +47,5 @@
   virtualisation.docker.enable = true;
 
   # Change to save battery life
-  powerManagement.cpuFreqGovernor = "performance";
+  powerManagement.cpuFreqGovernor = "powersave";
 }
