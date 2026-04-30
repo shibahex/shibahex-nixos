@@ -22,6 +22,7 @@
   outputs =
     { nixpkgs
     , stylix
+    , self
     , ...
     }@inputs:
     let
@@ -38,6 +39,7 @@
           specialArgs = {
             inherit inputs;
             host = hostname;
+            inherit self;
             inherit profile;
             inherit username;
           };
