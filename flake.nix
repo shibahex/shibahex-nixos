@@ -32,6 +32,7 @@
         { hostname
         , profile
         , username
+        , stateVersion
         ,
         }:
         nixpkgs.lib.nixosSystem {
@@ -39,6 +40,7 @@
           specialArgs = {
             inherit inputs;
             host = hostname;
+            inherit stateVersion;
             inherit self;
             inherit profile;
             inherit username;
@@ -55,29 +57,25 @@
     in
     {
       nixosConfigurations = {
-        # Default template configuration
         # Users will create their own host configurations during installation
-        default = mkHost {
-          hostname = "default";
-          profile = "amd";
-          username = "user";
-        };
         cyber-vm = mkHost {
           hostname = "cyber-vm";
           profile = "nvidia";
           username = "sheeb";
+          stateVersion = "25.05";
         };
         nixos-desktop = mkHost {
           hostname = "nixos-desktop";
           profile = "nvidia";
           username = "shiba";
+          stateVersion = "25.05";
         };
         thinkpad-nix = mkHost {
           hostname = "thinkpad-nix";
           profile = "intel";
           username = "shiba";
+          stateVersion = "25.11";
         };
-
       };
     };
 }

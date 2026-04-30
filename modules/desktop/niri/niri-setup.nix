@@ -3,6 +3,7 @@
 , inputs
 , host
 , self
+, stateVersion
 , ...
 }:
 let
@@ -24,7 +25,7 @@ in
   home-manager.users.${variables.hostName} =
     lib.mkIf (builtins.pathExists "${self}/hosts/${host}/niri-config")
       {
-        home.stateVersion = "25.05";
+        home.stateVersion = "${stateVersion}";
         xdg.configFile."niri" = {
           source = "${self}/hosts/${host}/niri-config";
           recursive = true;

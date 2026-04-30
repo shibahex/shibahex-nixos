@@ -1,5 +1,9 @@
 # For any nix/system configuration
-{ host, pkgs, ... }:
+{ host
+, pkgs
+, stateVersion
+, ...
+}:
 let
   inherit (import ../../hosts/${host}/variables.nix { pkgs = pkgs; }) timeZone;
 in
@@ -19,7 +23,7 @@ in
 
   time.timeZone = timeZone;
   i18n.defaultLocale = "en_US.UTF-8";
-  system.stateVersion = "25.11";
+  system.stateVersion = "${stateVersion}";
   nixpkgs.config.allowUnfree = true;
 
 }

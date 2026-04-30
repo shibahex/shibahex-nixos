@@ -1,10 +1,10 @@
-{
-  pkgs,
-  inputs,
-  username,
-  host,
-  profile,
-  ...
+{ pkgs
+, inputs
+, username
+, host
+, profile
+, stateVersion
+, ...
 }:
 let
   variables = import ../../hosts/${host}/variables.nix { pkgs = pkgs; };
@@ -35,7 +35,7 @@ in
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";
-        stateVersion = "25.05";
+        stateVersion = "${stateVersion}";
       };
     };
   };
