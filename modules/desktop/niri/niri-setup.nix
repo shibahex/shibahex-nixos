@@ -15,6 +15,7 @@ let
         lib
         variables
         host
+        self
         ;
     }
   );
@@ -28,9 +29,11 @@ in
           source = "${self}/hosts/${host}/niri-config";
           recursive = true;
         };
-        xdg.configFile."niri/configs/workspaces.kdl" = lib.mkIf (dynamic-workspace ? workspacesKdl) {
-          source = dynamic-workspace.workspacesKdl;
-        };
+        xdg.configFile."niri/configs/workspaces.kdl" = lib.mkForce (
+          lib.mkIf (dynamic-workspace ? workspacesKdl) {
+            source = dynamic-workspace.workspacesKdl;
+          }
+        );
       };
 
   environment.systemPackages =

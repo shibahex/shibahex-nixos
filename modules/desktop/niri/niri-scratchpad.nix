@@ -1,14 +1,15 @@
-{
-  pkgs,
-  lib,
-  variables,
-  host,
+{ pkgs
+, lib
+, variables
+, host
+, self
+,
 }:
 assert variables.mainMonitor != null -> builtins.isString variables.mainMonitor;
 let
   workspace-file =
-    if builtins.pathExists ../../hosts/${host}/niri-config/workspaces.nix then
-      import ../../hosts/${host}/niri-config/workspaces.nix { pkgs = pkgs; }
+    if builtins.pathExists "${self}/hosts/${host}/niri-config/workspaces.nix" then
+      import "${self}/hosts/${host}/niri-config/workspaces.nix" { pkgs = pkgs; }
     else
       {
         workspaces = [
