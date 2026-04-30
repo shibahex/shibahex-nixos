@@ -73,7 +73,7 @@
         thinkpad-nix = mkHost {
           hostname = "thinkpad-nix";
           profile = "intel";
-          username = "shiba";
+          username = "gecko";
           stateVersion = "25.11";
         };
       };
