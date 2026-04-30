@@ -18,7 +18,7 @@ in
     pkgs.xclip
     pkgs.ripgrep
     # Deno is for Peek (markdown viewer for neovim)
-    pkgs.deno
+    #pkgs.deno
   ];
 
   programs.neovim = {
