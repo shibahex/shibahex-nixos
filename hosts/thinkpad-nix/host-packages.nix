@@ -31,7 +31,6 @@
     ffmpegthumbnailer
 
   ];
-  services.upower.enable = true;
   #recording
   programs.obs-studio = {
     enable = true;
