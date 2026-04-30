@@ -1,6 +1,6 @@
 { pkgs }:
 {
-  hostName = "shiba";
+  hostName = "cyber-vm";
   timeZone = "America/New_York";
   hostId = "5ab03f50";
   defaultShell = "nushell";
