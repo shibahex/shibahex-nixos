@@ -6,11 +6,11 @@
     # For timing tasks and productivity
     timer
     btop
-
-    # dont want to manually compile deno
+    
     (pkgs.mpv.override {
       youtubeSupport = false;
     })
+
     tmux
     openvpn
 
@@ -31,7 +31,7 @@
     ffmpegthumbnailer
 
   ];
-
+  services.upower.enable = true;
   #recording
   programs.obs-studio = {
     enable = true;
