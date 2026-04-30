@@ -8,40 +8,27 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/93df2726-094a-4116-b523-62a04bacb167";
+    { device = "/dev/mapper/luks-e0e627de-841c-4515-bbf4-de86025e2aed";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-e7705805-2ba9-4475-91e4-6fb1ca50f2d2".device = "/dev/disk/by-uuid/e7705805-2ba9-4475-91e4-6fb1ca50f2d2";
-  #Swap
-  boot.initrd.luks.devices."luks-82124732-92ae-4260-9e62-3bc781925311".device = "/dev/disk/by-uuid/82124732-92ae-4260-9e62-3bc781925311";
+  boot.initrd.luks.devices."luks-e0e627de-841c-4515-bbf4-de86025e2aed".device = "/dev/disk/by-uuid/e0e627de-841c-4515-bbf4-de86025e2aed";
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6CBD-D508";
+    { device = "/dev/disk/by-uuid/2550-EA04";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/b8f0c8c9-e46b-490e-ae70-4a58bb992bed"; }
+    [ { device = "/dev/mapper/luks-dd67d449-3478-460e-acc7-4890531c37d7"; }
     ];
-
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp3s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
