@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 let
   variables = import ./variables.nix { pkgs = pkgs; };
 
 in
 {
-  home-manager.users.${variables.hostName} = {
+  home-manager.users.${username} = {
     programs.ghostty = {
       enable = true;
       settings = {
