@@ -2,10 +2,11 @@
 , lib
 , inputs
 , host
+, self
 , ...
 }:
 let
-  variables = import ../../hosts/${host}/variables.nix { pkgs = pkgs; };
+  variables = import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; };
   niri-scratchpad = inputs.niri-scratchpad-flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
   dynamic-workspace = lib.optionalAttrs (variables.mainMonitor != null) (
     import ./niri-scratchpad.nix {
@@ -20,11 +21,11 @@ let
 in
 {
   home-manager.users.${variables.hostName} =
-    lib.mkIf (builtins.pathExists ../../hosts/${host}/niri-config)
+    lib.mkIf (builtins.pathExists "${self}/hosts/${host}/niri-config")
       {
         home.stateVersion = "25.05";
         xdg.configFile."niri" = {
-          source = ../../hosts/${host}/niri-config;
+          source = "${self}/hosts/${host}/niri-config";
           recursive = true;
         };
         xdg.configFile."niri/configs/workspaces.kdl" = lib.mkIf (dynamic-workspace ? workspacesKdl) {
