@@ -1,11 +1,11 @@
-output "DP-4" {
+output "DP-5" {
     mode "3840x2160@143.999"
     scale 1.5
     transform "normal"
     position x=0 y=0
 }
 
-output "DP-5" {
+output "DP-4" {
     mode "2560x1440@100.001"
     scale 1.25
     transform "normal"
