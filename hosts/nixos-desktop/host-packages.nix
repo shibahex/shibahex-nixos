@@ -30,7 +30,7 @@ in
     tmux
     openvpn
     # Discord
-    vesktop
+    (vesktop.override { withSystemVencord = false; })
     # Extra browser
     librewolf
     #Yubikey
@@ -62,12 +62,6 @@ in
 
     # VPN
     wireguard-tools
-  ];
-  # rd2
-  hardware.opengl.driSupport32Bit = true;
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    glibc_multi
   ];
   # Try to fix wireless keyboard disconnecting on sleep
   services.udev.extraRules = ''
