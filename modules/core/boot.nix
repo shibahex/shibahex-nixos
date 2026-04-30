@@ -2,7 +2,8 @@
 
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
+    #nix eval github:NixOS/nixpkgs/nixos-unstable#linuxPackages_zen.kernel.version
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelModules = [ "v4l2loopback" ];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
     kernel.sysctl = {
@@ -19,6 +20,6 @@
       mask = "\\xff\\xff\\xff\\xff\\x00\\x00\\x00\\x00\\xff\\xff\\xff";
       magicOrExtension = "\\x7fELF....AI\\x02";
     };
-   #plymouth.enable = true;
+    #plymouth.enable = true;
   };
 }
