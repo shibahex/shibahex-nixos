@@ -1,7 +1,7 @@
-{ host, ... }:
+{ self, ... }:
 {
   imports = [
-    ../../modules/drivers
+    "${self}/modules/drivers"
   ];
   # Enable GPU Drivers
   drivers.amdgpu.enable = false;
