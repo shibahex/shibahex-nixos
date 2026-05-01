@@ -2,6 +2,7 @@
   pkgs,
   lib,
   host,
+  self,
   ...
 }:
 {
@@ -28,10 +29,10 @@
             { };
 
         # import all configs
-        dwmCfg = safeImport ../../hosts/${host}/dwm-config/dwm/config.nix;
-        dmenuCfg = safeImport ../../hosts/${host}/dwm-config/dmenu/config.nix;
-        stCfg = safeImport ../../hosts/${host}/dwm-config/st/config.nix;
-        slstatusCfg = safeImport ../../hosts/${host}/dwm-config/slstatus/config.nix;
+        dwmCfg = safeImport "${self}/hosts/${host}/dwm-config/dwm/config.nix";
+        dmenuCfg = safeImport "${self}/hosts/${host}/dwm-config/dmenu/config.nix";
+        stCfg = safeImport "${self}/hosts/${host}/dwm-config/st/config.nix";
+        slstatusCfg = safeImport "${self}/hosts/${host}/dwm-config/slstatus/config.nix";
 
         writeConfig = text: pkgs.writeText "config.h" text;
       in

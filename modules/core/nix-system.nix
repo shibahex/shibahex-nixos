@@ -2,10 +2,11 @@
 { host
 , pkgs
 , stateVersion
+, self
 , ...
 }:
 let
-  inherit (import ../../hosts/${host}/variables.nix { pkgs = pkgs; }) timeZone;
+  inherit (import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; }) timeZone;
 in
 {
   nix = {
