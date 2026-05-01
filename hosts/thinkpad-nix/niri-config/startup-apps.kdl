@@ -1,4 +1,3 @@
-spawn-at-startup "spotify"
 spawn-at-startup "vesktop"
 spawn-at-startup "pavucontrol"
 spawn-at-startup "easyeffects"
