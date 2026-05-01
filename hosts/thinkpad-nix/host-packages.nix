@@ -29,6 +29,7 @@
 
     thunar
     ffmpegthumbnailer
+    alacritty
 
   ];
   #recording
@@ -44,7 +45,4 @@
 
   programs.gamemode.enable = true;
   virtualisation.docker.enable = true;
-
-  # Change to save battery life
-  powerManagement.cpuFreqGovernor = "powersave";
 }

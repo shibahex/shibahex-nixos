@@ -3,7 +3,7 @@
 window-rule {
     match app-id=r#"^(spotify|org\.pulseaudio\.pavucontrol|com\.github\.wwmm\.easyeffects)|1password|com.obsproject.Studio$"#
     open-on-workspace "scratch"
-    opacity 0.95
+    opacity 0.85
     open-floating true
     default-column-width { fixed 1596; }
     default-window-height { fixed 1240; }
@@ -15,11 +15,12 @@ window-rule {
     open-floating true
     default-column-width { proportion 0.95; }
     default-window-height { proportion 0.95; }
-    opacity 0.95
+    opacity 0.85
 
 }
 
 window-rule {
+    opacity 0.95
     geometry-corner-radius 12
     clip-to-geometry true
 }

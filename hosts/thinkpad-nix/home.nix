@@ -4,11 +4,11 @@
     enable = true;
     timeouts = [
       {
-        timeout = 55;
+        timeout = 120;
         command = "${pkgs.swaylock}/bin/swaylock -f";
       }
       {
-        timeout = 60;
+        timeout = 120;
         command = "${pkgs.niri}/bin/niri msg action power-off-monitors";
         resumeCommand = "${pkgs.niri}/bin/niri msg action power-on-monitors";
       }

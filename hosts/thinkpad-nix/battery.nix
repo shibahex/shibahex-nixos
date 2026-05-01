@@ -1,48 +1,42 @@
-{ config, ... }: {
-
-  powerManagement = {
-    enable = true;
-    powertop.enable = true;
-    cpuFreqGovernor = "powersave";
-  };
+{ config, pkgs,... }: {
+  boot.kernelModules = [ "cpufreq_stats" ];
+  powerManagement.powertop.enable = false;
+  environment.systemPackages = [ pkgs.powertop ];
   services = {
-    upower.enable = true;
-    thermald.enable = true;
+    thermald.enable = false;
     power-profiles-daemon.enable = false;
-    auto-cpufreq = {
+
+    # upower for batter stats
+    upower.enable = true;
+
+    tlp = {
       enable = true;
       settings = {
-        battery = {
-          governor = "powersave";
-          turbo = "never";
-        };
-        charger = {
-          governor = "powersave";
-          turbo = "auto";
-        };
+        CPU_BOOST_ON_AC = 1;
+        CPU_BOOST_ON_BAT = 0;
+
+        CPU_HWP_DYN_BOOST_ON_AC = 1;
+        CPU_HWP_DYN_BOOST_ON_BAT = 0;
+
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
+
+        PLATFORM_PROFILE_ON_AC = "performance";
+        PLATFORM_PROFILE_ON_BAT = "balanced";
+
+        # Dual battery support
+        START_CHARGE_THRESH_BAT0 = 60;
+        STOP_CHARGE_THRESH_BAT0 = 90;
+        START_CHARGE_THRESH_BAT1 = 60;
+        STOP_CHARGE_THRESH_BAT1 = 90;
       };
     };
-    system76-scheduler = {
-      enable = true;
-      useStockConfig = true;
-    };
-    udev.extraRules = ''
-      # Remove NVIDIA USB xHCI Host Controller devices, if present
-      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
-      # Remove NVIDIA USB Type-C UCSI devices, if present
-      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
-      # Remove NVIDIA Audio devices, if present
-      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
-      # Remove NVIDIA VGA/3D controller devices
-      ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
-    '';
-  };
-  boot = {
-    extraModprobeConfig = ''
-      blacklist nouveau
-      options nouveau modeset=0
-    '';
-    blacklistedKernelModules =
-      [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
+
+    # Optional: disable unless you really want it
+    system76-scheduler.enable = false;
+    #NOTE: GHOSTTY KILLS BATTERY LIFE
   };
 }
