@@ -4,10 +4,11 @@
 , host
 , profile
 , stateVersion
+, self
 , ...
 }:
 let
-  variables = import ../../hosts/${host}/variables.nix { pkgs = pkgs; };
+  variables = import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; };
   defaultShell = variables.defaultShell or "zsh";
   shellPackage = if defaultShell == "nushell" then pkgs.nushell else pkgs.zsh;
 in
@@ -28,10 +29,14 @@ in
         username
         host
         profile
+        self
         ;
     };
     users.${username} = {
-      imports = [ ../home-apps ];
+      imports = [ "${self}/modules/home-apps"]
+      ++ (let path = "${self}/hosts/${host}/home.nix";
+        in if builtins.pathExists path then [ path ] else []);
+      
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";
