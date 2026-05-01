@@ -13,7 +13,7 @@
         resumeCommand = "${pkgs.niri}/bin/niri msg action power-on-monitors";
       }
       {
-        timeout = 120;
+        timeout = 300;
         command = "${pkgs.systemd}/bin/systemctl suspend";
       }
     ];
