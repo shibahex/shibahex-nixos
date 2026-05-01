@@ -36,7 +36,7 @@
     };
 
     # Optional: disable unless you really want it
-    system76-scheduler.enable = false;
+    system76-scheduler.enable = true;
     #NOTE: GHOSTTY KILLS BATTERY LIFE
   };
 }
