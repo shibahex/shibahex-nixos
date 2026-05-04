@@ -19,13 +19,20 @@
     yubikey-manager
 
     linuxPackages.usbip
+
+    spice-vdagent
+    xorg.xf86videovirtio
+
   ];
+  services.xserver.videoDrivers = [ "virtio" ];
 
   services.xrdp = {
     enable = true;
     defaultWindowManager = "dwm";
     openFirewall = true;
   };
+
+  services.xserver.libinput.enable = true;
 
   powerManagement.cpuFreqGovernor = "performance";
   services.pcscd.enable = true;
