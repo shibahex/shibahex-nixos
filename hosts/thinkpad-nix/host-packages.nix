@@ -6,10 +6,8 @@
     # For timing tasks and productivity
     timer
     btop
-    
-    (pkgs.mpv.override {
-      youtubeSupport = false;
-    })
+
+    (mpv.override { yt-dlp = pkgs.yt-dlp-light; })
 
     tmux
     openvpn

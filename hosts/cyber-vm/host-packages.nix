@@ -6,7 +6,8 @@
 
     btop
 
-    mpv
+    (mpv.override { yt-dlp = pkgs.yt-dlp-light; })
+
     alacritty
     tmux
     openvpn
