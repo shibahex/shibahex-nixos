@@ -62,7 +62,7 @@
           hostname = "cyber-vm";
           profile = "nvidia";
           username = "sheeb";
-          stateVersion = "25.05";
+          stateVersion = "26.05";
         };
         nixos-desktop = mkHost {
           hostname = "nixos-desktop";
