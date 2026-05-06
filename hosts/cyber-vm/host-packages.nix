@@ -24,6 +24,10 @@
     xorg.xf86videovirtio
 
   ];
+  # allow stuff like echo "10.129.x.x kobold.htb" | sudo tee -a /etc/hosts
+  # so we can resolve the DNS for htb labs
+  environment.etc.hosts.mode = "0644";
+
   services.xserver.videoDrivers = [ "virtio" ];
 
   services.xrdp = {
