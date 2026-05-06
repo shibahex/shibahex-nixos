@@ -23,6 +23,22 @@ let
   );
 in
 {
+  # Override noctalia-qs to 0.0.12 so noctalia-shell picks it up
+  nixpkgs.overlays = [
+    (final: prev: {
+      noctalia-qs = prev.noctalia-qs.overrideAttrs (old: rec {
+        version = "0.0.12";
+        src = prev.fetchFromGitHub {
+          owner = "noctalia-dev";
+          repo = "noctalia-qs";
+          tag = "v${version}";
+          hash = "sha256-79JP2QTdvp1jg7HGxAW+xzhzhLnlKUi8yGXq9nDCeH0=";
+        };
+        patches = [ ]; # drop the patch - verify if 0.0.12 includes the fix upstream
+      });
+    })
+  ];
+
   home-manager.users.${username} =
     lib.mkIf (builtins.pathExists "${self}/hosts/${host}/niri-config")
       {
