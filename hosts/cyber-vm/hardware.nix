@@ -21,12 +21,20 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-
+  # -------------------------
+  # ROOT LUKS
+  # -------------------------
   fileSystems."/" = {
     device = "/dev/mapper/luks-86424f50-67aa-4947-865e-89c379b3e264";
     fsType = "ext4";
   };
 
+  boot.initrd.luks.devices."luks-90fcbf07-154d-47ae-8139-a98ae2e22947".device =
+    "/dev/disk/by-uuid/90fcbf07-154d-47ae-8139-a98ae2e22947";
+
+  # -------------------------
+  # FILESYSTEMS
+  # -------------------------
   boot.initrd.luks.devices."luks-86424f50-67aa-4947-865e-89c379b3e264".device =
     "/dev/disk/by-uuid/86424f50-67aa-4947-865e-89c379b3e264";
 
@@ -38,7 +46,9 @@
       "dmask=0077"
     ];
   };
-
+  # -------------------------
+  # SWAP (encrypted mapper)
+  # -------------------------
   swapDevices = [
     { device = "/dev/mapper/luks-90fcbf07-154d-47ae-8139-a98ae2e22947"; }
   ];
