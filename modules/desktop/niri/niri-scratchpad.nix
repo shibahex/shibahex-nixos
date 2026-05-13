@@ -14,11 +14,11 @@ let
       {
         workspaces = [
           "dev"
-          "learn"
           "docs"
+          "learn"
           "media"
           "play"
-          "files"
+          "focus"
           "vm"
           "docker"
           "background"

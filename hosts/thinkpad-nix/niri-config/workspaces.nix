@@ -7,6 +7,7 @@
     "learn"
     "media"
     "play"
+    "misc"
     "focus"
     "vm"
     "docker"
