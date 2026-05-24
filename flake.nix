@@ -70,6 +70,12 @@
           username = "shiba";
           stateVersion = "25.05";
         };
+        nixos-console = mkHost {
+          hostname = "nixos-console";
+          profile = "nvidia";
+          username = "cuda";
+          stateVersion = "26.05";
+        };
         thinkpad-nix = mkHost {
           hostname = "thinkpad-nix";
           profile = "intel";
