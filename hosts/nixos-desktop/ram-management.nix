@@ -56,7 +56,7 @@ let
       name = "steam";
       bin = "${pkgs.steam}/bin/steam";
       memHigh = "600M";
-      memMax = "1G";
+      memMax = "4G";
     }
   ];
   #systemd-run --user --scope --slice=game.slice gamemoderun %command%

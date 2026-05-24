@@ -27,10 +27,12 @@ in
     freerdp
     mangohud
     mpv
+    alacritty
     tmux
     openvpn
     # Discord
     (vesktop.override { withSystemVencord = false; })
+    grayjay
     # Extra browser
     librewolf
     #Yubikey
