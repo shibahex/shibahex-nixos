@@ -1,0 +1,264 @@
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Found interface: zwlr_screencopy_manager_v1(32) version 3
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Found interface: zwp_linux_dmabuf_v1(45) version 5
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Found interface: wl_output(47) version 4
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Found interface: wl_output(48) version 4
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Resolution: 2560x1440
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Resolution: 2560x1440
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Offset: 3328x0
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Logical size: 2560x1440
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Name: HDMI-A-2
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Found monitor: Shenzhen KTC Technology Group - H24T27 - HDMI-A-2
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Offset: 1280x0
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Logical size: 2048x1152
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Name: DP-5
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wayland] Found monitor: Unknown - Unknown - DP-5
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wlgrab] -------- Start of Wayland monitor list --------
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wlgrab] Monitor 0 is HDMI-A-2: Shenzhen KTC Technology Group - H24T27 - HDMI-A-2
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wlgrab] Monitor 1 is DP-5: Unknown - Unknown - DP-5
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.485]: Info: [wlgrab] --------- End of Wayland monitor list ---------
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.487]: Error: Failed to load EGL library symbols
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.487]: Error: Platform failed to initialize
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Warning: Gamepad ds5 is disabled due to Permission denied
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: // Testing for available encoders, this may generate errors. You can safely ignore those errors. //
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: Trying encoder [nvenc]
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [misc] drop_elevated_privileges succeeded in dropping capabilities
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: Screencasting with Wayland's protocol
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wlgrab] Requested frame rate [60/1, approx. 60 fps]
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Found display [wayland-1]
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Found interface: zxdg_output_manager_v1(9) version 3
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Found interface: zwlr_screencopy_manager_v1(32) version 3
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Found interface: zwp_linux_dmabuf_v1(45) version 5
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Found interface: wl_output(47) version 4
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Found interface: wl_output(48) version 4
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Resolution: 2560x1440
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Resolution: 2560x1440
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Offset: 3328x0
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Logical size: 2560x1440
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Name: HDMI-A-2
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Found monitor: Shenzhen KTC Technology Group - H24T27 - HDMI-A-2
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Offset: 1280x0
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Logical size: 2048x1152
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Name: DP-5
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wayland] Found monitor: Unknown - Unknown - DP-5
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: [wlgrab] Selected monitor [Shenzhen KTC Technology Group - H24T27 - HDMI-A-2] for streaming
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: Creating encoder [h264_nvenc]
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: Color coding: SDR (Rec. 601)
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: Color depth: 8-bit
+May 24 21:56:54 nixos-console sunshine[171305]: [2026-05-24 21:56:54.488]: Info: Color range: JPEG
+May 24 21:56:54 nixos-console systemd-coredump[171316]: ]8;;man:core(5)\[🡕]]8;;\ [0;1;31m[0;1;39m[0;1;31mProcess 171305 (.sunshine-wrapp) of user 1000 dumped core.[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mModule /nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped without build-id.[0m
+                                                        [0;1;31mModule libxcb-randr.so.0 without build-id.[0m
+                                                        [0;1;31mModule libxcb-glx.so.0 without build-id.[0m
+                                                        [0;1;31mModule libmp3lame.so.0 without build-id.[0m
+                                                        [0;1;31mModule libmpg123.so.0 without build-id.[0m
+                                                        [0;1;31mModule libogg.so.0 without build-id.[0m
+                                                        [0;1;31mModule libvorbisenc.so.2 without build-id.[0m
+                                                        [0;1;31mModule libvorbis.so.0 without build-id.[0m
+                                                        [0;1;31mModule libFLAC.so.14 without build-id.[0m
+                                                        [0;1;31mModule libsndfile.so.1 without build-id.[0m
+                                                        [0;1;31mModule libXdmcp.so.6 without build-id.[0m
+                                                        [0;1;31mModule libXau.so.6 without build-id.[0m
+                                                        [0;1;31mModule libdatrie.so.1 without build-id.[0m
+                                                        [0;1;31mModule libxml2.so.16 without build-id.[0m
+                                                        [0;1;31mModule libjson-glib-1.0.so.0 without build-id.[0m
+                                                        [0;1;31mModule libexpat.so.1 without build-id.[0m
+                                                        [0;1;31mModule libbz2.so.1 without build-id.[0m
+                                                        [0;1;31mModule libkeyutils.so.1 without build-id.[0m
+                                                        [0;1;31mModule libkrb5support.so.0 without build-id.[0m
+                                                        [0;1;31mModule libcom_err.so.3 without build-id.[0m
+                                                        [0;1;31mModule libk5crypto.so.3 without build-id.[0m
+                                                        [0;1;31mModule libkrb5.so.3 without build-id.[0m
+                                                        [0;1;31mModule libz.so.1 without build-id.[0m
+                                                        [0;1;31mModule libunistring.so.5 without build-id.[0m
+                                                        [0;1;31mModule libpulsecommon-17.0.so without build-id.[0m
+                                                        [0;1;31mModule libquadmath.so.0 without build-id.[0m
+                                                        [0;1;31mModule libgcc_s.so.1 without build-id.[0m
+                                                        [0;1;31mModule libstdc++.so.6 without build-id.[0m
+                                                        [0;1;31mModule libicuuc.so.76 without build-id.[0m
+                                                        [0;1;31mModule libicui18n.so.76 without build-id.[0m
+                                                        [0;1;31mModule libicudata.so.76 without build-id.[0m
+                                                        [0;1;31mModule libxcb-dri3.so.0 without build-id.[0m
+                                                        [0;1;31mModule libX11-xcb.so.1 without build-id.[0m
+                                                        [0;1;31mModule libatomic.so.1 without build-id.[0m
+                                                        [0;1;31mModule libpcre2-8.so.0 without build-id.[0m
+                                                        [0;1;31mModule libffi.so.8 without build-id.[0m
+                                                        [0;1;31mModule libselinux.so.1 without build-id.[0m
+                                                        [0;1;31mModule libjpeg.so.62 without build-id.[0m
+                                                        [0;1;31mModule libxcb-shm.so.0 without build-id.[0m
+                                                        [0;1;31mModule libxcb-render.so.0 without build-id.[0m
+                                                        [0;1;31mModule libxcb.so.1 without build-id.[0m
+                                                        [0;1;31mModule libXrender.so.1 without build-id.[0m
+                                                        [0;1;31mModule libpng16.so.16 without build-id.[0m
+                                                        [0;1;31mModule libgraphite2.so.3 without build-id.[0m
+                                                        [0;1;31mModule libfreetype.so.6 without build-id.[0m
+                                                        [0;1;31mModule libthai.so.0 without build-id.[0m
+                                                        [0;1;31mModule libXinerama.so.1 without build-id.[0m
+                                                        [0;1;31mModule libXrandr.so.2 without build-id.[0m
+                                                        [0;1;31mModule libXcomposite.so.1 without build-id.[0m
+                                                        [0;1;31mModule libXdamage.so.1 without build-id.[0m
+                                                        [0;1;31mModule libXcursor.so.1 without build-id.[0m
+                                                        [0;1;31mModule libxkbcommon.so.0 without build-id.[0m
+                                                        [0;1;31mModule libXfixes.so.3 without build-id.[0m
+                                                        [0;1;31mModule libtinysparql-3.0.so.0 without build-id.[0m
+                                                        [0;1;31mModule libXi.so.6 without build-id.[0m
+                                                        [0;1;31mModule libepoxy.so.0 without build-id.[0m
+                                                        [0;1;31mModule libfribidi.so.0 without build-id.[0m
+                                                        [0;1;31mModule libfontconfig.so.1 without build-id.[0m
+                                                        [0;1;31mModule libpangoft2-1.0.so.0 without build-id.[0m
+                                                        [0;1;31mModule libdbusmenu-gtk3.so.4 without build-id.[0m
+                                                        [0;1;31mModule libbrotlicommon.so.1 without build-id.[0m
+                                                        [0;1;31mModule libbrotlidec.so.1 without build-id.[0m
+                                                        [0;1;31mModule libzstd.so.1 without build-id.[0m
+                                                        [0;1;31mModule libgssapi_krb5.so.2 without build-id.[0m
+                                                        [0;1;31mModule libpsl.so.5 without build-id.[0m
+                                                        [0;1;31mModule libssh2.so.1 without build-id.[0m
+                                                        [0;1;31mModule libidn2.so.0 without build-id.[0m
+                                                        [0;1;31mModule libnghttp2.so.14 without build-id.[0m
+                                                        [0;1;31mModule libngtcp2.so.16 without build-id.[0m
+                                                        [0;1;31mModule libngtcp2_crypto_ossl.so.0 without build-id.[0m
+                                                        [0;1;31mModule libnghttp3.so.9 without build-id.[0m
+                                                        [0;1;31mModule libboost_charconv.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libboost_date_time.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libboost_container.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libboost_chrono.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libboost_atomic.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libboost_thread.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libboost_regex.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libboost_filesystem.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libpulse-simple.so.0 without build-id.[0m
+                                                        [0;1;31mModule libpulse.so.0 without build-id.[0m
+                                                        [0;1;31mModule libXext.so.6 without build-id.[0m
+                                                        [0;1;31mModule libICE.so.6 without build-id.[0m
+                                                        [0;1;31mModule libSM.so.6 without build-id.[0m
+                                                        [0;1;31mModule libgbm.so.1 without build-id.[0m
+                                                        [0;1;31mModule libvulkan.so.1 without build-id.[0m
+                                                        [0;1;31mModule libevdev.so.2 without build-id.[0m
+                                                        [0;1;31mModule libcap.so.2 without build-id.[0m
+                                                        [0;1;31mModule libdrm.so.2 without build-id.[0m
+                                                        [0;1;31mModule libboost_locale.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libboost_program_options.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libboost_log.so.1.89.0 without build-id.[0m
+                                                        [0;1;31mModule libX11.so.6 without build-id.[0m
+                                                        [0;1;31mModule libva-x11.so.2 without build-id.[0m
+                                                        [0;1;31mModule libva-drm.so.2 without build-id.[0m
+                                                        [0;1;31mModule libva.so.2 without build-id.[0m
+                                                        [0;1;31mModule libnuma.so.1 without build-id.[0m
+                                                        [0;1;31mModule libopus.so.0 without build-id.[0m
+                                                        [0;1;31mModule libminiupnpc.so.21 without build-id.[0m
+                                                        [0;1;31mModule libnotify.so.4 without build-id.[0m
+                                                        [0;1;31mModule libharfbuzz.so.0 without build-id.[0m
+                                                        [0;1;31mModule libpango-1.0.so.0 without build-id.[0m
+                                                        [0;1;31mModule libpangocairo-1.0.so.0 without build-id.[0m
+                                                        [0;1;31mModule libdbusmenu-glib.so.4 without build-id.[0m
+                                                        [0;1;31mModule libappindicator3.so.1 without build-id.[0m
+                                                        [0;1;31mStack trace of thread 171305:[0m
+                                                        [0;1;31m#0  0x0000000000000000 n/a (n/a + 0x0)[0m
+                                                        [0;1;31m#1  0x000060e543de74dd _ZN4cuda14gl_cuda_vram_t4initEiiii (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x36e4dd)[0m
+                                                        [0;1;31m#2  0x000060e543de291b _ZN4cuda29make_avcodec_gl_encode_deviceEiiii (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x36991b)[0m
+                                                        [0;1;31m#3  0x000060e543e0c5cb _ZN2wl10wlr_vram_t26make_avcodec_encode_deviceEN5platf9pix_fmt_eE (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x3935cb)[0m
+                                                        [0;1;31m#4  0x000060e543d8dcd1 _ZN5video18make_encode_deviceERN5platf9display_tERKNS_9encoder_tERKNS_8config_tE (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x314cd1)[0m
+                                                        [0;1;31m#5  0x000060e543d94b69 _ZN5video15validate_configESt10shared_ptrIN5platf9display_tEERKNS_9encoder_tERKNS_8config_tE (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x31bb69)[0m
+                                                        [0;1;31m#6  0x000060e543d95ccb _ZN5video16validate_encoderERNS_9encoder_tEb (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x31cccb)[0m
+                                                        [0;1;31m#7  0x000060e543d97433 _ZN5video14probe_encodersEv (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x31e433)[0m
+                                                        [0;1;31m#8  0x000060e543bf7183 main (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x17e183)[0m
+                                                        [0;1;31m#9  0x00007c580462b285 __libc_start_call_main (libc.so.6 + 0x2b285)[0m
+                                                        [0;1;31m#10 0x00007c580462b338 __libc_start_main@@GLIBC_2.34 (libc.so.6 + 0x2b338)[0m
+                                                        [0;1;31m#11 0x000060e543c04dd5 _start (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x18bdd5)[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mStack trace of thread 171308:[0m
+                                                        [0;1;31m#0  0x00007c58046a6922 __syscall_cancel_arch (libc.so.6 + 0xa6922)[0m
+                                                        [0;1;31m#1  0x00007c580469a00c __internal_syscall_cancel (libc.so.6 + 0x9a00c)[0m
+                                                        [0;1;31m#2  0x00007c580469a084 __syscall_cancel (libc.so.6 + 0x9a084)[0m
+                                                        [0;1;31m#3  0x00007c580471778e __poll (libc.so.6 + 0x11778e)[0m
+                                                        [0;1;31m#4  0x00007c57eab036d7 n/a (libcuda.so.1 + 0x3036d7)[0m
+                                                        [0;1;31m#5  0x00007c57eabdedc5 n/a (libcuda.so.1 + 0x3dedc5)[0m
+                                                        [0;1;31m#6  0x00007c57eaaee2f3 n/a (libcuda.so.1 + 0x2ee2f3)[0m
+                                                        [0;1;31m#7  0x00007c580469dd53 start_thread (libc.so.6 + 0x9dd53)[0m
+                                                        [0;1;31m#8  0x00007c580472563c __clone3 (libc.so.6 + 0x12563c)[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mStack trace of thread 171309:[0m
+                                                        [0;1;31m#0  0x00007c580472320d syscall (libc.so.6 + 0x12320d)[0m
+                                                        [0;1;31m#1  0x00007c5805b38457 g_cond_wait (libglib-2.0.so.0 + 0x9a457)[0m
+                                                        [0;1;31m#2  0x00007c5805ac80ac g_async_queue_pop_intern_unlocked (libglib-2.0.so.0 + 0x2a0ac)[0m
+                                                        [0;1;31m#3  0x00007c5805b38ee4 g_thread_pool_spawn_thread (libglib-2.0.so.0 + 0x9aee4)[0m
+                                                        [0;1;31m#4  0x00007c5805b38c2e g_thread_proxy (libglib-2.0.so.0 + 0x9ac2e)[0m
+                                                        [0;1;31m#5  0x00007c580469dd53 start_thread (libc.so.6 + 0x9dd53)[0m
+                                                        [0;1;31m#6  0x00007c580472563c __clone3 (libc.so.6 + 0x12563c)[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mStack trace of thread 171310:[0m
+                                                        [0;1;31m#0  0x00007c58046a6922 __syscall_cancel_arch (libc.so.6 + 0xa6922)[0m
+                                                        [0;1;31m#1  0x00007c580469a00c __internal_syscall_cancel (libc.so.6 + 0x9a00c)[0m
+                                                        [0;1;31m#2  0x00007c580469a084 __syscall_cancel (libc.so.6 + 0x9a084)[0m
+                                                        [0;1;31m#3  0x00007c5804717d36 ppoll (libc.so.6 + 0x117d36)[0m
+                                                        [0;1;31m#4  0x00007c5805b04308 g_main_context_iterate_unlocked.isra.0 (libglib-2.0.so.0 + 0x66308)[0m
+                                                        [0;1;31m#5  0x00007c5805b04adf g_main_context_iteration (libglib-2.0.so.0 + 0x66adf)[0m
+                                                        [0;1;31m#6  0x00007c5805b04b31 glib_worker_main (libglib-2.0.so.0 + 0x66b31)[0m
+                                                        [0;1;31m#7  0x00007c5805b38c2e g_thread_proxy (libglib-2.0.so.0 + 0x9ac2e)[0m
+                                                        [0;1;31m#8  0x00007c580469dd53 start_thread (libc.so.6 + 0x9dd53)[0m
+                                                        [0;1;31m#9  0x00007c580472563c __clone3 (libc.so.6 + 0x12563c)[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mStack trace of thread 171306:[0m
+                                                        [0;1;31m#0  0x00007c580472320d syscall (libc.so.6 + 0x12320d)[0m
+                                                        [0;1;31m#1  0x00007c580581f3c2 _ZN5boost3log11v2_mt_posix3aux18atomic_based_event4waitEv (libboost_log.so.1.89.0 + 0x833c2)[0m
+                                                        [0;1;31m#2  0x000060e543c64abc _ZNSt6thread11_State_implINS_8_InvokerISt5tupleIJN5boost3log11v2_mt_posix5sinks17asynchronous_sinkINS6_26basic_text_ostream_backendIcEENS6_20unbounded_fifo_queueEE8run_funcEEEEEE6_M_runEv (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x1ebabc)[0m
+                                                        [0;1;31m#3  0x000060e544e92484 execute_native_thread_routine (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x1419484)[0m
+                                                        [0;1;31m#4  0x00007c580469dd53 start_thread (libc.so.6 + 0x9dd53)[0m
+                                                        [0;1;31m#5  0x00007c580472563c __clone3 (libc.so.6 + 0x12563c)[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mStack trace of thread 171311:[0m
+                                                        [0;1;31m#0  0x00007c58046a6922 __syscall_cancel_arch (libc.so.6 + 0xa6922)[0m
+                                                        [0;1;31m#1  0x00007c580469a00c __internal_syscall_cancel (libc.so.6 + 0x9a00c)[0m
+                                                        [0;1;31m#2  0x00007c580469a084 __syscall_cancel (libc.so.6 + 0x9a084)[0m
+                                                        [0;1;31m#3  0x00007c5804717d36 ppoll (libc.so.6 + 0x117d36)[0m
+                                                        [0;1;31m#4  0x00007c5805b04308 g_main_context_iterate_unlocked.isra.0 (libglib-2.0.so.0 + 0x66308)[0m
+                                                        [0;1;31m#5  0x00007c5805b04d37 g_main_loop_run (libglib-2.0.so.0 + 0x66d37)[0m
+                                                        [0;1;31m#6  0x00007c5805d43a2e gdbus_shared_thread_func (libgio-2.0.so.0 + 0x143a2e)[0m
+                                                        [0;1;31m#7  0x00007c5805b38c2e g_thread_proxy (libglib-2.0.so.0 + 0x9ac2e)[0m
+                                                        [0;1;31m#8  0x00007c580469dd53 start_thread (libc.so.6 + 0x9dd53)[0m
+                                                        [0;1;31m#9  0x00007c580472563c __clone3 (libc.so.6 + 0x12563c)[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mStack trace of thread 171313:[0m
+                                                        [0;1;31m#0  0x00007c58046a6922 __syscall_cancel_arch (libc.so.6 + 0xa6922)[0m
+                                                        [0;1;31m#1  0x00007c580469a00c __internal_syscall_cancel (libc.so.6 + 0x9a00c)[0m
+                                                        [0;1;31m#2  0x00007c58046ecbe2 clock_nanosleep@GLIBC_2.2.5 (libc.so.6 + 0xecbe2)[0m
+                                                        [0;1;31m#3  0x00007c58046f9307 __nanosleep (libc.so.6 + 0xf9307)[0m
+                                                        [0;1;31m#4  0x000060e543e91ee5 _ZN9inputtinoL14event_listenerERKSt10shared_ptrINS_15BaseJoypadStateEE (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x418ee5)[0m
+                                                        [0;1;31m#5  0x000060e543e96021 _ZNSt6thread11_State_implINS_8_InvokerISt5tupleIJPFvRKSt10shared_ptrIN9inputtino15BaseJoypadStateEEES3_INS4_18XboxOneJoypadStateEEEEEEE6_M_runEv (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x41d021)[0m
+                                                        [0;1;31m#6  0x000060e544e92484 execute_native_thread_routine (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x1419484)[0m
+                                                        [0;1;31m#7  0x00007c580469dd53 start_thread (libc.so.6 + 0x9dd53)[0m
+                                                        [0;1;31m#8  0x00007c580472563c __clone3 (libc.so.6 + 0x12563c)[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mStack trace of thread 171314:[0m
+                                                        [0;1;31m#0  0x00007c58046a6922 __syscall_cancel_arch (libc.so.6 + 0xa6922)[0m
+                                                        [0;1;31m#1  0x00007c580469a00c __internal_syscall_cancel (libc.so.6 + 0x9a00c)[0m
+                                                        [0;1;31m#2  0x00007c58046ecbe2 clock_nanosleep@GLIBC_2.2.5 (libc.so.6 + 0xecbe2)[0m
+                                                        [0;1;31m#3  0x00007c58046f9307 __nanosleep (libc.so.6 + 0xf9307)[0m
+                                                        [0;1;31m#4  0x000060e543e96c85 _ZN9inputtinoL14event_listenerERKSt10shared_ptrINS_15BaseJoypadStateEE (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x41dc85)[0m
+                                                        [0;1;31m#5  0x000060e543e96021 _ZNSt6thread11_State_implINS_8_InvokerISt5tupleIJPFvRKSt10shared_ptrIN9inputtino15BaseJoypadStateEEES3_INS4_18XboxOneJoypadStateEEEEEEE6_M_runEv (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x41d021)[0m
+                                                        [0;1;31m#6  0x000060e544e92484 execute_native_thread_routine (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x1419484)[0m
+                                                        [0;1;31m#7  0x00007c580469dd53 start_thread (libc.so.6 + 0x9dd53)[0m
+                                                        [0;1;31m#8  0x00007c580472563c __clone3 (libc.so.6 + 0x12563c)[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mStack trace of thread 171307:[0m
+                                                        [0;1;31m#0  0x00007c58046a6922 __syscall_cancel_arch (libc.so.6 + 0xa6922)[0m
+                                                        [0;1;31m#1  0x00007c580469a00c __internal_syscall_cancel (libc.so.6 + 0x9a00c)[0m
+                                                        [0;1;31m#2  0x00007c580469a78c __futex_abstimed_wait_common (libc.so.6 + 0x9a78c)[0m
+                                                        [0;1;31m#3  0x00007c580469d1ee pthread_cond_wait@@GLIBC_2.3.2 (libc.so.6 + 0x9d1ee)[0m
+                                                        [0;1;31m#4  0x000060e543c6f073 _ZN16thread_pool_util10ThreadPool5_mainEv (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x1f6073)[0m
+                                                        [0;1;31m#5  0x000060e544e92484 execute_native_thread_routine (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x1419484)[0m
+                                                        [0;1;31m#6  0x00007c580469dd53 start_thread (libc.so.6 + 0x9dd53)[0m
+                                                        [0;1;31m#7  0x00007c580472563c __clone3 (libc.so.6 + 0x12563c)[0m
+                                                        [0;1;31m[0m
+                                                        [0;1;31mStack trace of thread 171312:[0m
+                                                        [0;1;31m#0  0x00007c58046a6922 __syscall_cancel_arch (libc.so.6 + 0xa6922)[0m
+                                                        [0;1;31m#1  0x00007c580469a00c __internal_syscall_cancel (libc.so.6 + 0x9a00c)[0m
+                                                        [0;1;31m#2  0x00007c58046ecbe2 clock_nanosleep@GLIBC_2.2.5 (libc.so.6 + 0xecbe2)[0m
+                                                        [0;1;31m#3  0x00007c58046f9307 __nanosleep (libc.so.6 + 0xf9307)[0m
+                                                        [0;1;31m#4  0x000060e543e9ab36 _ZNSt6thread11_State_implINS_8_InvokerISt5tupleIJZN9inputtino8Keyboard6createERKNS3_16DeviceDefinitionEiEUlvE_EEEEE6_M_runEv (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x421b36)[0m
+                                                        [0;1;31m#5  0x000060e544e92484 execute_native_thread_routine (/nix/store/rcq0142z532qksybil053qkfya6z8fi0-sunshine-2026.516.143833/bin/.sunshine-wrapped + 0x1419484)[0m
+                                                        [0;1;31m#6  0x00007c580469dd53 start_thread (libc.so.6 + 0x9dd53)[0m
+                                                        [0;1;31m#7  0x00007c580472563c __clone3 (libc.so.6 + 0x12563c)[0m
+                                                        [0;1;31mELF object binary architecture: AMD x86-64[0m
+May 24 21:56:54 nixos-console systemd[2847]: [0;1;33m[0;1;38:5:185m[0;1;39m[0;1;33m[0;1;38:5:185msunshine.service: Main process exited, code=dumped, status=11/SEGV[0m
+May 24 21:56:54 nixos-console systemd[2847]: [0;1;33m[0;1;38:5:185m[0;1;39m[0;1;33m[0;1;38:5:185msunshine.service: Failed with result 'core-dump'.[0m
