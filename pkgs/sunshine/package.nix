@@ -276,7 +276,12 @@ stdenv'.mkDerivation (finalAttrs: {
   # allow Sunshine to find libvulkan
   postFixup = lib.optionalString cudaSupport ''
     wrapProgram $out/bin/sunshine \
-      --set LD_LIBRARY_PATH ${lib.makeLibraryPath [ vulkan-loader ]}
+      --set LD_LIBRARY_PATH ${
+        lib.makeLibraryPath [
+          vulkan-loader
+          libglvnd
+        ]
+      }
   '';
 
   doInstallCheck = isLinux;
