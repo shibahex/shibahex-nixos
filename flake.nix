@@ -28,6 +28,26 @@
     let
       system = "x86_64-linux";
       # Helper function to create a host configuration
+
+      # sunshine package out of date.
+      sunshineOverlay = final: prev: {
+        sunshine = prev.sunshine.overrideAttrs (old: rec {
+          version = "2026.516.143833";
+          src = prev.fetchFromGitHub {
+            owner = "LizardByte";
+            repo = "Sunshine";
+            tag = "v${version}";
+            hash = "sha256-uRagpVR+lkOcXqodU5Z4+22WVr0kjdfE2EC7ZuQzODY=";
+            fetchSubmodules = true;
+          };
+          passthru = old.passthru // {
+            ui = old.passthru.ui.overrideAttrs (_: {
+              inherit src;
+              npmDepsHash = "sha256-YnNnuAdj/S5LGNytqIsmCApIec8DTWKF6VIJ7AXUctU=";
+            });
+          };
+        });
+      };
       mkHost =
         { hostname
         , profile
@@ -52,6 +72,7 @@
             ./modules/core
             ./modules/desktop
             stylix.nixosModules.stylix
+            { nixpkgs.overlays = [ sunshineOverlay ]; }
           ];
         };
     in
