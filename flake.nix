@@ -27,9 +27,10 @@
     }@inputs:
     let
       system = "x86_64-linux";
-      # sunshine package out of date.
-      sunshineOverlay = final: prev: {
+      localPackagesOverlay = final: prev: {
         sunshine = final.callPackage ./pkgs/sunshine/package.nix { };
+        gamescope-kbm = final.callPackage ./pkgs/gamescope-kbm/package.nix { };
+        partyDeck = final.callPackage ./pkgs/partydeck/package.nix { };
       };
       mkHost =
         { hostname
@@ -55,7 +56,11 @@
             ./modules/core
             ./modules/desktop
             stylix.nixosModules.stylix
-            { nixpkgs.overlays = [ sunshineOverlay ]; }
+            {
+              nixpkgs.overlays = [
+                localPackagesOverlay
+              ];
+            }
           ];
         };
     in

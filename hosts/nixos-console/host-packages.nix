@@ -8,6 +8,8 @@
     thunar
     ffmpegthumbnailer
     alacritty
+
+    ryubing
   ];
   #recording
   programs.obs-studio = {

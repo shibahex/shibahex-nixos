@@ -62,9 +62,30 @@ in
     #noctalia shell plugin for lyrics
     lyricsmpris
 
+    xenia-canary
     # VPN
+    partyDeck
     wireguard-tools
   ];
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    capSysAdmin = true; # needed for KMS display capture
+    openFirewall = true;
+    package = pkgs.sunshine.override {
+      cudaSupport = true;
+      cudaPackages = pkgs.cudaPackages;
+    };
+  };
+
+  # Avahi for network discovery (Moonlight clients find Sunshine via mDNS)
+  services.avahi = {
+    enable = true;
+    publish = {
+      enable = true;
+      userServices = true;
+    };
+  };
   # Try to fix wireless keyboard disconnecting on sleep
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0c45", ATTR{idProduct}=="fefe", TEST=="power/control", ATTR{power/control}="on"
