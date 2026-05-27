@@ -10,6 +10,8 @@
     alacritty
 
     ryubing
+    partyDeck
+
   ];
   #recording
   programs.obs-studio = {
