@@ -11,7 +11,6 @@
 
     ryubing
     partyDeck
-
   ];
   #recording
   programs.obs-studio = {
@@ -23,4 +22,9 @@
 
   programs.gamemode.enable = true;
   virtualisation.docker.enable = true;
+
+  # AI server
+  networking.firewall.allowedTCPPorts = [
+    6969
+  ];
 }
