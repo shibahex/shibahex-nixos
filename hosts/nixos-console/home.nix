@@ -6,11 +6,11 @@ let
     rev = "master";
     hash = "sha256-C3sCpqNFlhof8fZXv77YyGRmOFK06pJ4SJowx2lHg6k=";
   };
-  gameOSTheme = pkgs.fetchFromGitHub {
-    owner = "PlayingKarrde";
+  gameOS = pkgs.fetchFromGitHub {
+    owner = "shibahex";
     repo = "gameOS";
     rev = "master";
-    hash = "sha256-EBpIe0aw1FO7DzB6F3oAWD5FRLF2iZGtOHllMxuamdc=";
+    hash = "sha256-JR6W2L+gpTY8JOJGcmUcNmAutpAXnFOe8ifPlXNlRjA=";
   };
   VapourTheme = pkgs.fetchFromGitHub {
     owner = "ZagonAb";
@@ -20,8 +20,8 @@ let
   };
 in
 {
-  home.file.".config/pegasus-frontend/themes/XboxOSv2" = {
-    source = xboxTheme;
+  home.file.".config/pegasus-frontend/themes/gameOS" = {
+    source = gameOS;
     recursive = true;
   };
   #   home.file.".config/pegasus-frontend/themes/gameOS" = {
