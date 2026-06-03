@@ -33,10 +33,16 @@ in
         ;
     };
     users.${username} = {
-      imports = [ "${self}/modules/home-apps"]
-      ++ (let path = "${self}/hosts/${host}/home.nix";
-        in if builtins.pathExists path then [ path ] else []);
-      
+      imports = [
+        "${self}/modules/home-apps"
+      ]
+      ++ (
+        let
+          path = "${self}/hosts/${host}/home.nix";
+        in
+        if builtins.pathExists path then [ path ] else [ ]
+      );
+
       home = {
         username = "${username}";
         homeDirectory = "/home/${username}";
@@ -54,6 +60,7 @@ in
       "networkmanager"
       "kvm" # for gpu passthrough
       "wheel" # sudo access
+      "input"
     ];
     # Use configured shell based on defaultShell variable
     shell = shellPackage;
