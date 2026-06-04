@@ -18,11 +18,14 @@
       url = "github:BEST8OY/LyricsMPRIS-Rust";
       flake = false;
     };
+    plasma67.url = "github:K900/nixpkgs/plasma-6.7";
+
   };
   outputs =
     { nixpkgs
     , stylix
     , self
+    , plasma67
     , ...
     }@inputs:
     let
@@ -31,6 +34,7 @@
         sunshine = final.callPackage ./pkgs/sunshine/package.nix { };
         gamescope-kbm = final.callPackage ./pkgs/gamescope-kbm/package.nix { };
         partyDeck = final.callPackage ./pkgs/partydeck/package.nix { };
+        kdePackages = plasma67.legacyPackages.${final.system}.kdePackages;
       };
       mkHost =
         { hostname

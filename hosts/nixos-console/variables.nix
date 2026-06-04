@@ -13,6 +13,7 @@ in
   desktops = [
     "dwm"
     "niri"
+    "plasma"
   ];
 
   # Monitors

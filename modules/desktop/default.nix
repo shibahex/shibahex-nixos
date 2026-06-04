@@ -15,7 +15,8 @@ in
 
   imports =
     (lib.optional (builtins.elem "dwm" desktops) ./dwm/dwm-setup.nix)
-    ++ (lib.optional (builtins.elem "niri" desktops) ./niri/niri-setup.nix);
+    ++ (lib.optional (builtins.elem "niri" desktops) ./niri/niri-setup.nix)
+    ++ (lib.optional (builtins.elem "plasma" desktops) ./plasma/plasma-setup.nix);
 
   services.displayManager.ly.enable = true;
 
