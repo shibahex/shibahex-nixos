@@ -18,8 +18,7 @@
       url = "github:BEST8OY/LyricsMPRIS-Rust";
       flake = false;
     };
-    plasma67.url = "github:K900/nixpkgs/plasma-6.7";
-
+    plasma67.url = "github:abdelq/nixpkgs/abdelq/oqyynsqtkmqv";
   };
   outputs =
     { nixpkgs
@@ -34,8 +33,34 @@
         sunshine = final.callPackage ./pkgs/sunshine/package.nix { };
         gamescope-kbm = final.callPackage ./pkgs/gamescope-kbm/package.nix { };
         partyDeck = final.callPackage ./pkgs/partydeck/package.nix { };
-        kdePackages = plasma67.legacyPackages.${final.system}.kdePackages;
       };
+      plasma67Overlay = final: prev: {
+        kdePackages = plasma67.legacyPackages.${system}.kdePackages;
+      };
+      plasma67Module =
+        { config, lib, ... }:
+        {
+          options.services.desktopManager.plasma6Bigscreen = {
+            enable = lib.mkOption {
+              type = lib.types.bool;
+              default = false;
+              description = "Enable Plasma Big Screen (KDE for large displays)";
+            };
+          };
+          config = lib.mkIf config.services.desktopManager.plasma6Bigscreen.enable {
+            services.desktopManager.plasma6.enable = true;
+            services.displayManager.sessionPackages = [
+              plasma67.legacyPackages.${system}.kdePackages.plasma-bigscreen
+            ];
+            services.displayManager.defaultSession = "plasma-bigscreen-wayland";
+            environment.systemPackages = with plasma67.legacyPackages.${system}.kdePackages; [
+              plasma-bigscreen
+              plasma-nm
+              powerdevil
+              kdeconnect-kde
+            ];
+          };
+        };
       mkHost =
         { hostname
         , profile
@@ -60,9 +85,11 @@
             ./modules/core
             ./modules/desktop
             stylix.nixosModules.stylix
+            plasma67Module
             {
               nixpkgs.overlays = [
                 localPackagesOverlay
+                plasma67Overlay
               ];
             }
           ];
