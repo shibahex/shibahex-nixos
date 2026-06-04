@@ -258,12 +258,29 @@
         "type": "github"
       }
     },
+    "plasma67": {
+      "locked": {
+        "lastModified": 1780102004,
+        "narHash": "sha256-1f5Xs/+kplsnQSWmB/6TUEJOVfW+FKsHRtvZQOSkB1U=",
+        "owner": "abdelq",
+        "repo": "nixpkgs",
+        "rev": "071cf3e418652c1c5f9c9168ac80408e02dc109c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abdelq",
+        "ref": "abdelq/oqyynsqtkmqv",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "lyricsmpris-rust": "lyricsmpris-rust",
         "niri-scratchpad-flake": "niri-scratchpad-flake",
         "nixpkgs": "nixpkgs",
+        "plasma67": "plasma67",
         "stylix": "stylix"
       }
     },
