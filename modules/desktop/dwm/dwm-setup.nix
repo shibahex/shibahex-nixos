@@ -1,9 +1,8 @@
-{
-  pkgs,
-  lib,
-  host,
-  self,
-  ...
+{ pkgs
+, lib
+, host
+, self
+, ...
 }:
 {
   services.xserver = {
@@ -11,60 +10,58 @@
     windowManager.dwm.enable = true;
   };
 
-  services.displayManager.defaultSession = "none+dwm";
-
   nixpkgs.overlays = [
     (
       final: prev:
-      let
-        # helper to import config files safely
-        safeImport =
-          path:
-          if builtins.pathExists path then
-            let
-              val = import path;
-            in
-            if builtins.isFunction val then val { inherit pkgs lib; } else val
-          else
-            { };
+        let
+          # helper to import config files safely
+          safeImport =
+            path:
+            if builtins.pathExists path then
+              let
+                val = import path;
+              in
+              if builtins.isFunction val then val { inherit pkgs lib; } else val
+            else
+              { };
 
-        # import all configs
-        dwmCfg = safeImport "${self}/hosts/${host}/dwm-config/dwm/config.nix";
-        dmenuCfg = safeImport "${self}/hosts/${host}/dwm-config/dmenu/config.nix";
-        stCfg = safeImport "${self}/hosts/${host}/dwm-config/st/config.nix";
-        slstatusCfg = safeImport "${self}/hosts/${host}/dwm-config/slstatus/config.nix";
+          # import all configs
+          dwmCfg = safeImport "${self}/hosts/${host}/dwm-config/dwm/config.nix";
+          dmenuCfg = safeImport "${self}/hosts/${host}/dwm-config/dmenu/config.nix";
+          stCfg = safeImport "${self}/hosts/${host}/dwm-config/st/config.nix";
+          slstatusCfg = safeImport "${self}/hosts/${host}/dwm-config/slstatus/config.nix";
 
-        writeConfig = text: pkgs.writeText "config.h" text;
-      in
-      {
-        dwm = prev.dwm.overrideAttrs (_: {
-          patches = [ ];
-          postPatch = lib.optionalString (dwmCfg ? dwmConfig) ''
-            cp ${writeConfig dwmCfg.dwmConfig} config.h
-          '';
-        });
+          writeConfig = text: pkgs.writeText "config.h" text;
+        in
+        {
+          dwm = prev.dwm.overrideAttrs (_: {
+            patches = [ ];
+            postPatch = lib.optionalString (dwmCfg ? dwmConfig) ''
+              cp ${writeConfig dwmCfg.dwmConfig} config.h
+            '';
+          });
 
-        dmenu = prev.dmenu.overrideAttrs (_: {
-          patches = [ ];
-          postPatch = lib.optionalString (dmenuCfg ? dmenuConfig) ''
-            cp ${writeConfig dmenuCfg.dmenuConfig} config.h
-          '';
-        });
+          dmenu = prev.dmenu.overrideAttrs (_: {
+            patches = [ ];
+            postPatch = lib.optionalString (dmenuCfg ? dmenuConfig) ''
+              cp ${writeConfig dmenuCfg.dmenuConfig} config.h
+            '';
+          });
 
-        st = prev.st.overrideAttrs (_: {
-          patches = [ ];
-          postPatch = lib.optionalString (stCfg ? stConfig) ''
-            cp ${writeConfig stCfg.stConfig} config.h
-          '';
-        });
+          st = prev.st.overrideAttrs (_: {
+            patches = [ ];
+            postPatch = lib.optionalString (stCfg ? stConfig) ''
+              cp ${writeConfig stCfg.stConfig} config.h
+            '';
+          });
 
-        slstatus = prev.slstatus.overrideAttrs (_: {
-          patches = [ ];
-          postPatch = lib.optionalString (slstatusCfg ? slstatusConfig) ''
-            cp ${writeConfig slstatusCfg.slstatusConfig} config.h
-          '';
-        });
-      }
+          slstatus = prev.slstatus.overrideAttrs (_: {
+            patches = [ ];
+            postPatch = lib.optionalString (slstatusCfg ? slstatusConfig) ''
+              cp ${writeConfig slstatusCfg.slstatusConfig} config.h
+            '';
+          });
+        }
     )
   ];
 
