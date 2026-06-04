@@ -62,6 +62,8 @@
   };
   services.blueman.enable = true;
   hardware.xpadneo.enable = true; # Enable the xpadneo driver for Xbox One wireless controllers
+  hardware.xone.enable = true;
+  hardware.steam-hardware.enable = true;
   boot.kernelModules = [
     "hid-sony"
     "hid-playstation"

@@ -4,6 +4,7 @@
 { config
 , lib
 , modulesPath
+, pkgs
 , ...
 }:
 
@@ -41,8 +42,17 @@
     fsType = "btrfs";
   };
 
-  boot.initrd.luks.devices."cryptroot".device =
-    "/dev/disk/by-uuid/909dc85e-ee8c-4cc0-b5ae-e22fc12eae0c";
+  # Auto Decrypt for console experience
+  boot.initrd.luks.devices."cryptroot" = {
+    device = "/dev/disk/by-uuid/909dc85e-ee8c-4cc0-b5ae-e22fc12eae0c";
+    keyFile = "/keyfile";
+    allowDiscards = true;
+    preLVM = true;
+  };
+
+  boot.initrd.secrets = {
+    "/keyfile" = /root/.luks-keyfile;
+  };
 
   fileSystems."/home" = {
     device = "/dev/mapper/cryptroot";
@@ -69,4 +79,32 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  stylix.targets.plymouth.enable = false;
+  # boot screen
+  boot = {
+    plymouth = {
+      enable = true;
+    };
+
+    initrd.systemd.enable = true;
+    # Enable "Silent boot"
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "rd.udev.log_level=3"
+      "rd.systemd.show_status=auto"
+    ];
+
+    # Hide the OS choice for bootloaders.
+    # It's still possible to open the bootloader list by pressing any key
+    # It will just not appear on screen unless a key is pressed
+    loader.timeout = 0;
+  };
+
+  # auto login
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "cuda";
+  services.displayManager.defaultSession = "plasma-bigscreen-wayland";
 }
