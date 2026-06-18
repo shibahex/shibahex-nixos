@@ -3,7 +3,7 @@
   environment.systemPackages = with pkgs; [
     btop
     (mpv.override { yt-dlp = pkgs.yt-dlp-light; })
-    librewolf
+    firefox
     fastfetch
     thunar
     ffmpegthumbnailer
@@ -14,8 +14,8 @@
 
     pcsx2
     ryubing
-    partyDeck
-    wine
+    #partyDeck
+    wineWowPackages.stable
     (rpcs3.overrideAttrs (prev: {
       cmakeFlags = prev.cmakeFlags ++ [ (lib.cmakeBool "BUILD_SHARED_LIBS" false) ];
     }))
@@ -77,6 +77,7 @@
     # connect xbox controller
   };
 
+  networking.firewall.enable = false;
   #recording
   programs.obs-studio = {
     enable = true;
@@ -87,11 +88,10 @@
 
   programs.gamemode.enable = true;
   virtualisation.docker.enable = true;
-
-  # AI server
   networking.firewall.allowedTCPPorts = [
-    6969
+    11434
     47584
   ];
   networking.firewall.allowedUDPPorts = [ 47584 ];
+
 }
