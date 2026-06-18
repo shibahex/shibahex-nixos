@@ -1,6 +1,7 @@
 { config
 , pkgs
 , inputs
+, self
 , ...
 }:
 let
@@ -17,6 +18,10 @@ let
   };
 in
 {
+  modules.virtualisation = {
+    enable = true;
+    swtpm = true;
+  };
   environment.systemPackages = with pkgs; [
     # Add host-specific packages here
     (anki.withAddons [ ankiAddons.review-heatmap ])
@@ -33,14 +38,16 @@ in
     # Discord
     (vesktop.override { withSystemVencord = false; })
     grayjay
-    # Extra browser
-    librewolf
     #Yubikey
     yubikey-manager
     linuxPackages.usbip
     fastfetch
     thunar
     ffmpegthumbnailer
+
+    (rpcs3.overrideAttrs (prev: {
+      cmakeFlags = prev.cmakeFlags ++ [ (lib.cmakeBool "BUILD_SHARED_LIBS" false) ];
+    }))
 
     # Recording (make OBS see nvidiaPackages)
     (pkgs.writeShellScriptBin "obs" ''
@@ -63,10 +70,31 @@ in
     lyricsmpris
 
     xenia-canary
+    pegasus-frontend
+
     # VPN
-    partyDeck
     wireguard-tools
+
+    # WRAPPED fuse-overlayfs: Forces it to use the SUID wrapper
+    (pkgs.writeShellScriptBin "fuse-overlayfs" ''
+      exec ${pkgs.fuse-overlayfs}/bin/fuse-overlayfs --fusermount=/run/wrappers/bin/fusermount3 "$@"
+    '')
+
+    bash
+    mimalloc
+
+    mesa-demos
+    jan
   ];
+  programs.nix-ld.enable = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
+  services.blueman.enable = true;
+
+  programs.gamescope.enable = true;
+
   services.sunshine = {
     enable = true;
     autoStart = true;
@@ -78,6 +106,18 @@ in
     };
   };
 
+  security.pki.certificateFiles = [
+    "${self}/certs/step-root-ca.crt"
+  ];
+  environment.variables = {
+    SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+    SSL_CERT_DIR = "/etc/ssl/certs/";
+  };
+
+  networking.extraHosts = ''
+    10.1.0.236 ai-agent.adams.internal
+  '';
+
   # Avahi for network discovery (Moonlight clients find Sunshine via mDNS)
   services.avahi = {
     enable = true;
@@ -86,6 +126,21 @@ in
       userServices = true;
     };
   };
+  # FOR PARTYDECK and Moonlight
+  networking.firewall.allowedUDPPorts = [
+    47584
+    48000
+    48010
+  ];
+  networking.firewall.allowedTCPPorts = [
+    47584
+    48010
+  ];
+
+  networking.hosts = {
+    "127.0.0.1" = [ "gconnect.ubi.com" ];
+  };
+
   # Try to fix wireless keyboard disconnecting on sleep
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0c45", ATTR{idProduct}=="fefe", TEST=="power/control", ATTR{power/control}="on"
@@ -95,8 +150,11 @@ in
 
   # ffmpegthumbnailer and tumbler for mp4 thumbnails
   services.tumbler.enable = true;
-  # for looking glass
-  systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 $USER kvm -" ];
+  # for looking glass and steam start scripts
+  systemd.tmpfiles.rules = [
+    "L+ /sbin/ldconfig - - - - ${pkgs.glibc}/sbin/ldconfig"
+    "f /dev/shm/looking-glass 0660 shiba kvm -"
+  ];
   programs.gamemode.enable = true;
   virtualisation.docker.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
