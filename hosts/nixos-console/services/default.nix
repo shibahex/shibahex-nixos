@@ -4,6 +4,6 @@
     ./sunshine.nix
     ./pegasus-frontend.nix
     ./llm.nix
-    ./nging.nix
+    ./nginx.nix
   ];
 }
