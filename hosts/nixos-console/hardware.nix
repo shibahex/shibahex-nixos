@@ -29,17 +29,33 @@
   fileSystems."/" = {
     device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
-    options = [ "subvol=root" ];
+    options = [
+      "subvol=root"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+    ];
   };
 
   fileSystems."/home/cuda/roms-one" = {
     device = "/dev/disk/by-uuid/73a2a196-b139-4ebd-b8bf-dec7769e3f46";
     fsType = "btrfs";
+    options = [
+      "compress=zstd"
+      "noatime"
+      "ssd"
+    ];
+
   };
 
   fileSystems."/home/cuda/roms-two" = {
     device = "/dev/disk/by-uuid/6f28647c-7f32-4a6a-92d9-3edb6cbf880b";
     fsType = "btrfs";
+    options = [
+      "compress=zstd"
+      "noatime"
+      "ssd"
+    ];
   };
 
   # Auto Decrypt for console experience
@@ -57,13 +73,23 @@
   fileSystems."/home" = {
     device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
-    options = [ "subvol=home" ];
+    options = [
+      "subvol=home"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+    ];
   };
 
   fileSystems."/nix" = {
     device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
-    options = [ "subvol=nix" ];
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+      "ssd"
+    ];
   };
 
   fileSystems."/boot" = {
