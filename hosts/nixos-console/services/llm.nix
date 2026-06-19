@@ -1,11 +1,6 @@
-{ pkgs
-, lib
-, ...
-}:
+{ pkgs, lib, ... }:
+
 let
-  # NOTE: ollama and lm-studio sucks just run llama-cpp yourself.
-  # llama.cpp built with CUDA and OpenBLAS (for CPU fallback layers),
-  # plus native CPU optimizations
   llama-cpp-cuda =
     (pkgs.llama-cpp.override {
       cudaSupport = true;
@@ -18,57 +13,64 @@ let
           ${old.preConfigure or ""}
         '';
       });
-  llama-server = lib.getExe' llama-cpp-cuda "llama-server";
-  modelsDir = "/var/lib/llama-swap";
 
-  # Auto-discover all .gguf files in /var/lib/llama-swap and register them.
-  # GGML_CUDA_ENABLE_UNIFIED_MEMORY=1 keeps model weights in RAM after first
-  # load so reloads are RAM-speed instead of requiring full reinit.
-  # --no-mmap ensures weights are actually read into RAM (not mapped from disk).
-  modelEntries = lib.mapAttrs'
-    (
-      filename: _:
-        lib.nameValuePair (lib.removeSuffix ".gguf" filename) {
-          cmd = ''
-            ${llama-server} \
-              --port ''${PORT} \
-              -m ${modelsDir}/${filename} \
-              --no-webui \
-              --ctx-size 32768 \
-              --parallel 4 \
-              --cont-batching \
-              --no-mmap
-          '';
-        }
-    )
-    (lib.filterAttrs (n: t: t == "regular" && lib.hasSuffix ".gguf" n) (builtins.readDir modelsDir));
+  modelsDir = "/var/lib/llama-swap";
 in
 {
-  # lact for GPU info on dashboard
-  environment.systemPackages = with pkgs; [ lact ];
-  systemd.packages = with pkgs; [ lact ];
-  systemd.services.lact.enable = true;
-  systemd.services.llama-swap.serviceConfig.SupplementaryGroups = [ "wheel" ];
-  services.llama-swap = {
-    enable = true;
-    port = 11434;
-    settings = {
-      healthCheckTimeout = 60;
-      models = modelEntries;
-      performance = {
-        disabled = false;
-        every = "15s";
-      };
+  environment.systemPackages = [ llama-cpp-cuda ];
+
+  systemd.services.llama-router = {
+    description = "llama.cpp router server";
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = ''
+        ${lib.getExe' llama-cpp-cuda "llama-server"} \
+          --host 0.0.0.0 \
+          --port 11434 \
+          --no-webui \
+          --models-dir ${modelsDir} \
+          --models-max 2 \
+          --models-autoload \
+          --ctx-size 0 \
+          --n-gpu-layers -1
+      '';
+
+      StateDirectory = "llama";
+      Restart = "always";
+      RestartSec = "5";
+      PrivateDevices = lib.mkForce false;
+      LimitMEMLOCK = "infinity";
+
+      Environment = [
+        "CUDA_VISIBLE_DEVICES=0"
+        "GGML_CUDA_ENABLE_UNIFIED_MEMORY=1"
+        "LD_LIBRARY_PATH=/run/opengl-driver/lib:/run/opengl-driver-32/lib"
+      ];
     };
+
+    # Make sure the models directory exists
+    preStart = ''
+      mkdir -p ${modelsDir}
+    '';
   };
-  systemd.services.llama-swap.serviceConfig = {
-    StateDirectory = "llama-swap";
-    PrivateDevices = lib.mkForce false;
-    LimitMEMLOCK = "infinity";
-    Environment = [
-      "LD_LIBRARY_PATH=/run/opengl-driver/lib:/run/opengl-driver-32/lib"
-      # Explicit GPU selection (redundant with one GPU)
-      "CUDA_VISIBLE_DEVICES=0"
-    ];
+
+  #embedding server for resolving web searches for oppen webui
+  systemd.services.llama-embedding = {
+    description = "llama.cpp embedding server";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = ''
+        ${lib.getExe' llama-cpp-cuda "llama-server"} \
+          --host 0.0.0.0 \
+          --port 11435 \
+          --no-webui \
+          --model ${modelsDir}/embed/embeddinggemma-300M-Q8_0.gguf \
+          --embedding \
+          --pooling mean \
+          --ctx-size 2048 \
+          --n-gpu-layers -1
+      '';
+    };
   };
 }
