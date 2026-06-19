@@ -114,7 +114,6 @@ in
 
   # Ram Categories
   imports = [
-    ./ram-management.nix
     ./configuration
   ];
 }
