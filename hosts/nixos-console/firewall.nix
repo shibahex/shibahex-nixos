@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 {
   networking.firewall.checkReversePath = "loose";
   networking.firewall.logRefusedPackets = true;
