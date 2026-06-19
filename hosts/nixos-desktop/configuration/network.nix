@@ -15,10 +15,6 @@
     48010
   ];
 
-  networking.hosts = {
-    "127.0.0.1" = [ "gconnect.ubi.com" ];
-  };
-
   security.pki.certificateFiles = [
     "${self}/certs/step-root-ca.crt"
   ];
