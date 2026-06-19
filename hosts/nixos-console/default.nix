@@ -3,6 +3,8 @@
   imports = [
     ./hardware.nix
     ./host-packages.nix
+    ./firewall.nix
+    ./controllers.nix
     ./services
   ];
   system.autoUpgrade.enable = true;
