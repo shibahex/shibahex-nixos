@@ -34,7 +34,7 @@
         gamescope-kbm = final.callPackage ./pkgs/gamescope-kbm/package.nix { };
         partyDeck = final.callPackage ./pkgs/partydeck/package.nix { };
         rpcs3 = final.callPackage ./pkgs/rpcs3/package.nix { };
-        terax = final.callPackage ./pkgs/terax/package.nix { };
+        terax = final.callPackage ./pkgs/terax-ai/package.nix { };
       };
       plasma67Overlay = final: prev: {
         kdePackages = plasma67.legacyPackages.${system}.kdePackages;
