@@ -78,6 +78,7 @@ in
 
     # VPN
     wireguard-tools
+    terax
   ];
 
   # Avahi for network discovery (Moonlight clients find Sunshine via mDNS)
