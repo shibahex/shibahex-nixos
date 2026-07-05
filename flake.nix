@@ -23,7 +23,6 @@
     { nixpkgs
     , stylix
     , self
-    , plasma67
     , ...
     }@inputs:
     let
