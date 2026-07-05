@@ -20,6 +20,5 @@ in
     ++ [ ./plasma/plasma-bigscreen.nix ];
 
   plasmaBigscreen.enable = hasBigscreen;
-
-  services.displayManager.ly.enable = !hasBigscreen;
+  services.displayManager.ly.enable = true;
 }
