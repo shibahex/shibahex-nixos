@@ -18,7 +18,6 @@
       url = "github:BEST8OY/LyricsMPRIS-Rust";
       flake = false;
     };
-    plasma67.url = "github:abdelq/nixpkgs/abdelq/oqyynsqtkmqv";
   };
   outputs =
     { nixpkgs
@@ -36,33 +35,6 @@
         rpcs3 = final.callPackage ./pkgs/rpcs3/package.nix { };
         terax = final.callPackage ./pkgs/terax-ai/package.nix { };
       };
-      plasma67Overlay = final: prev: {
-        kdePackages = plasma67.legacyPackages.${system}.kdePackages;
-      };
-      plasma67Module =
-        { config, lib, ... }:
-        {
-          options.services.desktopManager.plasma6Bigscreen = {
-            enable = lib.mkOption {
-              type = lib.types.bool;
-              default = false;
-              description = "Enable Plasma Big Screen (KDE for large displays)";
-            };
-          };
-          config = lib.mkIf config.services.desktopManager.plasma6Bigscreen.enable {
-            services.desktopManager.plasma6.enable = true;
-            services.displayManager.sessionPackages = [
-              plasma67.legacyPackages.${system}.kdePackages.plasma-bigscreen
-            ];
-            services.displayManager.defaultSession = "plasma-bigscreen-wayland";
-            environment.systemPackages = with plasma67.legacyPackages.${system}.kdePackages; [
-              plasma-bigscreen
-              plasma-nm
-              powerdevil
-              kdeconnect-kde
-            ];
-          };
-        };
       mkHost =
         { hostname
         , profile
@@ -87,11 +59,9 @@
             ./modules/core
             ./modules/desktop
             stylix.nixosModules.stylix
-            plasma67Module
             {
               nixpkgs.overlays = [
                 localPackagesOverlay
-                plasma67Overlay
               ];
             }
           ];

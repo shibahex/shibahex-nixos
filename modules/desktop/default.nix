@@ -1,3 +1,4 @@
+# modules/desktop/default.nix
 { pkgs
 , host
 , lib
@@ -7,6 +8,7 @@
 let
   variables = import "${self}/hosts/${host}/variables.nix" { inherit pkgs; };
   desktops = variables.desktops or [ "dwm" ];
+  hasBigscreen = builtins.elem "bigscreen" desktops;
 in
 {
   # Dark theme
@@ -16,8 +18,11 @@ in
   imports =
     (lib.optional (builtins.elem "dwm" desktops) ./dwm/dwm-setup.nix)
     ++ (lib.optional (builtins.elem "niri" desktops) ./niri/niri-setup.nix)
-    ++ (lib.optional (builtins.elem "plasma" desktops) ./plasma/plasma-setup.nix);
+    ++ (lib.optional hasBigscreen ./plasma/plasma-bigscreen.nix);
 
-  services.displayManager.ly.enable = true;
+  # Turn on your custom module if bigscreen is in variables.nix
+  ft.plasmaBigscreen.enable = hasBigscreen;
 
+  # Only use Ly if Bigscreen (which uses SDDM) is not active
+  services.displayManager.ly.enable = !hasBigscreen;
 }

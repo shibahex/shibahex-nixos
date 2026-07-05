@@ -13,7 +13,7 @@ in
   desktops = [
     "dwm"
     "niri"
-    "plasma"
+    "bigscreen"
   ];
 
   # Monitors
