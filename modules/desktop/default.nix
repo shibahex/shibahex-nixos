@@ -17,6 +17,7 @@ in
   imports =
     (lib.optional (builtins.elem "dwm" desktops) ./dwm/dwm-setup.nix)
     ++ (lib.optional (builtins.elem "niri" desktops) ./niri/niri-setup.nix)
+    ++ (lib.optional (builtins.elem "oxwm" desktops) ./oxwm/oxwm-setup.nix)
     ++ [ ./plasma/plasma-bigscreen.nix ];
 
   plasmaBigscreen.enable = hasBigscreen;
