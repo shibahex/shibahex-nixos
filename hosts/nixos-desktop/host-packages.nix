@@ -25,13 +25,19 @@ in
   };
   environment.systemPackages = with pkgs; [
     # Add host-specific packages here
-    (anki.withAddons [ ankiAddons.review-heatmap ])
+    # anki-connect: lets the health dashboard and its Anki MCP reach the collection
+    (anki.withAddons [
+      ankiAddons.review-heatmap
+      ankiAddons.anki-connect
+    ])
+    timeshift
     # For timing tasks and productivity
     timer
     btop
     looking-glass-client
     freerdp
     mangohud
+    qsynth
     mpv
     alacritty
     tmux
@@ -49,9 +55,10 @@ in
     thunar
     ffmpegthumbnailer
 
-    (rpcs3.overrideAttrs (prev: {
-      cmakeFlags = prev.cmakeFlags ++ [ (lib.cmakeBool "BUILD_SHARED_LIBS" false) ];
-    }))
+    rpcs3
+    # (rpcs3.overrideAttrs (prev: {
+    #   cmakeFlags = prev.cmakeFlags ++ [ (lib.cmakeBool "BUILD_SHARED_LIBS" false) ];
+    # }))
 
     # Recording (make OBS see nvidiaPackages)
     (pkgs.writeShellScriptBin "obs" ''
@@ -72,6 +79,7 @@ in
     #keyboard
     via
 
+    yt-dlp
     #noctalia shell plugin for lyrics
     lyricsmpris
 
@@ -80,7 +88,17 @@ in
     # VPN
     wireguard-tools
     terax
+    claude-code
+    repomix
   ];
+
+  programs.wireshark.enable = true;
+  users.users.shiba = {
+    extraGroups = [
+      "wireshark"
+      "dialout"
+    ];
+  };
 
   # Avahi for network discovery (Moonlight clients find Sunshine via mDNS)
   services.avahi = {
@@ -98,6 +116,7 @@ in
 
   programs.gamemode.enable = true;
   virtualisation.docker.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
   # USB Yubikey to VM. (Can be insecure if public)
   systemd.services.usbipd = {
@@ -114,8 +133,15 @@ in
     "usbip-host"
   ];
 
-  # Ram Categories
   imports = [
+    # Ram Categories
     ./configuration
+    # Art software
+    ./art-software.nix
   ];
+
+  # Try to fix niri freezing due to GPU drivers
+  boot.extraModprobeConfig = ''
+    options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_UsePageAttributeTable=1
+  '';
 }
