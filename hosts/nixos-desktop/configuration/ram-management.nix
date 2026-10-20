@@ -51,7 +51,7 @@ let
       name = "spotify";
       bin = "${pkgs.spotify}/bin/spotify";
       memHigh = "200M";
-      memMax = "300M";
+      memMax = "2G";
     }
     {
       name = "steam";

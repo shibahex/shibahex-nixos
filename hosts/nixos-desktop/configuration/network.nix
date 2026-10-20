@@ -13,6 +13,7 @@
   networking.firewall.allowedTCPPorts = [
     47584
     48010
+    2049
   ];
 
   security.pki.certificateFiles = [
