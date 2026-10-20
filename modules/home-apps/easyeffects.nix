@@ -4,8 +4,8 @@ let
   easyEffectsProfiles = pkgs.fetchFromGitHub {
     "owner" = "shibahex";
     "repo" = "easyeffects-presets";
-    "rev" = "87fe1b742379618272c8934b6962cefcb2a9ed25";
-    "hash" = "sha256-WDk73L/6mpc1EW5hZv1hV964IitE85wZcFBdD7uWL7w=";
+    "rev" = "5647521a7d874eabd08948b4f442027ffeec1b3a";
+    "hash" = "sha256-QZc1v71cn++FBa0m46aqM91cdtbdUN7Vj5pMHj1VXqc=";
   };
 in
 {
