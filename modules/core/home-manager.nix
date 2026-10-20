@@ -62,6 +62,7 @@ in
       "kvm" # for gpu passthrough
       "wheel" # sudo access
       "input"
+      "tty"
     ];
     # Use configured shell based on defaultShell variable
     shell = shellPackage;
