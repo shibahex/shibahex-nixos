@@ -1,14 +1,20 @@
 // -------- window rules ---------~
 
 window-rule {
-    match app-id=r#"^(spotify|org\.pulseaudio\.pavucontrol|com\.github\.wwmm\.easyeffects)|1password|com.obsproject.Studio$"#
+    match app-id=r#"^(Spotify|org\.pulseaudio\.pavucontrol|com\.github\.wwmm\.easyeffects)|com.onepassword.OnePassword|com.obsproject.Studio$"#
     open-on-workspace "scratch"
     opacity 0.95
     open-floating true
     default-column-width { fixed 1596; }
     default-window-height { fixed 1240; }
 }
-
+window-rule {
+    match app-id="Alacritty" title="scratch-terminal"
+    open-floating true
+    opacity 0.95
+    default-column-width { fixed 1596; }
+    default-window-height { fixed 1240; }
+}
 window-rule {
     match app-id=r#"vesktop"#
     open-on-workspace "scratch"

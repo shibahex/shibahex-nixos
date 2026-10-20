@@ -1,14 +1,29 @@
-output "DP-5" {
+output "DP-4" {
     mode "3840x2160@143.999"
     scale 1.5
     transform "normal"
     position x=0 y=0
 }
 
-output "DP-4" {
+output "DP-5" {
     mode "2560x1440@100.001"
     scale 1.25
     transform "normal"
-    position x=1280 y=0
+    position x=2560 y=0
 }
 
+output "HDMI-A-2" {
+  mode "1920x1080@60.042"
+    scale 1
+    position x=2560 y=1152
+}
+
+gestures {
+    hot-corners {
+        off
+    }
+}
+//     touch {
+//         map-to-output "HDMI-A-2"
+//     }
+//}

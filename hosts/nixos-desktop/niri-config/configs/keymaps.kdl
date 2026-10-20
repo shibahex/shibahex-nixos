@@ -5,16 +5,18 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Shift+Return hotkey-overlay-title="Open a Browser: chromium" { spawn "chromium"; }
     Mod+P hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+Shift+S { spawn-sh "nscratch -id Spotify -m"; }
-    Mod+Shift+A { spawn-sh "nscratch -id org.kde.easyeffects -m && nscratch -id org.pulseaudio.pavucontrol -m"; }
+    Mod+Shift+A { spawn-sh "nscratch -id com.github.wwmm.easyeffects -m && nscratch -id org.pulseaudio.pavucontrol -m"; }
     Mod+Shift+D { spawn-sh "nscratch -id vesktop -m"; }
     Mod+Shift+O { spawn-sh "nscratch -id com.obsproject.Studio -m"; }
-    Mod+Shift+P { spawn-sh "nscratch -id 1password -m"; }
+    Mod+Shift+P { spawn-sh "nscratch -id com.onepassword.OnePassword -m"; }
+    Mod+Shift+T { spawn-sh "nscratch -t scratch-terminal -s \"alacritty --title scratch-terminal\" -m"; }
 
 
     Mod+C repeat=false { close-window; }
-    Mod+Ctrl+X hotkey-overlay-title="Kill unresponsive window" {
+    Mod+Ctrl+C hotkey-overlay-title="Kill unresponsive window" {
       spawn-sh "kill -9 $(niri msg -j windows | jq '.[] | select(.is_focused == true)' | jq .pid)";
     }
 
@@ -183,7 +185,7 @@ binds {
     Mod+Shift+C { center-column; }
 
     // Center all fully visible columns on screen.
-    Mod+Ctrl+C { center-visible-columns; }
+    // Mod+Ctrl+C { center-visible-columns; }
 
     // Finer width adjustments.
     // This command can also:
