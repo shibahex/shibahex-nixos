@@ -1,16 +1,17 @@
-{ config
-, lib
-, pkgs
-, modulesPath
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
 }:
 let
   mkApp =
-    { name
-    , bin
-    , memHigh
-    , memMax
-    ,
+    {
+      name,
+      bin,
+      memHigh,
+      memMax,
     }:
     {
       wrapper = pkgs.writeShellScriptBin name ''
@@ -27,10 +28,10 @@ let
       };
     };
   mkSlice =
-    { name
-    , memHigh
-    , memMax
-    ,
+    {
+      name,
+      memHigh,
+      memMax,
     }:
     lib.nameValuePair name {
       sliceConfig = {

@@ -1,9 +1,9 @@
-{ pkgs
-, lib
-, variables
-, host
-, self
-,
+{
+  pkgs,
+  lib,
+  variables,
+  host,
+  self,
 }:
 assert variables.mainMonitor != null -> builtins.isString variables.mainMonitor;
 let

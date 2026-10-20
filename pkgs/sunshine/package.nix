@@ -1,62 +1,62 @@
-{ lib
-, shaderc
-, stdenv
-, fetchFromGitHub
-, fetchurl
-, autoAddDriverRunpath
-, makeWrapper
-, buildNpmPackage
-, nixosTests
-, cmake
-, avahi
-, libevdev
-, libpulseaudio
-, libxtst
-, libxrandr
-, libxi
-, libxfixes
-, libxdmcp
-, libx11
-, libxcb
-, openssl
-, libopus
-, boost
-, pkg-config
-, libdrm
-, wayland
-, wayland-scanner
-, libffi
-, libcap
-, libgbm
-, curl
-, pcre
-, pcre2
-, pipewire
-, python3
-, libuuid
-, libselinux
-, libsepol
-, libthai
-, libdatrie
-, libxkbcommon
-, libepoxy
-, libva
-, libvdpau
-, libglvnd
-, numactl
-, amf-headers
-, vulkan-loader
-, libappindicator
-, libnotify
-, miniupnpc
-, nlohmann_json
-, config
-, coreutils
-, udevCheckHook
-, cudaSupport ? config.cudaSupport
-, cudaPackages ? { }
-, apple-sdk_15
-,
+{
+  lib,
+  shaderc,
+  stdenv,
+  fetchFromGitHub,
+  fetchurl,
+  autoAddDriverRunpath,
+  makeWrapper,
+  buildNpmPackage,
+  nixosTests,
+  cmake,
+  avahi,
+  libevdev,
+  libpulseaudio,
+  libxtst,
+  libxrandr,
+  libxi,
+  libxfixes,
+  libxdmcp,
+  libx11,
+  libxcb,
+  openssl,
+  libopus,
+  boost,
+  pkg-config,
+  libdrm,
+  wayland,
+  wayland-scanner,
+  libffi,
+  libcap,
+  libgbm,
+  curl,
+  pcre,
+  pcre2,
+  pipewire,
+  python3,
+  libuuid,
+  libselinux,
+  libsepol,
+  libthai,
+  libdatrie,
+  libxkbcommon,
+  libepoxy,
+  libva,
+  libvdpau,
+  libglvnd,
+  numactl,
+  amf-headers,
+  vulkan-loader,
+  libappindicator,
+  libnotify,
+  miniupnpc,
+  nlohmann_json,
+  config,
+  coreutils,
+  udevCheckHook,
+  cudaSupport ? config.cudaSupport,
+  cudaPackages ? { },
+  apple-sdk_15,
 }:
 let
   inherit (stdenv.hostPlatform) isDarwin isLinux;
@@ -108,35 +108,35 @@ stdenv'.mkDerivation (finalAttrs: {
   };
 
   postPatch = # don't look for npm since we build webui separately
-    ''
-      substituteInPlace cmake/targets/common.cmake \
-        --replace-fail 'find_program(NPM npm REQUIRED)' ""
-    ''
-    # use system boost instead of FetchContent.
-    # FETCH_CONTENT_BOOST_USED prevents Simple-Web-Server from re-finding boost
-    + ''
-      substituteInPlace cmake/dependencies/Boost_Sunshine.cmake \
-        --replace-fail 'set(BOOST_VERSION "1.89.0")' 'set(BOOST_VERSION "${boost.version}")'
-      echo 'set(FETCH_CONTENT_BOOST_USED TRUE)' >> cmake/dependencies/Boost_Sunshine.cmake
-    ''
-    # remove upstream dependency on systemd and udev
-    + lib.optionalString isLinux ''
-      substituteInPlace cmake/packaging/linux.cmake \
-        --replace-fail 'find_package(Systemd)' "" \
-        --replace-fail 'find_package(Udev)' ""
+  ''
+    substituteInPlace cmake/targets/common.cmake \
+      --replace-fail 'find_program(NPM npm REQUIRED)' ""
+  ''
+  # use system boost instead of FetchContent.
+  # FETCH_CONTENT_BOOST_USED prevents Simple-Web-Server from re-finding boost
+  + ''
+    substituteInPlace cmake/dependencies/Boost_Sunshine.cmake \
+      --replace-fail 'set(BOOST_VERSION "1.89.0")' 'set(BOOST_VERSION "${boost.version}")'
+    echo 'set(FETCH_CONTENT_BOOST_USED TRUE)' >> cmake/dependencies/Boost_Sunshine.cmake
+  ''
+  # remove upstream dependency on systemd and udev
+  + lib.optionalString isLinux ''
+    substituteInPlace cmake/packaging/linux.cmake \
+      --replace-fail 'find_package(Systemd)' "" \
+      --replace-fail 'find_package(Udev)' ""
 
-      substituteInPlace packaging/linux/dev.lizardbyte.app.Sunshine.desktop \
-        --subst-var-by PROJECT_NAME 'Sunshine' \
-        --subst-var-by PROJECT_DESCRIPTION 'Self-hosted game stream host for Moonlight' \
-        --subst-var-by SUNSHINE_DESKTOP_ICON 'sunshine' \
-        --subst-var-by CMAKE_INSTALL_FULL_DATAROOTDIR "$out/share" \
-        --replace-fail '/usr/bin/env systemctl start --u app-@PROJECT_FQDN@' 'sunshine'
+    substituteInPlace packaging/linux/dev.lizardbyte.app.Sunshine.desktop \
+      --subst-var-by PROJECT_NAME 'Sunshine' \
+      --subst-var-by PROJECT_DESCRIPTION 'Self-hosted game stream host for Moonlight' \
+      --subst-var-by SUNSHINE_DESKTOP_ICON 'sunshine' \
+      --subst-var-by CMAKE_INSTALL_FULL_DATAROOTDIR "$out/share" \
+      --replace-fail '/usr/bin/env systemctl start --u app-@PROJECT_FQDN@' 'sunshine'
 
-      substituteInPlace packaging/linux/app-dev.lizardbyte.app.Sunshine.service.in \
-        --subst-var-by PROJECT_DESCRIPTION 'Self-hosted game stream host for Moonlight' \
-        --subst-var-by SUNSHINE_EXECUTABLE_PATH $out/bin/sunshine \
-        --replace-fail '/bin/sleep' '${lib.getExe' coreutils "sleep"}'
-    '';
+    substituteInPlace packaging/linux/app-dev.lizardbyte.app.Sunshine.service.in \
+      --subst-var-by PROJECT_DESCRIPTION 'Self-hosted game stream host for Moonlight' \
+      --subst-var-by SUNSHINE_EXECUTABLE_PATH $out/bin/sunshine \
+      --replace-fail '/bin/sleep' '${lib.getExe' coreutils "sleep"}'
+  '';
 
   nativeBuildInputs = [
     cmake

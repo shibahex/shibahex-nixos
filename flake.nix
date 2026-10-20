@@ -20,10 +20,11 @@
     };
   };
   outputs =
-    { nixpkgs
-    , stylix
-    , self
-    , ...
+    {
+      nixpkgs,
+      stylix,
+      self,
+      ...
     }@inputs:
     let
       system = "x86_64-linux";
@@ -35,11 +36,11 @@
         terax = final.callPackage ./pkgs/terax-ai/package.nix { };
       };
       mkHost =
-        { hostname
-        , profile
-        , username
-        , stateVersion
-        ,
+        {
+          hostname,
+          profile,
+          username,
+          stateVersion,
         }:
         nixpkgs.lib.nixosSystem {
           inherit system;

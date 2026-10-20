@@ -1,4 +1,4 @@
-{ config, pkgs,... }: {
+{ config, pkgs, ... }: {
   boot.kernelModules = [ "cpufreq_stats" ];
   powerManagement.powertop.enable = false;
   environment.systemPackages = [ pkgs.powertop ];

@@ -1,11 +1,11 @@
-{ lib
-, fetchFromGitHub
-, stdenv
-, cmake
-, SDL2
-, sqlite
-, libsForQt5
-,
+{
+  lib,
+  fetchFromGitHub,
+  stdenv,
+  cmake,
+  SDL2,
+  sqlite,
+  libsForQt5,
 }:
 
 stdenv.mkDerivation {

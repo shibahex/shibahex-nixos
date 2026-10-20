@@ -1,7 +1,7 @@
-{ lib
-, fetchFromGitHub
-, gamescope
-,
+{
+  lib,
+  fetchFromGitHub,
+  gamescope,
 }:
 
 gamescope.overrideAttrs (
@@ -32,8 +32,8 @@ gamescope.overrideAttrs (
       mv $out/bin/gamescope $out/bin/gamescope-kbm
     ''
     +
-    builtins.replaceStrings [ "$out/bin/gamescope" ] [ "$out/bin/gamescope-kbm" ]
-      previousAttrs.postInstall;
+      builtins.replaceStrings [ "$out/bin/gamescope" ] [ "$out/bin/gamescope-kbm" ]
+        previousAttrs.postInstall;
 
     # Do not inherit gamescope's update script for ValveSoftware/gamescope.
     passthru = { };

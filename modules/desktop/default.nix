@@ -1,9 +1,10 @@
 # modules/desktop/default.nix
-{ pkgs
-, host
-, lib
-, self
-, ...
+{
+  pkgs,
+  host,
+  lib,
+  self,
+  ...
 }:
 let
   variables = import "${self}/hosts/${host}/variables.nix" { inherit pkgs; };

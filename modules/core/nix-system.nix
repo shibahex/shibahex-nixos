@@ -1,9 +1,10 @@
 # For any nix/system configuration
-{ host
-, pkgs
-, stateVersion
-, self
-, ...
+{
+  host,
+  pkgs,
+  stateVersion,
+  self,
+  ...
 }:
 let
   inherit (import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; }) timeZone;

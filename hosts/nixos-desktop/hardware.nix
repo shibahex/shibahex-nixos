@@ -1,8 +1,9 @@
-{ config
-, lib
-, modulesPath
-, pkgs
-, ...
+{
+  config,
+  lib,
+  modulesPath,
+  pkgs,
+  ...
 }:
 let
   variables = import ./variables.nix { pkgs = pkgs; };

@@ -1,11 +1,12 @@
-{ pkgs
-, lib
-, inputs
-, host
-, self
-, username
-, stateVersion
-, ...
+{
+  pkgs,
+  lib,
+  inputs,
+  host,
+  self,
+  username,
+  stateVersion,
+  ...
 }:
 let
   variables = import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; };

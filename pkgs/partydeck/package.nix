@@ -1,26 +1,26 @@
-{ lib
-, stdenv
-, rustPlatform
-, fetchFromGitHub
-, makeBinaryWrapper
-, pkg-config
-, p7zip
-, bubblewrap
-, fetchurl
-, fontconfig
-, fuse-overlayfs
-, gamescope-kbm
-, libGL
-, libx11
-, libxcursor
-, libxi
-, libxkbcommon
-, libxrandr
-, openssl
-, umu-launcher
-, wayland
-, xdg-utils
-,
+{
+  lib,
+  stdenv,
+  rustPlatform,
+  fetchFromGitHub,
+  makeBinaryWrapper,
+  pkg-config,
+  p7zip,
+  bubblewrap,
+  fetchurl,
+  fontconfig,
+  fuse-overlayfs,
+  gamescope-kbm,
+  libGL,
+  libx11,
+  libxcursor,
+  libxi,
+  libxkbcommon,
+  libxrandr,
+  openssl,
+  umu-launcher,
+  wayland,
+  xdg-utils,
 }:
 let
   gbeVersion = "release-2026_03_10";

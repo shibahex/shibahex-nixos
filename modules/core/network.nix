@@ -1,7 +1,8 @@
-{ pkgs
-, host
-, options
-, ...
+{
+  pkgs,
+  host,
+  options,
+  ...
 }:
 # let inherit (import ../../hosts/${host}/variables.nix) hostId;
 # in

@@ -1,4 +1,9 @@
-{ host, pkgs, self, ... }:
+{
+  host,
+  pkgs,
+  self,
+  ...
+}:
 let
   variables = import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; };
   monitorRules = variables.monitorRules or [ ];

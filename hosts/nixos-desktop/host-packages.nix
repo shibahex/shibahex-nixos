@@ -1,8 +1,9 @@
-{ config
-, pkgs
-, inputs
-, self
-, ...
+{
+  config,
+  pkgs,
+  inputs,
+  self,
+  ...
 }:
 let
   lyricsmpris = pkgs.rustPlatform.buildRustPackage {
