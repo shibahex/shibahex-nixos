@@ -13,6 +13,7 @@ in
   desktops = [
     "dwm"
     "niri"
+    "oxwm"
   ];
   # GPU
   nvidiaID = "PCI:1:0:0";
