@@ -34,6 +34,9 @@ let
 
 in
 {
+  home.packages = with pkgs; [
+    decent-sampler
+  ];
   home.file.".config/pegasus-frontend/themes/XboxOSv2" = {
     source = xboxTheme;
     recursive = true;
@@ -50,4 +53,7 @@ in
     source = flatFlix;
     recursive = true;
   };
+
+  home.file.".vst3/DecentSampler.vst3".source = "${pkgs.decent-sampler}/lib/vst3/DecentSampler.vst3";
+
 }
