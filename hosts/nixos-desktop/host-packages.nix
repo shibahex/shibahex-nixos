@@ -84,7 +84,6 @@ in
 
     # VPN
     wireguard-tools
-    terax
     claude-code
     repomix
   ];

@@ -38,7 +38,6 @@
       system = "x86_64-linux";
       localPackagesOverlay = final: prev: {
         partyDeck = final.callPackage ./pkgs/partydeck/package.nix { };
-        terax = final.callPackage ./pkgs/terax-ai/package.nix { };
         # Workarounds: these fail to build with GCC 16
         breakpad = prev.breakpad.override { stdenv = prev.gcc14Stdenv; };
         pegasus-frontend = prev.pegasus-frontend.override { stdenv = prev.gcc14Stdenv; };
