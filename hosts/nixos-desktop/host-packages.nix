@@ -56,9 +56,6 @@ in
     ffmpegthumbnailer
 
     rpcs3
-    # (rpcs3.overrideAttrs (prev: {
-    #   cmakeFlags = prev.cmakeFlags ++ [ (lib.cmakeBool "BUILD_SHARED_LIBS" false) ];
-    # }))
 
     # Recording (make OBS see nvidiaPackages)
     (pkgs.writeShellScriptBin "obs" ''

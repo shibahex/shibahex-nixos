@@ -37,10 +37,7 @@
     let
       system = "x86_64-linux";
       localPackagesOverlay = final: prev: {
-        # sunshine = final.callPackage ./pkgs/sunshine/package.nix { };
-        # gamescope-kbm = final.callPackage ./pkgs/gamescope-kbm/package.nix { };
         partyDeck = final.callPackage ./pkgs/partydeck/package.nix { };
-        # rpcs3 = final.callPackage ./pkgs/rpcs3/package.nix { };
         terax = final.callPackage ./pkgs/terax-ai/package.nix { };
         # Workarounds: these fail to build with GCC 16
         breakpad = prev.breakpad.override { stdenv = prev.gcc14Stdenv; };
