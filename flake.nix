@@ -22,6 +22,10 @@
       url = "github:9Prestidigitator/reaper-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    partydeckfork = {
+      url = "github:cseelhoff/partydeck";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     {
@@ -33,8 +37,8 @@
     let
       system = "x86_64-linux";
       localPackagesOverlay = final: prev: {
-        sunshine = final.callPackage ./pkgs/sunshine/package.nix { };
-        gamescope-kbm = final.callPackage ./pkgs/gamescope-kbm/package.nix { };
+        # sunshine = final.callPackage ./pkgs/sunshine/package.nix { };
+        # gamescope-kbm = final.callPackage ./pkgs/gamescope-kbm/package.nix { };
         partyDeck = final.callPackage ./pkgs/partydeck/package.nix { };
         # rpcs3 = final.callPackage ./pkgs/rpcs3/package.nix { };
         terax = final.callPackage ./pkgs/terax-ai/package.nix { };

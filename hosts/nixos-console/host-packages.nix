@@ -14,11 +14,12 @@
 
     pcsx2
     ryubing
-    #partyDeck
-    wineWowPackages.stable
-    (rpcs3.overrideAttrs (prev: {
-      cmakeFlags = prev.cmakeFlags ++ [ (lib.cmakeBool "BUILD_SHARED_LIBS" false) ];
-    }))
+    partyDeck
+    rpcs3
+    # wineWowPackages.stable
+    # (rpcs3.overrideAttrs (prev: {
+    #   cmakeFlags = prev.cmakeFlags ++ [ (lib.cmakeBool "BUILD_SHARED_LIBS" false) ];
+    # }))
 
     # Wrapper to start and close the skyrim server
     (writeShellScriptBin "skyrim-server" ''
@@ -45,6 +46,9 @@
       # Kill any remaining processes with broader patterns when finished
       pkill -9 -f "SkyrimTogether|TPPProcess|crashpad|wineserver"
     '')
+    swayidle
+    kdePackages.libkscreen
+
   ];
 
   #recording
@@ -57,4 +61,31 @@
 
   programs.gamemode.enable = true;
   virtualisation.docker.enable = true;
+
+  hardware.bluetooth = {
+    enable = true;
+    input = {
+      General = {
+        IdleTimeout = 45;
+      };
+    };
+  };
+
+  systemd.user.services.swayidle = {
+    description = "swayidle - turn off display after idle";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig = {
+      ExecStart = ''
+        ${pkgs.swayidle}/bin/swayidle -w \
+          timeout 300 '${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor --dpms off' \
+          resume     '${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor --dpms on'
+      '';
+      Restart = "on-failure";
+    };
+    environment = {
+      QT_QPA_PLATFORM = "wayland";
+      WAYLAND_DISPLAY = "wayland-0";
+    };
+  };
 }
