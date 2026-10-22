@@ -16,10 +16,10 @@ in
       download-buffer-size = 250000000;
       # Dedup on a timer (nix.optimise) instead of after every build
       auto-optimise-store = false;
-      # Parallel builds x threads per build. Leaving cores at 0 (all threads) with
-      # many jobs oversubscribes the CPU and swaps big builds. Hosts can override.
+      # Each build uses every thread; max-jobs caps how many run at once so
+      # several big C++/CUDA builds don't run out of RAM. Hosts can override.
       max-jobs = lib.mkDefault 4;
-      cores = lib.mkDefault 4;
+      cores = lib.mkDefault 0;
       substituters = [
         "https://nix-community.cachix.org"
         # Unfree CUDA builds aren't on cache.nixos.org
