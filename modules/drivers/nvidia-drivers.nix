@@ -11,6 +11,8 @@ in
 {
   options.drivers.nvidia = {
     enable = mkEnableOption "Enable Nvidia Drivers";
+    # Turing (RTX 20) and newer only; Pascal and older need the proprietary module
+    open = mkEnableOption "Nvidia open kernel modules";
   };
   config = mkIf cfg.enable {
     services.xserver.videoDrivers = [ "nvidia" ];
@@ -23,7 +25,7 @@ in
       # Fine-grained power management. Turns off GPU when not in use.
       powerManagement.finegrained = false;
 
-      open = false;
+      open = cfg.open;
 
       # Enable the Nvidia settings menu,
       # accessible via `nvidia-settings`.

@@ -60,6 +60,7 @@
   services.tumbler.enable = true;
 
   programs.gamemode.enable = true;
+  modules.performance.enable = true;
   virtualisation.docker.enable = true;
 
   hardware.bluetooth = {

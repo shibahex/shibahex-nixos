@@ -15,7 +15,6 @@ in
   # KERNEL
   # ============================================================
   boot.kernelParams = [
-    "intel_iommu=on"
     "iommu=pt"
     "vfio-pci.ids=${variables.vfioIds}"
   ];

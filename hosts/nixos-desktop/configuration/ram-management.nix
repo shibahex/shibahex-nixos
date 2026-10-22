@@ -73,7 +73,6 @@ let
 in
 {
   zramSwap.enable = true;
-  zramSwap.algorithm = "zstd";
   environment.systemPackages = map (app: app.wrapper) apps;
   systemd.user.slices = appSlices // extraSlices;
 }

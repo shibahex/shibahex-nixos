@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 {
   # RTKit - grants PipeWire realtime scheduling via DBus
   security.rtkit.enable = true;
@@ -77,10 +82,7 @@
     blacklistedKernelModules = [ "pcspkr" ];
   };
 
-  # Prevent CPU downclocking mid-playback (a common hidden xrun cause).
-  powerManagement.cpuFreqGovernor = "performance";
-
-  users.users.shiba.extraGroups = [
+  users.users.${username}.extraGroups = [
     "audio"
     "rtkit"
   ];

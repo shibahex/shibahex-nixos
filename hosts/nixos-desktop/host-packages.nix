@@ -23,6 +23,10 @@ in
     enable = true;
     swtpm = true;
   };
+  modules.performance.enable = true;
+  drivers.nvidia.open = true; # RTX 3080; the vfio'd 1080 Ti doesn't use this driver
+  # 4 jobs x 6 threads on the 16-thread 9800X3D
+  nix.settings.cores = 6;
   environment.systemPackages = with pkgs; [
     # Add host-specific packages here
     # anki-connect: lets the health dashboard and its Anki MCP reach the collection
@@ -113,7 +117,6 @@ in
   programs.gamemode.enable = true;
   virtualisation.docker.enable = true;
   hardware.nvidia-container-toolkit.enable = true;
-  powerManagement.cpuFreqGovernor = "performance";
   # USB Yubikey to VM. (Can be insecure if public)
   systemd.services.usbipd = {
     enable = true;
