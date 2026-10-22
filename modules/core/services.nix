@@ -5,6 +5,8 @@
   ...
 }:
 {
+  services.fstrim.enable = lib.mkDefault true; # SSD optimizer
+
   security.rtkit.enable = lib.mkDefault true;
 
   services.pipewire = {
