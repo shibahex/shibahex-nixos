@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, ... }:
 {
   home.file.".config/nushell/nix-prompt.nu".text = ''
     if ("IN_NIX_SHELL" in $env) {
@@ -8,7 +8,7 @@
   programs.nushell = {
     enable = true;
     environmentVariables = {
-      EDITOR = "nvim";
+      EDITOR = lib.mkDefault "nvim";
     };
     extraEnv = ''
       source ~/.config/nushell/nix-prompt.nu

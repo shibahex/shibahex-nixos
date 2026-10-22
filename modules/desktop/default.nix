@@ -1,4 +1,3 @@
-# modules/desktop/default.nix
 {
   pkgs,
   host,
@@ -9,18 +8,19 @@
 let
   variables = import "${self}/hosts/${host}/variables.nix" { inherit pkgs; };
   desktops = variables.desktops or [ "dwm" ];
-  hasBigscreen = builtins.elem "bigscreen" desktops;
+  hasDesktop = d: builtins.elem d desktops;
 in
 {
-  stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
-
   imports =
-    (lib.optional (builtins.elem "dwm" desktops) ./dwm/dwm-setup.nix)
-    ++ (lib.optional (builtins.elem "niri" desktops) ./niri/niri-setup.nix)
-    ++ (lib.optional (builtins.elem "oxwm" desktops) ./oxwm/oxwm-setup.nix)
+    (lib.optional (hasDesktop "dwm") ./dwm/dwm-setup.nix)
+    ++ (lib.optional (hasDesktop "niri") ./niri/niri-setup.nix)
+    ++ (lib.optional (hasDesktop "oxwm") ./oxwm/oxwm-setup.nix)
+    ++ (lib.optional (hasDesktop "hyprland") ./hyprland/hyprland-setup.nix)
     ++ [ ./plasma/plasma-bigscreen.nix ];
 
-  plasmaBigscreen.enable = hasBigscreen;
-  services.displayManager.ly.enable = true;
+  stylix.enable = lib.mkDefault true;
+  stylix.base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
+
+  plasmaBigscreen.enable = lib.mkDefault (hasDesktop "bigscreen");
+  services.displayManager.ly.enable = lib.mkDefault true;
 }

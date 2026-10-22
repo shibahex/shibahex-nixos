@@ -1,11 +1,8 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
-  hardware.graphics.enable32Bit = true;
-  programs.steam.enable = true;
+  programs.steam.enable = lib.mkDefault true;
 
   environment.systemPackages = with pkgs; [
-    #Browser
-    # ungoogled-chromium
     (ungoogled-chromium.override {
       commandLineArgs = [
         "--enable-blink-features=DisableHardwareNoiseSuppression"
@@ -13,16 +10,9 @@
         "--disable-gpu-memory-buffer-compositor-resources"
       ];
     })
-    # Password Manager
     _1password-gui
-
-    # Terminal Command to see file structures
     tree
-
-    # Screenshots
     flameshot
-
-    #easy kill command
     killall
   ];
 }

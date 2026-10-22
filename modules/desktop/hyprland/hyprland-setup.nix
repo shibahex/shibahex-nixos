@@ -8,17 +8,12 @@
   stateVersion,
   ...
 }:
-let
-  variables = import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; };
-in
 {
   home-manager.users.${username} =
     lib.mkIf (builtins.pathExists "${self}/hosts/${host}/hypr-config")
       {
         home.stateVersion = "${stateVersion}";
 
-        # Maps your host's hypr-config directory to ~/.config/hypr
-        # Place your hyprland.lua inside ${self}/hosts/${host}/hypr-config/
         xdg.configFile."hypr" = {
           source = "${self}/hosts/${host}/hypr-config";
           recursive = true;
@@ -35,10 +30,9 @@ in
       xwayland-satellite
       jq
       ghostty
-      waybar # Added for Hyprland
-      hyprlock # Added for Hyprland
+      waybar
+      hyprlock
 
-      # nix packages search
       (pkgs.writeShellScriptBin "nix-packages" ''
         pkg=$(nix search nixpkgs ^ --json \
           | jq -r 'to_entries[] | "\(.key | ltrimstr("legacyPackages.x86_64-linux.")) — \(.value.description // "")"' \
@@ -64,7 +58,6 @@ in
         ];
       })
 
-      # zoom web app
       (pkgs.writeShellScriptBin "zoom-web" ''
         chromium --app=https://app.zoom.us/wc
       '')
@@ -85,7 +78,6 @@ in
         ];
       })
 
-      #my fitness pal
       (pkgs.writeShellScriptBin "fitnesspal-web" ''
         chromium --app=https://www.myfitnesspal.com/food/diary
       '')

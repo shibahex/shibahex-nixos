@@ -1,4 +1,3 @@
-# For any nix/system configuration
 {
   host,
   lib,
@@ -41,12 +40,10 @@ in
     dates = lib.mkDefault "weekly";
     options = lib.mkDefault "--delete-older-than 14d";
   };
-  nix.package = pkgs.nix;
-  #nix.package = pkgs.lixPackageSets.stable.lix;
+  nix.package = lib.mkDefault pkgs.nix;
 
-  time.timeZone = timeZone;
-  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = lib.mkDefault timeZone;
+  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
   system.stateVersion = "${stateVersion}";
-  nixpkgs.config.allowUnfree = true;
-
+  nixpkgs.config.allowUnfree = lib.mkDefault true;
 }

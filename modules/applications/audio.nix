@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
-  # For easyeffects, cant add plugins without it.
-  programs.dconf.enable = true;
+  # EasyEffects can't add plugins without dconf
+  programs.dconf.enable = lib.mkDefault true;
 
   environment.systemPackages = with pkgs; [
-    easyeffects # for filers and plugins
-    pavucontrol # manage audio devices
-    spotify # music player
+    easyeffects
+    pavucontrol
+    spotify
   ];
 }

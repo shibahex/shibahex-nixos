@@ -1,29 +1,24 @@
 {
-  config,
+  lib,
   pkgs,
   username,
   ...
 }:
 {
-  # RTKit - grants PipeWire realtime scheduling via DBus
-  security.rtkit.enable = true;
+  security.rtkit.enable = lib.mkDefault true;
 
   services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-    jack.enable = true;
+    enable = lib.mkDefault true;
+    alsa.enable = lib.mkDefault true;
+    alsa.support32Bit = lib.mkDefault true;
+    pulse.enable = lib.mkDefault true;
+    wireplumber.enable = lib.mkDefault true;
+    jack.enable = lib.mkDefault true;
 
-    # --- PipeWire Core: rate + dual-mode quantum ---
     extraConfig.pipewire."10-clock-rate" = {
       "context.properties" = {
-        # Base/fallback rate. Not pinned, so rate-switching stays enabled.
+        # Not pinned, so PipeWire switches to a file's native rate when the device is idle
         "default.clock.rate" = 48000;
-
-        # Bit-perfect hi-fi: play 44.1k / 96k / 192k files at native rate
-        # instead of resampling. PipeWire switches when the device is idle.
         "default.clock.allowed-rates" = [
           44100
           48000
@@ -33,39 +28,31 @@
           192000
         ];
 
-        # The graph runs at the SMALLEST quantum any active client asks for.
-        #   default 1024 -> music + desktop rest here (cheap).
-        #   min 64       -> lets REAPER/JACK pull down to ~128 for monitoring
-        #                   (128 @ 48kHz = ~5.3ms). Closing REAPER relaxes it.
-        #   max 8192     -> idle-buffering headroom.
-        # Quantum changes timing only, never sound quality.
+        # The graph runs at the smallest quantum any client asks for: desktop audio
+        # idles at 1024, REAPER/JACK can pull it down to 64 for low-latency monitoring.
         "default.clock.quantum" = 1024;
         "default.clock.min-quantum" = 64;
         "default.clock.max-quantum" = 8192;
       };
     };
 
-    # --- Pulse resampler: only used when rate-matching isn't possible ---
+    # Only used when rate-matching isn't possible
     extraConfig.pipewire-pulse."10-resample-quality" = {
       "stream.properties" = {
         "resample.quality" = 10; # SoX VHQ
       };
     };
 
-    # --- WirePlumber: Volt 2 (USB 2.0 batch device) ---
+    # Universal Audio Volt 2 (USB 2.0); no effect on machines without it
     wireplumber.extraConfig."10-volt2-alsa" = {
       "monitor.alsa.rules" = [
         {
-          # Verify the exact node name: wpctl status | grep -i volt
           matches = [
             { "node.name" = "~alsa_output.usb-Universal_Audio_Volt*"; }
           ];
           actions.update-props = {
-            # 256 @ 48kHz is the realistic USB 2.0 floor.
-            # Crackle/xruns at low quantum -> raise to 512.
+            # 256 @ 48kHz is the realistic USB 2.0 floor; raise to 512 on xruns
             "api.alsa.period-size" = 256;
-
-            # 32-bit internal processing.
             "audio.format" = "S32LE";
           };
         }
@@ -74,11 +61,8 @@
   };
 
   boot = {
-    # Route IRQ handlers into kernel threads so sound-card IRQs can be
-    # prioritized above other hardware.
+    # Threaded IRQs let rtkit prioritize the sound card's interrupts
     kernelParams = [ "threadirqs" ];
-
-    # pcspkr fires interrupts that compete with audio.
     blacklistedKernelModules = [ "pcspkr" ];
   };
 
@@ -88,7 +72,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    alsa-utils # amidi, aconnect, aplaymidi
-    qpwgraph # visual PipeWire patchbay (audio + MIDI)
+    alsa-utils
+    qpwgraph
   ];
 }

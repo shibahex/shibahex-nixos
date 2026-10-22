@@ -22,13 +22,9 @@ in
       looking-glass-client
     ];
 
-    virtualisation = {
-      libvirtd = {
-        enable = true;
-        qemu = {
-          swtpm.enable = cfg.swtpm;
-        };
-      };
+    virtualisation.libvirtd = {
+      enable = lib.mkDefault true;
+      qemu.swtpm.enable = cfg.swtpm;
     };
 
     users.users."qemu-libvirtd" = {

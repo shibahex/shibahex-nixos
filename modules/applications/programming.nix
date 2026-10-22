@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    lazygit # for committing on github
+    lazygit
     git
     unzip
   ];
 
-  # for Mason LSPs
-  programs.nix-ld.enable = true;
+  # Lets Mason's prebuilt LSP binaries run
+  programs.nix-ld.enable = lib.mkDefault true;
 }

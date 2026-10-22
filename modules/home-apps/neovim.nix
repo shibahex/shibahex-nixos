@@ -16,17 +16,12 @@ in
     pkgs.xclip
     pkgs.ripgrep
     pkgs.git
-    #pkgs.deno
   ];
 
   programs.neovim = {
     viAlias = true;
     vimAlias = true;
   };
-  #   home.file.".config/nvim" = {
-  #     source = neovimConfig;
-  #     recursive = true;
-  #   };
 
   home.activation.cloneNvimConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if [ ! -d "${nvimLocalPath}" ]; then

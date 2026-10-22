@@ -10,12 +10,12 @@ let
 in
 {
   options.vm.guest-services = {
-    enable = mkEnableOption "Enable Virtual Machine Guest Services";
+    enable = mkEnableOption "virtual machine guest services";
   };
 
   config = mkIf cfg.enable {
-    services.qemuGuest.enable = true;
-    services.spice-vdagentd.enable = true;
-    services.spice-webdavd.enable = true;
+    services.qemuGuest.enable = mkDefault true;
+    services.spice-vdagentd.enable = mkDefault true;
+    services.spice-webdavd.enable = mkDefault true;
   };
 }

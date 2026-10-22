@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   xdg.portal = {
-    enable = true;
-    config.common.default = [ "gtk" ];
+    enable = lib.mkDefault true;
+    config.common.default = lib.mkDefault [ "gtk" ];
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-  services.flatpak.enable = true;
+  services.flatpak.enable = lib.mkDefault true;
 }

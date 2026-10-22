@@ -10,7 +10,7 @@ let
 in
 {
   options.drivers.amdgpu = {
-    enable = mkEnableOption "Enable AMD Drivers";
+    enable = mkEnableOption "AMD graphics drivers";
   };
 
   config = mkIf cfg.enable {

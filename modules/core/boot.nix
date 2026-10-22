@@ -1,17 +1,17 @@
-{ pkgs, config, ... }:
-
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   boot = {
-    #nix eval github:NixOS/nixpkgs/nixos-unstable#linuxPackages_zen.kernel.version
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
     kernelModules = [ "v4l2loopback" ];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
-    kernel.sysctl = {
-      "vm.max_map_count" = 2147483642;
-    };
-    loader.systemd-boot.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    # Appimage Support
+    kernel.sysctl."vm.max_map_count" = 2147483642;
+    loader.systemd-boot.enable = lib.mkDefault true;
+    loader.efi.canTouchEfiVariables = lib.mkDefault true;
     binfmt.registrations.appimage = {
       wrapInterpreterInShell = false;
       interpreter = "${pkgs.appimage-run}/bin/appimage-run";
@@ -20,6 +20,5 @@
       mask = "\\xff\\xff\\xff\\xff\\x00\\x00\\x00\\x00\\xff\\xff\\xff";
       magicOrExtension = "\\x7fELF....AI\\x02";
     };
-    #plymouth.enable = true;
   };
 }

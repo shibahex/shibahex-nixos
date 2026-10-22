@@ -1,20 +1,16 @@
 {
   pkgs,
+  lib,
   host,
   options,
   ...
 }:
-# let inherit (import ../../hosts/${host}/variables.nix) hostId;
-# in
 {
   networking = {
-    hostName = "${host}";
-    # hostId = hostId;
-    networkmanager.enable = true;
+    hostName = lib.mkDefault host;
+    networkmanager.enable = lib.mkDefault true;
     timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
-    firewall = {
-      enable = true;
-    };
+    firewall.enable = lib.mkDefault true;
   };
 
   environment.systemPackages = with pkgs; [ networkmanagerapplet ];

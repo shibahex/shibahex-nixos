@@ -1,19 +1,18 @@
-{ self, host, ... }:
+{
+  lib,
+  self,
+  host,
+  ...
+}:
 let
   inherit (import "${self}/hosts/${host}/variables.nix") intelID nvidiaID;
 in
 {
-  imports = [
-    "${self}/modules/drivers"
-  ];
-  # Enable GPU Drivers
-  drivers.amdgpu.enable = false;
-  drivers.nvidia.enable = true;
+  imports = [ "${self}/modules/drivers" ];
+  drivers.nvidia.enable = lib.mkDefault true;
   drivers.nvidia-prime = {
-    enable = true;
-    intelBusID = "${intelID}";
-    nvidiaBusID = "${nvidiaID}";
+    enable = lib.mkDefault true;
+    intelBusID = lib.mkDefault intelID;
+    nvidiaBusID = lib.mkDefault nvidiaID;
   };
-  drivers.intel.enable = false;
-  vm.guest-services.enable = false;
 }

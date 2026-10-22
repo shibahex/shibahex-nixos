@@ -10,38 +10,28 @@ let
 in
 {
   options.drivers.nvidia = {
-    enable = mkEnableOption "Enable Nvidia Drivers";
+    enable = mkEnableOption "Nvidia drivers";
     # Turing (RTX 20) and newer only; Pascal and older need the proprietary module
     open = mkEnableOption "Nvidia open kernel modules";
   };
   config = mkIf cfg.enable {
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = {
-      modesetting.enable = true;
-
-      # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-      powerManagement.enable = false;
-
-      # Fine-grained power management. Turns off GPU when not in use.
-      powerManagement.finegrained = false;
-
+      modesetting.enable = mkDefault true;
+      # Saves VRAM across suspend; can break suspend on some setups
+      powerManagement.enable = mkDefault false;
+      powerManagement.finegrained = mkDefault false;
       open = cfg.open;
-
-      # Enable the Nvidia settings menu,
-      # accessible via `nvidia-settings`.
-      nvidiaSettings = true;
-
-      # select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      nvidiaSettings = mkDefault true;
+      package = mkDefault config.boot.kernelPackages.nvidiaPackages.stable;
     };
     hardware.graphics = {
       enable = true;
-      enable32Bit = true;
+      enable32Bit = mkDefault true;
       extraPackages = with pkgs; [
         nvidia-vaapi-driver
         libvdpau-va-gl
       ];
     };
-
   };
 }

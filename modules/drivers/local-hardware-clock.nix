@@ -10,7 +10,7 @@ let
 in
 {
   options.local.hardware-clock = {
-    enable = mkEnableOption "Change Hardware Clock To Local Time";
+    enable = mkEnableOption "hardware clock in local time";
   };
 
   config = mkIf cfg.enable { time.hardwareClockInLocalTime = true; };

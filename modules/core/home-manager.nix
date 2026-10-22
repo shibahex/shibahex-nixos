@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   inputs,
   username,
   host,
@@ -16,14 +17,14 @@ in
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
-  # Enable fish and Zsh system-wide for vendor completions
-  programs.zsh.enable = true;
-  programs.fish.enable = true;
+  # System-wide so their vendor completions get installed
+  programs.zsh.enable = lib.mkDefault true;
+  programs.fish.enable = lib.mkDefault true;
 
   home-manager = {
-    useUserPackages = true;
-    useGlobalPkgs = false;
-    backupFileExtension = "backup";
+    useUserPackages = lib.mkDefault true;
+    useGlobalPkgs = lib.mkDefault false;
+    backupFileExtension = lib.mkDefault "backup";
     extraSpecialArgs = {
       inherit
         inputs
@@ -45,28 +46,26 @@ in
       );
 
       home = {
-        username = "${username}";
+        inherit username stateVersion;
         homeDirectory = "/home/${username}";
-        stateVersion = "${stateVersion}";
       };
     };
   };
-  users.mutableUsers = true;
+  users.mutableUsers = lib.mkDefault true;
   users.users.${username} = {
     isNormalUser = true;
-    description = "${username}";
+    description = lib.mkDefault username;
     extraGroups = [
       "docker"
-      "libvirtd" # For VirtManager
+      "libvirtd"
       "networkmanager"
-      "kvm" # for gpu passthrough
-      "wheel" # sudo access
+      "kvm"
+      "wheel"
       "input"
       "tty"
     ];
-    # Use configured shell based on defaultShell variable
     shell = shellPackage;
     ignoreShellProgramCheck = true;
   };
-  nix.settings.allowed-users = [ "${username}" ];
+  nix.settings.allowed-users = [ username ];
 }

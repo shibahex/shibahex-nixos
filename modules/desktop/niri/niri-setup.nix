@@ -50,7 +50,6 @@ in
       niri-scratchpad
       jq
 
-      # nix packages search
       (pkgs.writeShellScriptBin "nix-packages" ''
         pkg=$(nix search nixpkgs ^ --json \
           | jq -r 'to_entries[] | "\(.key | ltrimstr("legacyPackages.x86_64-linux.")) — \(.value.description // "")"' \
@@ -76,7 +75,6 @@ in
         ];
       })
 
-      # zoom web app
       (pkgs.writeShellScriptBin "zoom-web" ''
         chromium --app=https://app.zoom.us/wc
       '')
@@ -97,7 +95,6 @@ in
         ];
       })
 
-      #slack
       (pkgs.writeShellScriptBin "slack-web" ''
         chromium --app=https://app.slack.com/client/T03P4BU6M61/C0B7W9C17K3
       '')
@@ -118,7 +115,6 @@ in
         ];
       })
 
-      #my fitness pal
       (pkgs.writeShellScriptBin "fitnesspal-web" ''
         chromium --app=https://www.myfitnesspal.com/food/diary
       '')
@@ -154,7 +150,6 @@ in
         "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
         "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
       };
-      # Explicitly tell the portal system what Niri should use
       niri = {
         default = [
           "gnome"
@@ -165,5 +160,5 @@ in
       };
     };
   };
-  programs.niri.enable = true;
+  programs.niri.enable = lib.mkDefault true;
 }

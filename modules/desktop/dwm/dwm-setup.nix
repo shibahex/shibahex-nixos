@@ -7,7 +7,7 @@
 }:
 {
   services.xserver = {
-    enable = true;
+    enable = lib.mkDefault true;
     windowManager.dwm.enable = true;
   };
 
@@ -15,7 +15,6 @@
     (
       final: prev:
       let
-        # helper to import config files safely
         safeImport =
           path:
           if builtins.pathExists path then
@@ -26,7 +25,6 @@
           else
             { };
 
-        # import all configs
         dwmCfg = safeImport "${self}/hosts/${host}/dwm-config/dwm/config.nix";
         dmenuCfg = safeImport "${self}/hosts/${host}/dwm-config/dmenu/config.nix";
         stCfg = safeImport "${self}/hosts/${host}/dwm-config/st/config.nix";

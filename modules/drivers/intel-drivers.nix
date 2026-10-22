@@ -10,11 +10,10 @@ let
 in
 {
   options.drivers.intel = {
-    enable = mkEnableOption "Enable Intel Graphics Drivers";
+    enable = mkEnableOption "Intel graphics drivers";
   };
 
   config = mkIf cfg.enable {
-    # OpenGL
     hardware.graphics = {
       extraPackages = with pkgs; [
         intel-media-driver
