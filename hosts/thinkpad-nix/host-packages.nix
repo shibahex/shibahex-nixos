@@ -41,6 +41,6 @@
   # for looking glass
   systemd.tmpfiles.rules = [ "f /dev/shm/looking-glass 0660 $USER kvm -" ];
 
-  programs.gamemode.enable = true;
-  virtualisation.docker.enable = true;
+  modules.gaming.enable = true;
+  modules.docker.enable = true;
 }

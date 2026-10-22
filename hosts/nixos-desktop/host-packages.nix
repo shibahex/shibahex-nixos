@@ -24,6 +24,8 @@ in
     swtpm = true;
   };
   modules.performance.enable = true;
+  modules.gaming.enable = true;
+  modules.docker.enable = true;
   drivers.nvidia.open = true; # RTX 3080; the vfio'd 1080 Ti doesn't use this driver
   environment.systemPackages = with pkgs; [
     # Add host-specific packages here
@@ -112,9 +114,6 @@ in
   # ffmpegthumbnailer and tumbler for mp4 thumbnails
   services.tumbler.enable = true;
 
-  programs.gamemode.enable = true;
-  virtualisation.docker.enable = true;
-  hardware.nvidia-container-toolkit.enable = true;
   # USB Yubikey to VM. (Can be insecure if public)
   systemd.services.usbipd = {
     enable = true;

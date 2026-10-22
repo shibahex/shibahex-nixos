@@ -8,6 +8,7 @@
     ./nix-system.nix
     ./network.nix
     ./virtualisation.nix
+    ./docker.nix
     ./performance.nix
   ];
 }

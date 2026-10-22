@@ -59,9 +59,9 @@
   # ffmpegthumbnailer and tumbler for mp4 thumbnails
   services.tumbler.enable = true;
 
-  programs.gamemode.enable = true;
+  modules.gaming.enable = true;
+  modules.docker.enable = true;
   modules.performance.enable = true;
-  virtualisation.docker.enable = true;
 
   hardware.bluetooth = {
     enable = true;

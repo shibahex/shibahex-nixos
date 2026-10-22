@@ -5,6 +5,7 @@
     ./packages.nix
     ./programming.nix
     ./audio.nix
+    ./gaming.nix
     ./ghostty/ghostty.nix
   ];
 }

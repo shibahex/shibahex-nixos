@@ -56,7 +56,6 @@ in
     isNormalUser = true;
     description = lib.mkDefault username;
     extraGroups = [
-      "docker"
       "libvirtd"
       "networkmanager"
       "kvm"

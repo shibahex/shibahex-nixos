@@ -1,7 +1,5 @@
 { lib, pkgs, ... }:
 {
-  programs.steam.enable = lib.mkDefault true;
-
   environment.systemPackages = with pkgs; [
     (ungoogled-chromium.override {
       commandLineArgs = [
