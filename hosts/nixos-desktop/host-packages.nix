@@ -1,8 +1,7 @@
 {
-  config,
   pkgs,
   inputs,
-  self,
+  username,
   ...
 }:
 let
@@ -19,26 +18,15 @@ let
   };
 in
 {
-  modules.virtualisation = {
-    enable = true;
-    swtpm = true;
-  };
-  modules.performance.enable = true;
-  modules.gaming.enable = true;
-  modules.docker.enable = true;
-  drivers.nvidia.open = true; # RTX 3080; the vfio'd 1080 Ti doesn't use this driver
   environment.systemPackages = with pkgs; [
-    # Add host-specific packages here
     # anki-connect: lets the health dashboard and its Anki MCP reach the collection
     (anki.withAddons [
       ankiAddons.review-heatmap
       ankiAddons.anki-connect
     ])
     timeshift
-    # For timing tasks and productivity
     timer
     btop
-    looking-glass-client
     freerdp
     mangohud
     qsynth
@@ -46,38 +34,22 @@ in
     alacritty
     tmux
     openvpn
-    # Discord
     (vesktop.override { withSystemVencord = false; })
     grayjay
 
-    #Yubikey
-    yubikey-manager
-    linuxPackages.usbip
-
     fastfetch
-
-    thunar
-    ffmpegthumbnailer
 
     rpcs3
 
-    # Recording (make OBS see nvidiaPackages)
-    (pkgs.writeShellScriptBin "obs" ''
-      export LD_LIBRARY_PATH=${config.boot.kernelPackages.nvidiaPackages.stable}/lib:$LD_LIBRARY_PATH
-      exec ${pkgs.obs-studio}/bin/obs "$@"
-    '')
-
-    # Playerctl for MPRIS (lyrics)
+    # MPRIS control, used for lyrics
     playerctl
 
-    # Way to find PIDs and see what taking RAM
     pstree
 
     obsidian
     taskwarrior3
     taskwarrior-tui
 
-    #keyboard
     via
 
     yt-dlp
@@ -86,14 +58,13 @@ in
 
     pegasus-frontend
 
-    # VPN
     wireguard-tools
     claude-code
     repomix
   ];
 
   programs.wireshark.enable = true;
-  users.users.shiba = {
+  users.users.${username} = {
     extraGroups = [
       "wireshark"
       "dialout"
@@ -111,32 +82,12 @@ in
 
   services.playerctld.enable = true;
 
-  # ffmpegthumbnailer and tumbler for mp4 thumbnails
-  services.tumbler.enable = true;
-
-  # USB Yubikey to VM. (Can be insecure if public)
-  systemd.services.usbipd = {
-    enable = true;
-    description = "USB/IP Daemon";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      ExecStart = "${pkgs.linuxPackages.usbip}/bin/usbipd";
-      Restart = "on-failure";
-    };
-  };
-  boot.kernelModules = [
-    "usbip-core"
-    "usbip-host"
-  ];
-
   imports = [
-    # Ram Categories
     ./configuration
-    # Art software
     ./art-software.nix
   ];
 
-  # Try to fix niri freezing due to GPU drivers
+  # Fixes niri freezing on the Nvidia driver
   boot.extraModprobeConfig = ''
     options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_UsePageAttributeTable=1
   '';

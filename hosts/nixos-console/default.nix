@@ -2,10 +2,9 @@
 {
   imports = [
     ./hardware.nix
+    ./variables.nix
     ./host-packages.nix
     ./services
     ./configuration
   ];
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.flake = "git+https://github.com/shibahex/nixos-config#nixos-console";
 }

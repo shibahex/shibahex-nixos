@@ -1,13 +1,6 @@
-{
-  host,
-  pkgs,
-  self,
-  ...
-}:
+{ osConfig, ... }:
 let
-  variables = import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; };
-  monitorRules = variables.monitorRules or [ ];
-
+  monitorRules = osConfig.machine.monitorRules;
 in
 {
   services.grobi = {

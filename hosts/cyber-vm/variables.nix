@@ -1,16 +1,16 @@
-{ pkgs }:
+{ ... }:
 {
-  hostName = "cyber-vm";
-  timeZone = "America/New_York";
-  hostId = "5ab03f50";
-  defaultShell = "nushell";
+  machine.shell = "nushell";
 
-  # No monitors on VM
-  mainMonitor = null;
-  sideMonitorRight = null;
-  sideMonitorLeft = null;
-  monitorRules = [ ];
-  desktops = [
-    "dwm"
-  ];
+  modules = {
+    desktop.dwm.enable = true;
+    yubikey = {
+      enable = true;
+      usbip = "client";
+    };
+    performance = {
+      enable = true;
+      scheduler = null;
+    };
+  };
 }

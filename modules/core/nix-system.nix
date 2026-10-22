@@ -1,14 +1,10 @@
 {
-  host,
+  config,
   lib,
   pkgs,
   stateVersion,
-  self,
   ...
 }:
-let
-  inherit (import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; }) timeZone;
-in
 {
   nix = {
     settings = {
@@ -42,7 +38,7 @@ in
   };
   nix.package = lib.mkDefault pkgs.nix;
 
-  time.timeZone = lib.mkDefault timeZone;
+  time.timeZone = lib.mkDefault config.machine.timeZone;
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
   system.stateVersion = "${stateVersion}";
   nixpkgs.config.allowUnfree = lib.mkDefault true;

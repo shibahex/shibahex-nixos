@@ -1,23 +1,24 @@
-{ pkgs }:
-let
-  mainMonitor = "DP-2";
-  sideMonitorRight = null;
-  sideMonitorLeft = null;
-in
+{ ... }:
 {
-  # Host
-  hostName = "nixos-console";
-  timeZone = "America/New_York";
-  hostId = "5ab03f50";
-  defaultShell = "nushell";
-  desktops = [
-    "dwm"
-    "niri"
-    "bigscreen"
-  ];
+  machine = {
+    shell = "nushell";
+    monitors.main = "DP-2";
+  };
 
-  # Monitors
-  mainMonitor = mainMonitor;
-  sideMonitorRight = sideMonitorRight;
-  sideMonitorLeft = sideMonitorLeft;
+  modules = {
+    desktop = {
+      dwm.enable = true;
+      niri.enable = true;
+      bigscreen.enable = true;
+    };
+    kiosk = {
+      enable = true;
+      session = "plasma-bigscreen-wayland";
+    };
+    recording.enable = true;
+    fileManager.enable = true;
+    gaming.enable = true;
+    docker.enable = true;
+    performance.enable = true;
+  };
 }

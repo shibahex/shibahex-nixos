@@ -1,22 +1,23 @@
-{ pkgs }:
-let
-  mainMonitor = "eDP-1";
-  sideMonitorRight = null;
-  sideMonitorLeft = null;
-in
+{ ... }:
 {
-  # Host
-  hostName = "thinkpad-nix";
-  timeZone = "America/New_York";
-  hostId = "5ab03f50";
-  defaultShell = "nushell";
-  desktops = [
-    "dwm"
-    "niri"
-  ];
+  machine = {
+    shell = "nushell";
+    monitors.main = "eDP-1";
+  };
 
-  # Monitors
-  mainMonitor = mainMonitor;
-  sideMonitorRight = sideMonitorRight;
-  sideMonitorLeft = sideMonitorLeft;
+  modules = {
+    desktop = {
+      dwm.enable = true;
+      niri.enable = true;
+    };
+    virtualisation.lookingGlass = true;
+    yubikey = {
+      enable = true;
+      usbip = "client";
+    };
+    recording.enable = true;
+    fileManager.enable = true;
+    gaming.enable = true;
+    docker.enable = true;
+  };
 }

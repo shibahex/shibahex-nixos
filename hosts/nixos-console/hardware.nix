@@ -106,32 +106,4 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  stylix.targets.plymouth.enable = false;
-  # boot screen
-  boot = {
-    plymouth = {
-      enable = true;
-    };
-
-    initrd.systemd.enable = true;
-    # Enable "Silent boot"
-    consoleLogLevel = 3;
-    initrd.verbose = false;
-    kernelParams = [
-      "quiet"
-      "splash"
-      "rd.udev.log_level=3"
-      "rd.systemd.show_status=auto"
-    ];
-
-    # Hide the OS choice for bootloaders.
-    # It's still possible to open the bootloader list by pressing any key
-    # It will just not appear on screen unless a key is pressed
-    loader.timeout = 0;
-  };
-
-  # auto login
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "cuda";
-  services.displayManager.defaultSession = "plasma-bigscreen-wayland";
 }

@@ -1,11 +1,10 @@
 {
   pkgs,
   lib,
-  variables,
+  monitors,
   host,
   self,
 }:
-assert variables.mainMonitor != null -> builtins.isString variables.mainMonitor;
 let
   workspace-file =
     if builtins.pathExists "${self}/hosts/${host}/niri-config/workspaces.nix" then
@@ -26,9 +25,9 @@ let
       };
 
   ws = workspace-file.workspaces;
-  mainMon = if variables.mainMonitor != null then variables.mainMonitor else "unknown";
-  sideRight = variables.sideMonitorRight;
-  sideLeft = variables.sideMonitorLeft;
+  mainMon = if monitors.main != null then monitors.main else "unknown";
+  sideRight = monitors.right;
+  sideLeft = monitors.left;
 
   mkWorkspaces =
     names: output:

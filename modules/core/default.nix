@@ -9,6 +9,9 @@
     ./network.nix
     ./virtualisation.nix
     ./docker.nix
+    ./kiosk.nix
+    ./machine.nix
+    ./yubikey.nix
     ./performance.nix
   ];
 }

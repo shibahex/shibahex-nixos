@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   inputs,
@@ -9,11 +10,6 @@
   self,
   ...
 }:
-let
-  variables = import "${self}/hosts/${host}/variables.nix" { pkgs = pkgs; };
-  defaultShell = variables.defaultShell or "zsh";
-  shellPackage = if defaultShell == "nushell" then pkgs.nushell else pkgs.zsh;
-in
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
@@ -63,7 +59,7 @@ in
       "input"
       "tty"
     ];
-    shell = shellPackage;
+    shell = if config.machine.shell == "nushell" then pkgs.nushell else pkgs.zsh;
     ignoreShellProgramCheck = true;
   };
   nix.settings.allowed-users = [ username ];

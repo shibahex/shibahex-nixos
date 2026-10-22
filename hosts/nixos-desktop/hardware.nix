@@ -5,19 +5,12 @@
   pkgs,
   ...
 }:
-let
-  variables = import ./variables.nix { pkgs = pkgs; };
-in
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # ============================================================
   # KERNEL
   # ============================================================
-  boot.kernelParams = [
-    "iommu=pt"
-    "vfio-pci.ids=${variables.vfioIds}"
-  ];
   boot.blacklistedKernelModules = [ "nouveau" ]; # Let nvidia take over
   boot.initrd.availableKernelModules = [
     "nvme"

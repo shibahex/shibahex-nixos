@@ -6,11 +6,11 @@
 }:
 
 let
-  cfg = config.plasmaBigscreen;
+  cfg = config.modules.desktop.bigscreen;
   inherit (pkgs.kdePackages.plasma) plasma-bigscreen;
 in
 {
-  options.plasmaBigscreen = {
+  options.modules.desktop.bigscreen = {
     enable = lib.mkEnableOption "Plasma Bigscreen TV shell" // {
       description = "Installs kdePackages.plasma.plasma-bigscreen and registers its plasma-bigscreen-wayland session via services.displayManager.sessionPackages.";
     };
