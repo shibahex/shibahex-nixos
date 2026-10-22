@@ -2,6 +2,7 @@
 {
   imports = [
     ./easyeffects.nix
+    ./gtk.nix
     ./monitors.nix
     ./neovim.nix
     ./nixpkgsconf.nix
