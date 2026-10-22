@@ -5,6 +5,6 @@ in
 {
   services.grobi = {
     enable = monitorRules != [ ];
-    rules = monitorRules;
+    settings.rules = monitorRules;
   };
 }

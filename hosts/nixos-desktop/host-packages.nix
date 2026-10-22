@@ -97,9 +97,10 @@ in
   # Avahi for network discovery (Moonlight clients find Sunshine via mDNS)
   services.avahi = {
     enable = true;
-    publish = {
-      enable = true;
-      userServices = true;
+    settings.publish = {
+      "disable-publishing" = false;
+      disable-user-service-publishing = false;
+      publish-addresses = true;
     };
   };
 

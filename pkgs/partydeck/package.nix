@@ -20,11 +20,22 @@
 , symlinkJoin
 , # build inputs - gamescope-kbm
   pipewire
-, xorg
+, libx11
+, libxcb
 , wayland
 , wayland-protocols
 , vulkan-loader
 , vulkan-headers
+, libxcomposite
+, libxcursor
+, libxdamage
+, libxext
+, libxi
+, libxmu
+, libxrender
+, libxres
+, libxtst
+, libxxf86vm
 , libavif
 , libdrm
 , libei
@@ -39,6 +50,13 @@
 , luajit
 , seatd
 , xwayland
+, libxcb-wm
+, libxcb-image
+, libxcb-keysyms
+, libxcb-render-util
+, libxcb-cursor
+, libxcb-errors
+, libxrandr
 , # build inputs - partydeck
   libarchive
 , openssl
@@ -122,22 +140,22 @@ let
     buildInputs = [
       pipewire
       hwdata
-      xorg.libX11
-      xorg.libxcb
+      libx11
+      libxcb
       wayland
       wayland-protocols
       vulkan-loader
       vulkan-headers
-      xorg.libXcomposite
-      xorg.libXcursor
-      xorg.libXdamage
-      xorg.libXext
-      xorg.libXi
-      xorg.libXmu
-      xorg.libXrender
-      xorg.libXres
-      xorg.libXtst
-      xorg.libXxf86vm
+      libxcomposite
+      libxcursor
+      libxdamage
+      libxext
+      libxi
+      libxmu
+      libxrender
+      libxres
+      libxtst
+      libxxf86vm
       libavif
       libdrm
       libei
@@ -152,12 +170,12 @@ let
       luajit
       seatd
       xwayland
-      xorg.xcbutilwm
-      xorg.xcbutilimage
-      xorg.xcbutilkeysyms
-      xorg.xcbutilrenderutil
-      xorg.xcbutilcursor
-      xorg.xcbutilerrors
+      libxcb-wm
+      libxcb-image
+      libxcb-keysyms
+      libxcb-render-util
+      libxcb-cursor
+      libxcb-errors
     ];
 
     mesonFlags = [
@@ -207,11 +225,11 @@ let
       libGL
       libxkbcommon
       wayland
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXrandr
-      xorg.libXi
-      xorg.libxcb
+      libx11
+      libxcursor
+      libxrandr
+      libxi
+      libxcb
       SDL2
       fontconfig
       freetype
@@ -261,10 +279,10 @@ let
             libGL
             vulkan-loader
             wayland
-            xorg.libX11
-            xorg.libXcursor
-            xorg.libXrandr
-            xorg.libXi
+            libx11
+            libxcursor
+            libxrandr
+            libxi
           ]
         } \
         --set-default PARTYDECK_SKIP_UMU_UPDATE "1"
