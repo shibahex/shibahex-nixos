@@ -13,5 +13,7 @@
     firewall.enable = lib.mkDefault true;
   };
 
+  services.openssh.enable = lib.mkDefault true;
+
   environment.systemPackages = with pkgs; [ networkmanagerapplet ];
 }
