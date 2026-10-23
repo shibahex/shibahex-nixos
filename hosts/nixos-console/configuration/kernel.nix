@@ -13,14 +13,6 @@
           kmodigest $out/lib/modules/${prev.kernel.modDirVersion}/kernel/drivers/xpad-noone/xpad-noone.ko
         '';
       });
-
-      # Kernel's `dev` output now ships System.map, so kbuild's modules_install
-      # runs depmod for out-of-tree modules too; v4l2loopback's own modules.alias
-      # then collides with the kernel's when NixOS merges them (nixpkgs#576406).
-      # DEPMOD=true no-ops that depmod call; the final aggregate depmod handles it.
-      v4l2loopback = prev.v4l2loopback.overrideAttrs (old: {
-        makeFlags = (old.makeFlags or [ ]) ++ [ "DEPMOD=true" ];
-      });
     }
   );
 }
