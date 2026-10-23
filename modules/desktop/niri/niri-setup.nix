@@ -32,9 +32,8 @@ let
   };
   idleTimeouts = screenOffStage ++ lockStage ++ hibernateStage;
   idleEnable = idleTimeouts != [ ];
-  idleEvents = lib.optional (pm.hibernate.enable && pm.hibernate.lock.enable) {
-    event = "before-sleep";
-    command = "${pkgs.swaylock}/bin/swaylock -f";
+  idleEvents = lib.optionalAttrs (pm.hibernate.enable && pm.hibernate.lock.enable) {
+    before-sleep = "${pkgs.swaylock}/bin/swaylock -f";
   };
   niri-scratchpad = inputs.niri-scratchpad-flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
   dynamic-workspace = lib.optionalAttrs (monitors.main != null) (

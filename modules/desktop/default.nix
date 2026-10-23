@@ -21,10 +21,10 @@ in
     oxwm.enable = mkDesktop "oxwm";
     hyprland.enable = mkDesktop "Hyprland";
   };
-
   config = {
     stylix.enable = lib.mkDefault true;
     stylix.base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/default-dark.yaml";
+    home-manager.sharedModules = [ { stylix.targets.rofi.enable = false; } ];
     services.displayManager.ly.enable = lib.mkDefault true;
   };
 }

@@ -7,6 +7,7 @@
   '';
   programs.nushell = {
     enable = true;
+    loadSessionVariables = true;
     environmentVariables = {
       EDITOR = lib.mkDefault "nvim";
     };
