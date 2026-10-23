@@ -59,6 +59,9 @@
     { device = "/dev/mapper/luks-dd67d449-3478-460e-acc7-4890531c37d7"; }
   ];
 
+  # Needed for hibernate/suspend-then-hibernate to find the resume image.
+  boot.resumeDevice = "/dev/mapper/luks-dd67d449-3478-460e-acc7-4890531c37d7";
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

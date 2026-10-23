@@ -6,6 +6,60 @@
   self,
   ...
 }:
+let
+  pm = config.modules.powerManagement;
+
+  # X11 has no idle-triggered suspend of its own; this mirrors niri's
+  # swayidle timeouts so an unattended DWM session blanks, locks, and
+  # (optionally) sleeps instead of just burning battery. Each enabled
+  # feature contributes one stage, keyed by the absolute idle time (in
+  # seconds) it should fire at; stages are independent and may come from
+  # any combination of screenOff/hibernate.
+  screenOffStage = lib.optional pm.screenOff.enable {
+    time = pm.screenOff.timeout;
+    cmd = "${pkgs.xset}/bin/xset dpms force off";
+    cancel = "${pkgs.xset}/bin/xset dpms force on";
+  };
+  lockStage = lib.optional (pm.hibernate.enable && pm.hibernate.lock.enable) {
+    time = pm.hibernate.lock.timeout;
+    cmd = "${pkgs.slock}/bin/slock & ${pkgs.xset}/bin/xset dpms force off";
+    cancel = "";
+  };
+  hibernateStage = lib.optional pm.hibernate.enable {
+    time = pm.hibernate.idleTimeout;
+    cmd = "${pkgs.systemd}/bin/systemctl suspend-then-hibernate";
+    cancel = "";
+  };
+  stages = lib.sort (a: b: a.time < b.time) (screenOffStage ++ lockStage ++ hibernateStage);
+  idleEnable = stages != [ ];
+
+  # xidlehook's --timer durations are chained: each one counts from when
+  # the previous timer fired, not from the start of idle. Convert our
+  # absolute per-stage times into those deltas.
+  chainedStages =
+    let
+      go =
+        prevTime: xs:
+        if xs == [ ] then
+          [ ]
+        else
+          let
+            s = builtins.head xs;
+            rest = builtins.tail xs;
+          in
+          [ (s // { delta = s.time - prevTime; }) ] ++ go s.time rest;
+    in
+    go 0 stages;
+
+  idleExec = ''
+    ${pkgs.xidlehook}/bin/xidlehook \
+      --not-when-audio \
+      --not-when-fullscreen \
+      ${lib.concatMapStringsSep " \\\n      " (
+        s: ''--timer ${toString s.delta} "${s.cmd}" "${s.cancel}"''
+      ) chainedStages}
+  '';
+in
 {
   config = lib.mkIf config.modules.desktop.dwm.enable {
     services.xserver = {
@@ -66,13 +120,20 @@
       )
     ];
 
-    environment.systemPackages = with pkgs; [
-      dwm
-      dmenu
-      st
-      slstatus
-      xinit
-    ];
+    environment.systemPackages =
+      with pkgs;
+      [
+        dwm
+        dmenu
+        st
+        slstatus
+        xinit
+      ]
+      ++ lib.optionals idleEnable [
+        xidlehook
+        xset
+      ]
+      ++ lib.optional (lockStage != [ ]) slock;
 
     systemd.user.services.slstatus = {
       description = "slstatus - suckless status monitor";
@@ -82,6 +143,19 @@
 
       serviceConfig = {
         ExecStart = "${pkgs.slstatus}/bin/slstatus";
+        Restart = "on-failure";
+        RestartSec = 3;
+      };
+    };
+
+    systemd.user.services.xidlehook = lib.mkIf idleEnable {
+      description = "xidlehook - idle-triggered screen off / lock / suspend for DWM";
+      after = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
+
+      serviceConfig = {
+        ExecStart = idleExec;
         Restart = "on-failure";
         RestartSec = 3;
       };

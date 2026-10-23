@@ -11,6 +11,31 @@
 }:
 let
   inherit (config.machine) monitors;
+  pm = config.modules.powerManagement;
+
+  # Mirrors the dwm session's xidlehook stages, but swayidle's `timeout`
+  # entries are each independent and absolute (seconds of idle from the
+  # last activity), unlike xidlehook's chained --timer durations — so no
+  # delta conversion is needed here, every stage just uses its own time.
+  screenOffStage = lib.optional pm.screenOff.enable {
+    timeout = pm.screenOff.timeout;
+    command = "${pkgs.niri}/bin/niri msg action power-off-monitors";
+    resumeCommand = "${pkgs.niri}/bin/niri msg action power-on-monitors";
+  };
+  lockStage = lib.optional (pm.hibernate.enable && pm.hibernate.lock.enable) {
+    timeout = pm.hibernate.lock.timeout;
+    command = "${pkgs.swaylock}/bin/swaylock -f; ${pkgs.niri}/bin/niri msg action power-off-monitors";
+  };
+  hibernateStage = lib.optional pm.hibernate.enable {
+    timeout = pm.hibernate.idleTimeout;
+    command = "${pkgs.systemd}/bin/systemctl suspend-then-hibernate";
+  };
+  idleTimeouts = screenOffStage ++ lockStage ++ hibernateStage;
+  idleEnable = idleTimeouts != [ ];
+  idleEvents = lib.optional (pm.hibernate.enable && pm.hibernate.lock.enable) {
+    event = "before-sleep";
+    command = "${pkgs.swaylock}/bin/swaylock -f";
+  };
   niri-scratchpad = inputs.niri-scratchpad-flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
   dynamic-workspace = lib.optionalAttrs (monitors.main != null) (
     import ./niri-scratchpad.nix {
@@ -26,20 +51,27 @@ let
 in
 {
   config = lib.mkIf config.modules.desktop.niri.enable {
-    home-manager.users.${username} =
-      lib.mkIf (builtins.pathExists "${self}/hosts/${host}/niri-config")
-        {
-          home.stateVersion = "${stateVersion}";
-          xdg.configFile."niri" = {
-            source = "${self}/hosts/${host}/niri-config";
-            recursive = true;
-          };
-          xdg.configFile."niri/configs/workspaces.kdl" = lib.mkForce (
-            lib.mkIf (dynamic-workspace ? workspacesKdl) {
-              source = dynamic-workspace.workspacesKdl;
-            }
-          );
+    home-manager.users.${username} = lib.mkMerge [
+      (lib.mkIf (builtins.pathExists "${self}/hosts/${host}/niri-config") {
+        home.stateVersion = "${stateVersion}";
+        xdg.configFile."niri" = {
+          source = "${self}/hosts/${host}/niri-config";
+          recursive = true;
         };
+        xdg.configFile."niri/configs/workspaces.kdl" = lib.mkForce (
+          lib.mkIf (dynamic-workspace ? workspacesKdl) {
+            source = dynamic-workspace.workspacesKdl;
+          }
+        );
+      })
+      (lib.mkIf idleEnable {
+        services.swayidle = {
+          enable = true;
+          timeouts = idleTimeouts;
+          events = idleEvents;
+        };
+      })
+    ];
     environment.systemPackages =
       (with pkgs; [
         # noctalia-shell: temporarily disabled, fails to build against the

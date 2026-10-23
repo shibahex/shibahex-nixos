@@ -20,5 +20,16 @@
     gaming.enable = true;
     docker.enable = true;
     performance.enable = true;
+    powerManagement = {
+      screenOff = {
+        enable = true;
+        timeout = 300; # 5 min: turn the HDMI output off
+      };
+      hibernate = {
+        enable = true;
+        idleTimeout = 1200; # 20 min: suspend-then-hibernate
+        lock.enable = false; # kiosk session, no lock screen to protect
+      };
+    };
   };
 }

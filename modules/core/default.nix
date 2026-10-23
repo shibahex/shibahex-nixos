@@ -13,5 +13,6 @@
     ./machine.nix
     ./yubikey.nix
     ./performance.nix
+    ./power-management.nix
   ];
 }

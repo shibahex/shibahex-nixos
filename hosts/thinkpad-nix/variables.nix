@@ -19,5 +19,6 @@
     fileManager.enable = true;
     gaming.enable = true;
     docker.enable = true;
+    powerManagement.hibernate.enable = true;
   };
 }

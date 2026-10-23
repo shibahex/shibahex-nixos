@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
   environment.systemPackages = with pkgs; [
     (anki.withAddons [ ankiAddons.review-heatmap ])
@@ -17,5 +17,10 @@
     fastfetch
     alacritty
 
+    blender
   ];
+
+  virtualisation.vmware.host.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+  users.users.${username}.extraGroups = [ "vboxusers" ];
 }
