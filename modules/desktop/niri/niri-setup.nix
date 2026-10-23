@@ -74,8 +74,8 @@ in
     ];
     environment.systemPackages =
       (with pkgs; [
-        # noctalia-shell: temporarily disabled, fails to build against the
-        # Qt 6.12 bump (nixpkgs noctalia-dev/noctalia#4761, unfixed upstream)
+        # Pinned to an older nixpkgs in flake.nix (Qt 6.12 build failure)
+        noctalia-shell
         fuzzel
         swaylock
         wl-clipboard

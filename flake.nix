@@ -2,6 +2,9 @@
   description = "ShibaHex Nix (File format based on Don OS)";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Last nixpkgs on Qt 6.11; noctalia-shell fails to build against Qt 6.12
+    # (noctalia-dev/noctalia#4761). Drop this once upstream is fixed.
+    nixpkgs-noctalia.url = "github:nixos/nixpkgs/6774f7bc253789b113a4f39285dc0fa100abeacc";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,8 +41,9 @@
       system = "x86_64-linux";
       localPackagesOverlay = final: prev: {
         partyDeck = final.callPackage ./pkgs/partydeck/package.nix { };
-        # Workarounds: these fail to build with GCC 16
-        breakpad = prev.breakpad.override { stdenv = prev.gcc14Stdenv; };
+        # Pinned to the Qt 6.11 nixpkgs, see the nixpkgs-noctalia input
+        noctalia-shell = inputs.nixpkgs-noctalia.legacyPackages.${system}.noctalia-shell;
+        # Workaround: fails to build with GCC 16
         pegasus-frontend = prev.pegasus-frontend.override { stdenv = prev.gcc14Stdenv; };
         # Workaround: aggregator now requires a .ko.cer per out-of-tree module
         # (virtualbox-modules, vmware-modules, ...) that most don't produce,

@@ -189,11 +189,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792605213,
-        "narHash": "sha256-J73EBU30r2hXvHCcBtaigQDAIu/GGPYk1nc6P9THcmg=",
+        "lastModified": 1792773325,
+        "narHash": "sha256-bvba9Lts8r8d15MdIDMwJGDxLtJiTlasKtAZyhTDzXk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ab97a5d09e0f2aa7339cfd35ec5824fd6653e27c",
+        "rev": "6d9655f76459099b0db2f57b13563729c7022aa7",
         "type": "github"
       },
       "original": {
@@ -256,6 +256,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-noctalia": {
+      "locked": {
+        "lastModified": 1790046670,
+        "narHash": "sha256-MYiI+CzL0tuWgRPjGsKCDHqYs2T3OzMlMQWOYWG0qso=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "6774f7bc253789b113a4f39285dc0fa100abeacc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "6774f7bc253789b113a4f39285dc0fa100abeacc",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -289,7 +305,7 @@
       },
       "locked": {
         "lastModified": 1779560513,
-        "narHash": "sha256-oFRE5wUdYIsy0nrUQFk4A6HreuikAACJlr87NkxcI1I=",
+        "narHash": "sha256-jruehPdHXqgGUtk2DUEUv4ecb/+bYeEGbuxPSN45OHI=",
         "owner": "cseelhoff",
         "repo": "partydeck",
         "rev": "431de9730046f406c93485191b9e92c144a31b0a",
@@ -328,6 +344,7 @@
         "lyricsmpris-rust": "lyricsmpris-rust",
         "niri-scratchpad-flake": "niri-scratchpad-flake",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-noctalia": "nixpkgs-noctalia",
         "partydeckfork": "partydeckfork",
         "reaper-flake": "reaper-flake",
         "stylix": "stylix"
