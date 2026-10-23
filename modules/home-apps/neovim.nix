@@ -6,7 +6,7 @@
 }:
 let
   nvimRepoUrl = "https://github.com/shibahex/LazyVim-starter.git";
-  nvimRepoRev = "7f3b12efa9a199d9e44aabdac01e59c0ef82eef8";
+  nvimRepoRev = "44c6601901d5722a9fbf63228cc83a820a2e6d6b";
   nvimLocalPath = "${config.home.homeDirectory}/Documents/LazyVim-starter";
 in
 {
