@@ -47,6 +47,14 @@
       };
     };
   };
+  # Wait for every mount inside the home dir (e.g. ~/Documents on another disk),
+  # not just /home itself, so activation never sees an empty mountpoint.
+  systemd.services."home-manager-${username}".unitConfig.RequiresMountsFor =
+    let
+      home = "/home/${username}";
+    in
+    lib.filter (p: lib.hasPrefix "${home}/" p) (lib.attrNames config.fileSystems);
+
   users.mutableUsers = lib.mkDefault true;
   users.users.${username} = {
     isNormalUser = true;
