@@ -45,17 +45,6 @@
         noctalia-shell = inputs.nixpkgs-noctalia.legacyPackages.${system}.noctalia-shell;
         # Workaround: fails to build with GCC 16
         pegasus-frontend = prev.pegasus-frontend.override { stdenv = prev.gcc14Stdenv; };
-        # Workaround: aggregator now requires a .ko.cer per out-of-tree module
-        # (virtualbox-modules, vmware-modules, ...) that most don't produce,
-        # aborting the whole modules closure. nixpkgs#575192, still open.
-        aggregateModules =
-          modules:
-          (prev.aggregateModules modules).overrideAttrs (old: {
-            postBuild = prev.lib.replaceStrings
-              [ ''| xargs -d'\n' cat >> modules.cer'' ]
-              [ ''| xargs -d'\n' cat >> modules.cer || true'' ]
-              old.postBuild;
-          });
       };
       mkHost =
         {
