@@ -113,6 +113,4 @@ in
   boot.extraModprobeConfig = ''
     options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_UsePageAttributeTable=1
   '';
-
-  networking.hosts."10.1.129.5" = [ "health.adams.internal" ];
 }
