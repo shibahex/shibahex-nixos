@@ -141,6 +141,8 @@ in
       partOf = [ "graphical-session.target" ];
       wantedBy = [ "graphical-session.target" ];
 
+      unitConfig.ConditionEnvironment = "!WAYLAND_DISPLAY";
+
       serviceConfig = {
         ExecStart = "${pkgs.slstatus}/bin/slstatus";
         Restart = "on-failure";
@@ -153,6 +155,11 @@ in
       after = [ "graphical-session.target" ];
       partOf = [ "graphical-session.target" ];
       wantedBy = [ "graphical-session.target" ];
+
+      # X11-only: under a Wayland session (niri) it segfaults in a restart loop
+      unitConfig.ConditionEnvironment = "!WAYLAND_DISPLAY";
+      startLimitBurst = 5;
+      startLimitIntervalSec = 60;
 
       serviceConfig = {
         ExecStart = idleExec;
