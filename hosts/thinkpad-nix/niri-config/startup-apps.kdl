@@ -1,5 +1,3 @@
-spawn-at-startup "vesktop"
-spawn-at-startup "pavucontrol"
 spawn-at-startup "easyeffects"
 spawn-at-startup "1password"
 spawn-at-startup "sh" "-c" "pkill -f [n]octalia-shell; QT_QUICK_BACKEND=software noctalia-shell"
