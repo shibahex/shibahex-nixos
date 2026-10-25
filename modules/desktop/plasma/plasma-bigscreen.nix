@@ -1,9 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  username,
-  ...
+{ config
+, lib
+, pkgs
+, username
+, ...
 }:
 
 let
@@ -22,20 +21,29 @@ let
   # ::Sleep and SleepMode::SuspendThenHibernate enum values — see
   # kdePackages.powerdevil's daemon/powerdevilenums.h.
   powerdevilSettings =
-    lib.optionalAttrs pm.screenOff.enable {
-      "AC][Display" = {
-        TurnOffDisplayWhenIdle = true;
-        TurnOffDisplayIdleTimeoutSec = pm.screenOff.timeout;
-        DimDisplayWhenIdle = false;
-        LockBeforeTurnOffDisplay = pm.hibernate.enable && pm.hibernate.lock.enable;
-      };
-    }
-    // lib.optionalAttrs pm.hibernate.enable {
-      "AC][SuspendAndShutdown" = {
-        AutoSuspendAction = 1; # PowerButtonAction::Sleep
-        AutoSuspendIdleTimeoutSec = pm.hibernate.idleTimeout;
-        SleepMode = 3; # SleepMode::SuspendThenHibernate
-      };
+    lib.optionalAttrs pm.screenOff.enable
+      {
+        "AC][Display" = {
+          TurnOffDisplayWhenIdle = true;
+          TurnOffDisplayIdleTimeoutSec = pm.screenOff.timeout;
+          DimDisplayWhenIdle = false;
+          LockBeforeTurnOffDisplay = pm.hibernate.enable && pm.hibernate.lock.enable;
+        };
+      }
+    // {
+      "AC][SuspendAndShutdown" =
+        if pm.hibernate.enable then
+          {
+            AutoSuspendAction = 1; # PowerButtonAction::Sleep
+            AutoSuspendIdleTimeoutSec = pm.hibernate.idleTimeout;
+            SleepMode = 3; # SleepMode::SuspendThenHibernate
+          }
+        else
+          {
+            AutoSuspendAction = 0; # PowerButtonAction::Nothing
+            AutoSuspendIdleTimeoutSec = 0; # not used, but explicit
+            SleepMode = 0; # harmless default
+          };
     };
 in
 {
@@ -70,12 +78,14 @@ in
     ];
 
     home-manager.users.${username} = lib.mkIf idleEnable {
-      xdg.configFile."powerdevilrc".text = lib.generators.toINI {
-        # KConfig's nested-group syntax is a literal "[Outer][Inner]"
-        # section header; toINI's default mkSectionName would otherwise
-        # escape those brackets.
-        mkSectionName = lib.id;
-      } powerdevilSettings;
+      xdg.configFile."powerdevilrc".text = lib.generators.toINI
+        {
+          # KConfig's nested-group syntax is a literal "[Outer][Inner]"
+          # section header; toINI's default mkSectionName would otherwise
+          # escape those brackets.
+          mkSectionName = lib.id;
+        }
+        powerdevilSettings;
     };
   };
 }
