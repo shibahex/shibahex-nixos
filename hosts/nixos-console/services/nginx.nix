@@ -13,7 +13,6 @@
       # This single block handles everything:
       # 1. Binds ports 80 and 443
       # 2. Redirects HTTP to HTTPS
-      # 3. Uses the self-signed cert generated above
       forceSSL = true;
       sslCertificate = "/var/lib/ai-certs/ai-serv.crt";
       sslCertificateKey = "/var/lib/ai-certs/ai-serv.key";

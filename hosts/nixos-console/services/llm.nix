@@ -29,7 +29,7 @@ in
       # stopped --fit from adjusting them.
       ExecStart = ''
         ${lib.getExe' llama-cpp-cuda "llama-server"} \
-          --host 0.0.0.0 \
+          --host 127.0.0.1 \
           --port 11434 \
           --no-webui \
           --models-dir ${modelsDir} \
@@ -80,7 +80,7 @@ in
     serviceConfig = {
       ExecStart = ''
         ${lib.getExe' llama-cpp-cuda "llama-server"} \
-          --host 0.0.0.0 \
+          --host 127.0.0.1 \
           --port 11435 \
           --no-webui \
           --model ${modelsDir}/embed/embeddinggemma-300M-Q8_0.gguf \

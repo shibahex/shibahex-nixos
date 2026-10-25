@@ -18,7 +18,6 @@
   */
 
   networking.firewall.allowedTCPPorts = [
-    11434
     47584
     80
     443
