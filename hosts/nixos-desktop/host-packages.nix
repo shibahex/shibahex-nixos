@@ -81,6 +81,7 @@ in
     claude-code
     repomix
 
+    prismlauncher
     jdk25
   ];
 
